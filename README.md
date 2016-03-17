@@ -1,2 +1,2 @@
 # Rlilyyy.github.io
-Bingoh's blog
+这是一个测试~
