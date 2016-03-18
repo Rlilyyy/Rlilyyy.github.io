@@ -15,15 +15,15 @@
 	})();
 	</script>
   
-  <title>Hello World | 滨滨和泓泓</title>
+  <title>clearfix 闭合浮动 | 滨滨和泓泓</title>
   <meta name="author" content="滨滨和泓泓">
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+  <meta name="description" content="123456789101112131415/** *  For modern browsers */.clearfix:before, .clearfix:after &amp;#123;    content: &quot;&quot;;    display: table;&amp;#125;.clearfix:after &amp;#1">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="clearfix 闭合浮动"/>
   <meta property="og:site_name" content="滨滨和泓泓"/>
 
   
@@ -81,34 +81,39 @@
   <div class="post-content">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-	Hello World
+	clearfix 闭合浮动
   </h1>
   <p class="article-author">By
     
       <a href="http://www.libinhong.com" title="滨滨和泓泓">滨滨和泓泓</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-03-17T15:56:07.639Z" itemprop="datePublished">2016-03-17</time>
-    更新日期:<time datetime="2016-03-17T15:56:07.814Z" itemprop="dateModified">2016-03-17</time>
+    <time datetime="2016-03-18T05:57:45.000Z" itemprop="datePublished">2016-03-18</time>
+    更新日期:<time datetime="2016-03-18T06:00:39.567Z" itemprop="dateModified">2016-03-18</time>
     
   </p>
 </header>
     <div class="entry">
 		
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/** *  For modern browsers */</span><br><span class="line"></span><br><span class="line">.clearfix:before, .clearfix:after &#123;</span><br><span class="line">    content: "";</span><br><span class="line">    display: table;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** * For IE 6/7 (trigger hasLayout) */</span><br><span class="line">.clearfix &#123;</span><br><span class="line">    *zoom: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>.clearfix:after {content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }</code><br>这里也是一种方法，<code>content</code>为一个<code>.</code>的原因是在 Firefox 里，空的 content 会有额外间隙，所以使用<code>.</code>，此外的<code>height</code>等属性只是为了隐藏 content 不影响布局。而最新的方法 <code>display: table</code> 的 content 可以为空，且不会产生间隙，所以额外的属性都可以去除。</p>
+<p>在父元素使用<code>overflow</code>清除浮动的原理是，将父元素变为一个新的<code>BFC</code>，根据 BFC 的特点，BFC 可以包含浮动元素，所以，不仅仅是 overflow 能清除浮动，只要能触发父元素的BFC的方式都可以清除浮动，例如<code>display: table-cell</code>,<code>float:left</code>等等都可以触发BFC。</p>
+<p>传统的加一个空的div去清除浮动的方法有一个缺点，当子元素是浮动元素且有外边距是，清除浮动以后，父元素的高度仅仅是包裹子元素的高度（不包括外边距的高度），那么子元素明显会被边距顶出了父元素外边，虽然父元素会被撑开一段高度，但是由于子元素外边距的存在，父元素无法完全包裹子元素。</p>
+<p>关于BFC的知识，可浏览</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/leejersey/p/3991400.html" target="_blank" rel="external">http://www.cnblogs.com/leejersey/p/3991400.html</a></p>
+<p><a href="http://kayosite.com/remove-floating-style-in-detail.html" target="_blank" rel="external">http://kayosite.com/remove-floating-style-in-detail.html</a></p>
+</blockquote>
 
     </div>
     <footer>
         
         
+  
+  <div class="tags">
+    <a href="/tags/布局/">布局</a>
+  </div>
+
 		<div class="bdsharebuttonbox">
 	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
 	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
@@ -154,8 +159,8 @@ with(document)0[
 
  <nav id="pagination" >
     
-    <a href="/2016/03/18/双飞翼布局和圣杯布局/" class="alignleft prev" title="双飞翼布局和圣杯布局">双飞翼布局和圣杯布局</a>
     
+    <a href="/2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/" class="alignright next" title="Javascript 事件监听 event 和 target 兼容性写法">Javascript 事件监听 event 和 target 兼容性写法</a>
     
     <div class="clearfix"></div>
 </nav>
@@ -165,7 +170,7 @@ with(document)0[
 	
 	<section id="comment">
 		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="2016/03/17/hello-world/" data-title="Hello World" data-url="http://www.libinhong.com/2016/03/17/hello-world/"></div>
+		<div class="ds-thread" data-thread-key="2016/03/18/clearfix-闭合浮动/" data-title="clearfix 闭合浮动" data-url="http://www.libinhong.com/2016/03/18/clearfix-闭合浮动/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
