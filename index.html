@@ -298,7 +298,7 @@
         
           
           今天在微博看到有人发了一道题目，代码如下：
-123456789101112131415161718function Foo() &#123;    getName = function() &#123;console.log(1);&#125;    return this;&#125;Foo.getName = function() &#123;console.log(2);&#125;;Foo.prototype.getName = function() &#123;console.log(3);&#125;;var getName = function() &#123;console.log(4);&#125;;function getName() &#123;console.log(5);&#125;;Foo.getName();//2getName();//4Foo().getName();//1getName();//1new Foo.getName();//2new Foo().getName();//3new new Foo().getName();//3Foo.get
+123456789101112131415161718function Foo() &#123;    getName = function() &#123;console.log(1);&#125;    return this;&#125;Foo.getName = function() &#123;console.log(2);&#125;;Foo.prototype.getName = function() &#123;console.log(
           ...
 
           <div class="post-more-link text-center">
@@ -419,8 +419,7 @@
         
           
           123456789101112131415/** *  For modern browsers */.clearfix:before, .clearfix:after &#123;    content: "";    display: table;&#125;.clearfix:after &#123;    clear: both;&#125;/** * For IE 6/7 (trigger hasLayout) */.clearfix &#123;    *zoom: 1;&#125;
-.clearfix:after {content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }这里也是一种方法，content为一个.的原因是在 Firefox 里，空的 content 会有额外间隙，所以使用.，此外的height等属性只是为了隐藏 content 不影响布局。而最新的方法 display: table 的 content 可以为空，且不会产生间隙，所以额外的属性都可以去除。
-在
+
           ...
 
           <div class="post-more-link text-center">
@@ -663,10 +662,7 @@
       
         
           
-          1. typeof首先，使用 typeof 去判断一个函数是一种通用的做法，不过这种做法存在一种风险，即在低版本浏览器下会出现误判的现象，在 IE6/7/8 下，一些 JS 的核心函数是以 COM 对象去构造的函数，例如 document.getElementById，正常情况下，typeof 应该对其判断为 function，但是在 IE6/7/8 下，会将其判断为 object。在 Chrome 和 Safari 的旧版本中，正则表达式进行 typeof 的判断结果为 function，其他浏览器则返回 object，这会导致误判，所以使用 typeof 判断函数是一种不稳定的做法，存在一定的风险。
-2. 使用Object.prototype.toString.call()
-使用 Object 的原型里的 toString 去判断类型也是一种方法，而且也稳定安全得多，其结果返回的格式是“[object NativeConstructorName]”
-和 typeof 一样存在的一个问题是其在 IE6/7/8 仍会对某些核心函数判断为 [object Object]，这是 IE 特有
+          1. typeof首先，使用 typeof 去判断一个函数是一种通用的做法，不过这种做法存在一种风险，即在低版本浏览器下会出现误判的现象，在 IE6/7/8 下，一些 JS 的核心函数是以 COM 对象去构造的函数，例如 document.getElementById，正常情况下，typeof 应该对其判断为 function，但是在 IE6/7/8 下，会将其判断为 object。在 Chrome 和 Safari 的旧版本中，正则表达式进行 typeof 的判断结果为 function，其他
           ...
 
           <div class="post-more-link text-center">
@@ -787,9 +783,7 @@
         
           
           1.使用 margin + float 实现HTML：1234&lt;div class="normal"&gt;    &lt;div class="normal-right"&gt;&lt;/div&gt;    &lt;div class="normal-left"&gt;&lt;/div&gt;&lt;/div&gt;
-CSS：1234567891011.normal-right &#123;    float: right;    width: 100px;    height: 300px;    background-color: blue;&#125;.normal-left &#123;    margin-right: 100px;    height: 300px;    background-color: yellow;&#125;
-使用该种方法，浮动在右边的div必须写在左边div之前
-2.使用 table + table-cell 实现HTML：1234&lt;div class="table"&gt;    &lt;div class="table-lef
+CSS：1234567891011.normal-right &#123;    float: right;    width: 100px;    height: 30
           ...
 
           <div class="post-more-link text-center">
@@ -910,9 +904,7 @@ CSS：1234567891011.normal-right &#123;    float: right;    width: 100px;    hei
         
           
           CORS（Cross-Origin Resource Sharing，跨源资源共享）
-CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（eg. Origin: http://www.baidu.com），如果服务器接收到 request 后，需要给 response 加上 Access-Control-Allow-Origin 头部（eg. Access-Control-Allow-Origin: http://www.baidu.com），当然，如果是公共资源，将地址改成*就可以允许所有源地址进行跨域访问。如果服务器没有加入和 Origin 头部地址对应的头部或者 Access-Control-Allow-Origin 允许的跨域地址不相符合（eg. Access-Control-Allow-Origin: http://www.google.com），那么浏览器将会驳回请求，导致跨域失败。
-
-1.XDomainRequestXDomainRequest（以下简称XDR）是I
+CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（eg. Origin: http://www.baidu.com），如果服务器接收到 request 后，需要给 response 加上 Access-Control-Allow-Origin 头部（eg. Access-Control-Allow-Or
           ...
 
           <div class="post-more-link text-center">
@@ -1037,12 +1029,7 @@ CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，�
 相同点：
 都让三列布局左浮动
 实现三列布局
-中间列优先加载
-左右两列顺序不影响布局
-
-异同点：
-圣杯布局利用布局父元素 container 左右 padding 出边距给予左右两列的空间放置，左右两列则通过 position 和margin 负边距插入到自身的位置。
-双飞翼布局直接在 container 加入一个 div 包裹住中间列，同时该 div 浮动，而被包裹住的中间列则 margin 左右为左右两列布局留出空白，这样做省了多个 CSS 属性（position，左右两列的 margin 负边距，container 的 padding 属性，左
+中间列优先
           ...
 
           <div class="post-more-link text-center">
