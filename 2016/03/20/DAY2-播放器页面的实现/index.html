@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Javascript," />
+  <meta name="keywords" content="Oxygen," />
 
 
 
@@ -59,22 +59,30 @@
 
 
 
-<meta name="description" content="IE,Chrome都有window.event对象FireFox没有window.event对象
-1234elem.onclick = function(event) &amp;#123;    var e = window.event || event;    var target = e.srcElement || e.target;&amp;#125;
-以上写法能保证在这三个浏览器下获取事件对象和当前事件元">
+<meta name="description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+
+最终页面效果图
+实现过程
+进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript 事件监听 event 和 target 兼容性写法">
-<meta property="og:url" content="http://rlilyyy.github.io/2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/index.html">
+<meta property="og:title" content="DAY2 播放器页面的实现">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/20/DAY2-播放器页面的实现/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="IE,Chrome都有window.event对象FireFox没有window.event对象
-1234elem.onclick = function(event) &amp;#123;    var e = window.event || event;    var target = e.srcElement || e.target;&amp;#125;
-以上写法能保证在这三个浏览器下获取事件对象和当前事件元">
-<meta property="og:updated_time" content="2016-03-18T07:10:48.328Z">
+<meta property="og:description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+
+最终页面效果图
+实现过程
+进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png">
+<meta property="og:updated_time" content="2016-03-20T14:10:55.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript 事件监听 event 和 target 兼容性写法">
-<meta name="twitter:description" content="IE,Chrome都有window.event对象FireFox没有window.event对象
-1234elem.onclick = function(event) &amp;#123;    var e = window.event || event;    var target = e.srcElement || e.target;&amp;#125;
-以上写法能保证在这三个浏览器下获取事件对象和当前事件元">
+<meta name="twitter:title" content="DAY2 播放器页面的实现">
+<meta name="twitter:description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+
+最终页面效果图
+实现过程
+进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png">
 
 
 
@@ -92,7 +100,7 @@
   };
 </script>
 
-  <title> Javascript 事件监听 event 和 target 兼容性写法 | 滨滨和泓泓 </title>
+  <title> DAY2 播放器页面的实现 | 滨滨和泓泓 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -232,7 +240,7 @@
             
             
               
-                Javascript 事件监听 event 和 target 兼容性写法
+                DAY2 播放器页面的实现
               
             
           </h1>
@@ -244,8 +252,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-18T13:54:21+08:00" content="2016-03-18">
-              2016-03-18
+            <time itemprop="dateCreated" datetime="2016-03-20T21:51:14+08:00" content="2016-03-20">
+              2016-03-20
             </time>
           </span>
 
@@ -258,8 +266,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/项目/" itemprop="url" rel="index">
+                    <span itemprop="name">项目</span>
                   </a>
                 </span>
 
@@ -274,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/" itemprop="commentsCount"></span>
+                <a href="/2016/03/20/DAY2-播放器页面的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/DAY2-播放器页面的实现/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -297,9 +305,22 @@
       
 
       
-        <p>IE,Chrome都有<code>window.event</code>对象<br>FireFox没有<code>window.event</code>对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elem.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> e = <span class="built_in">window</span>.event || event;</span><br><span class="line">    <span class="keyword">var</span> target = e.srcElement || e.target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上写法能保证在这三个浏览器下获取事件对象和当前事件元素的兼容性。</p>
+        <blockquote>
+<p>早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 <code>border-radius</code> 和 <code>box-shadow</code> 就没办法啦，<code>rem</code> 也不能用，但是这个能用正常的 <code>px</code> 解决。</p>
+</blockquote>
+<h2 id="最终页面效果图"><a href="#最终页面效果图" class="headerlink" title="最终页面效果图"></a>最终页面效果图</h2><p><img src="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png" alt=""></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
+<li>进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空间</li>
+<li>进度条的实现，用了三个 div 分别代表 <code>当前进度</code>，<code>加载进度</code>，<code>进度总长</code></li>
+<li>歌曲的封面，为了实现宽度固定，焦点居中，使用 div 的 <code>background</code> 加载封面，<code>background-position</code> 可以实现焦点居中</li>
+<li>歌词的显示，使用 <code>&lt;ul&gt;</code> 可以实现，后面也方便进行滚动</li>
+<li>控制器的样式，引入了 <code>font-awesome</code> 作为图标</li>
+<li>音量调节的弹出，使用 CSS 的 <code>:hover</code> 进行一个样式优先级转换，还是尽量避免使用 JS 实现效果</li>
+<li>一些字体的凹凸感，使用了 <code>text-shadow</code> 实现，阴影往下偏移1个像素，发散一个像素，颜色使用比字体颜色偏浅的黑色</li>
+</ul>
+<blockquote>
+<p><a href="http://www.libinhong.com:8080/index" target="_blank" rel="external">demo查看</a></p>
+</blockquote>
 
       
     </div>
@@ -314,7 +335,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Javascript/" rel="tag">#Javascript</a>
+            <a href="/tags/Oxygen/" rel="tag">#Oxygen</a>
           
         </div>
       
@@ -323,17 +344,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/18/Function的类型判断/" rel="next" title="Function的类型判断">
-                <i class="fa fa-chevron-left"></i> Function的类型判断
+              <a href="/2016/03/20/DAY1-构建原型图/" rel="next" title="DAY1 构建原型图">
+                <i class="fa fa-chevron-left"></i> DAY1 构建原型图
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/18/clearfix-闭合浮动/" rel="prev" title="clearfix 闭合浮动">
-                clearfix 闭合浮动 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -359,8 +376,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/"
-           data-title="Javascript 事件监听 event 和 target 兼容性写法" data-url="http://rlilyyy.github.io/2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/">
+      <div class="ds-thread" data-thread-key="2016/03/20/DAY2-播放器页面的实现/"
+           data-title="DAY2 播放器页面的实现" data-url="http://rlilyyy.github.io/2016/03/20/DAY2-播放器页面的实现/">
       </div>
     
   </div>
@@ -481,7 +498,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最终页面效果图"><span class="nav-number">1.</span> <span class="nav-text">最终页面效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
