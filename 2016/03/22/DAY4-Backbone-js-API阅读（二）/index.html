@@ -59,30 +59,19 @@
 
 
 
-<meta name="description" content="昨晚5点多睡觉，早上12点才起床，下午爬去参加了珠海的 GDG。主讲是 360 的一个高级网络工程师（我才知道珠海也有 360 的分部），还有一个腾讯的员工，讲的内容一般般，收获还是有一点的。晚上又折腾了一下 deepin 操作系统，打算还是暂时不碰 Linux。睡前先把首页的原型图大概切一下先。
-
-首页原型图
-
-明天再做详细的切图啦，今天实在太累了……GG思密达">
+<meta name="description" content="Collection
+Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Collection 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 change 事件，当使用 fetch() 函数时，可能会触发 add 或者 remove">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DAY1 构建原型图">
-<meta property="og:url" content="http://rlilyyy.github.io/2016/03/20/DAY1-构建原型图/index.html">
+<meta property="og:title" content="DAY4 Backbone.js API阅读（二）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/22/DAY4-Backbone-js-API阅读（二）/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="昨晚5点多睡觉，早上12点才起床，下午爬去参加了珠海的 GDG。主讲是 360 的一个高级网络工程师（我才知道珠海也有 360 的分部），还有一个腾讯的员工，讲的内容一般般，收获还是有一点的。晚上又折腾了一下 deepin 操作系统，打算还是暂时不碰 Linux。睡前先把首页的原型图大概切一下先。
-
-首页原型图
-
-明天再做详细的切图啦，今天实在太累了……GG思密达">
-<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E9%A6%96%E9%A1%B5%E5%8E%9F%E5%9E%8B%E5%9B%BE.PNG">
-<meta property="og:updated_time" content="2016-03-19T18:15:23.662Z">
+<meta property="og:description" content="Collection
+Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Collection 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 change 事件，当使用 fetch() 函数时，可能会触发 add 或者 remove">
+<meta property="og:updated_time" content="2016-03-22T06:57:24.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DAY1 构建原型图">
-<meta name="twitter:description" content="昨晚5点多睡觉，早上12点才起床，下午爬去参加了珠海的 GDG。主讲是 360 的一个高级网络工程师（我才知道珠海也有 360 的分部），还有一个腾讯的员工，讲的内容一般般，收获还是有一点的。晚上又折腾了一下 deepin 操作系统，打算还是暂时不碰 Linux。睡前先把首页的原型图大概切一下先。
-
-首页原型图
-
-明天再做详细的切图啦，今天实在太累了……GG思密达">
-<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E9%A6%96%E9%A1%B5%E5%8E%9F%E5%9E%8B%E5%9B%BE.PNG">
+<meta name="twitter:title" content="DAY4 Backbone.js API阅读（二）">
+<meta name="twitter:description" content="Collection
+Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Collection 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 change 事件，当使用 fetch() 函数时，可能会触发 add 或者 remove">
 
 
 
@@ -100,7 +89,7 @@
   };
 </script>
 
-  <title> DAY1 构建原型图 | 滨滨和泓泓 </title>
+  <title> DAY4 Backbone.js API阅读（二） | 滨滨和泓泓 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +229,7 @@
             
             
               
-                DAY1 构建原型图
+                DAY4 Backbone.js API阅读（二）
               
             
           </h1>
@@ -252,8 +241,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T02:06:46+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-03-22T12:52:00+08:00" content="2016-03-22">
+              2016-03-22
             </time>
           </span>
 
@@ -282,8 +271,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/DAY1-构建原型图/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/DAY1-构建原型图/" itemprop="commentsCount"></span>
+                <a href="/2016/03/22/DAY4-Backbone-js-API阅读（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/22/DAY4-Backbone-js-API阅读（二）/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -305,12 +294,29 @@
       
 
       
-        <blockquote>
-<p>昨晚5点多睡觉，早上12点才起床，下午爬去参加了珠海的 GDG。主讲是 360 的一个高级网络工程师（我才知道珠海也有 360 的分部），还有一个腾讯的员工，讲的内容一般般，收获还是有一点的。晚上又折腾了一下 deepin 操作系统，打算还是暂时不碰 Linux。睡前先把首页的原型图大概切一下先。</p>
+        <h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><blockquote>
+<p>Backbone.js 的 C 层不同于通常 MVC 架构的 <code>Controller</code> 层，而是 <code>Collection</code> 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 <code>change</code> 事件，当使用 <code>fetch()</code> 函数时，可能会触发 <code>add</code> 或者 <code>remove</code> 事件。而一些在 Model 上触发的事件可能也会在 Collection 中触发。</p>
 </blockquote>
-<h2 id="首页原型图"><a href="#首页原型图" class="headerlink" title="首页原型图"></a>首页原型图</h2><p><img src="http://7xoehm.com1.z0.glb.clouddn.com/github%E9%A6%96%E9%A1%B5%E5%8E%9F%E5%9E%8B%E5%9B%BE.PNG" alt=""></p>
+<ul>
+<li><p>extend——用于创建一个新的 Collection 集合并对其进行相应扩充和定义，如下定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = Backbone.Collection.extend(&#123;</span><br><span class="line">    model: Book,</span><br><span class="line">    ……</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>model——用于定义该集合中的 Model 类型</p>
+</li>
+<li>add——向 Collection 添加一个或多个 Model，同时会触发 <code>add</code> 事件</li>
+<li>remove——从 Collection 移除一个或多个 Model，同时会触发 <code>remove</code> 事件</li>
+<li>reset——当有大量 Model 需要更改的时候，这时候使用 reset 插入一个模型组，同时触发 <code>reset</code> 事件，但是不会触发 <code>add</code> 和 <code>remove</code> 事件</li>
+<li>set——通过传入一组 Model，如果传入的 Model 在 Collection 已经存在，那么将会合并，如果不存在，那么将会添加，如果 Collection 中存在传入 Model 组中不存在的 Model，那么该 Model 将会被删除。以上将会触发 <code>add</code>，<code>remove</code>，<code>change</code> 事件</li>
+<li>fetch——从服务端拉取更新数据，并使用 <code>reset</code> 到 Collection 中。</li>
+<li><p>comparator——设置 Collection 排序的依据，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Chapter  = Backbone.Model;</span><br><span class="line"><span class="keyword">var</span> chapters = <span class="keyword">new</span> Backbone.Collection;</span><br><span class="line"></span><br><span class="line">chapters.comparator = <span class="string">'page'</span>;</span><br><span class="line"></span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">9</span>, title: <span class="string">"The End"</span>&#125;));</span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">5</span>, title: <span class="string">"The Middle"</span>&#125;));</span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">1</span>, title: <span class="string">"The Beginning"</span>&#125;));</span><br><span class="line"></span><br><span class="line">alert(chapters.pluck(<span class="string">'title'</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Collection 同时提供了多个 Underscore.js 的函数，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">books.each(<span class="function"><span class="keyword">function</span>(<span class="params">book</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// doing something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <blockquote>
-<p>明天再做详细的切图啦，今天实在太累了……GG思密达</p>
+<p><code>reset</code> 用于重置数据，即将原有数据删除，添加传入的新数据，而 <code>set</code> 则更新数据，只有当原先集合中的某个 Model 不存在于新传入的数据中时，该 Model 才会被删除，否则只是合并数据。总结就是 reset 是重置，set 是更新。</p>
 </blockquote>
 
       
@@ -335,17 +341,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/19/准备开始一个新的项目-Oxygen轻音乐/" rel="next" title="准备开始一个新的项目 Oxygen轻音乐">
-                <i class="fa fa-chevron-left"></i> 准备开始一个新的项目 Oxygen轻音乐
+              <a href="/2016/03/21/DAY3-Backbone-js-API阅读/" rel="next" title="DAY3 Backbone.js API阅读">
+                <i class="fa fa-chevron-left"></i> DAY3 Backbone.js API阅读
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/20/DAY2-播放器页面的实现/" rel="prev" title="DAY2 播放器页面的实现">
-                DAY2 播放器页面的实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -371,8 +373,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/DAY1-构建原型图/"
-           data-title="DAY1 构建原型图" data-url="http://rlilyyy.github.io/2016/03/20/DAY1-构建原型图/">
+      <div class="ds-thread" data-thread-key="2016/03/22/DAY4-Backbone-js-API阅读（二）/"
+           data-title="DAY4 Backbone.js API阅读（二）" data-url="http://rlilyyy.github.io/2016/03/22/DAY4-Backbone-js-API阅读（二）/">
       </div>
     
   </div>
@@ -493,7 +495,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首页原型图"><span class="nav-number">1.</span> <span class="nav-text">首页原型图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">1.</span> <span class="nav-text">Collection</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
