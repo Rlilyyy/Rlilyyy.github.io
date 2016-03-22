@@ -67,7 +67,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
 <meta property="og:site_name" content="滨滨和泓泓">
 <meta property="og:description" content="Collection
 Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Collection 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 change 事件，当使用 fetch() 函数时，可能会触发 add 或者 remove">
-<meta property="og:updated_time" content="2016-03-22T06:57:24.812Z">
+<meta property="og:updated_time" content="2016-03-22T15:58:21.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DAY4 Backbone.js API阅读（二）">
 <meta name="twitter:description" content="Collection
@@ -318,6 +318,28 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
 <blockquote>
 <p><code>reset</code> 用于重置数据，即将原有数据删除，添加传入的新数据，而 <code>set</code> 则更新数据，只有当原先集合中的某个 Model 不存在于新传入的数据中时，该 Model 才会被删除，否则只是合并数据。总结就是 reset 是重置，set 是更新。</p>
 </blockquote>
+<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><blockquote>
+<p>View 用来处理视图的渲染以及视图的更新，我们可以自定义一个 <code>render</code> 函数来定义当模型数据发生变化时（render 可以绑定在自身模型的 change 事件上）如何渲染视图。</p>
+</blockquote>
+<ul>
+<li><p>一般地，我们如下所示去扩充一个自定义 View：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DocumentRow = Backbone.View.extend(&#123;</span><br><span class="line"></span><br><span class="line">  tagName: <span class="string">"li"</span>,</span><br><span class="line"></span><br><span class="line">  className: <span class="string">"document-row"</span>,</span><br><span class="line"></span><br><span class="line">  events: &#123;</span><br><span class="line">    <span class="string">"click .icon"</span>:          <span class="string">"open"</span>,</span><br><span class="line">    <span class="string">"click .button.edit"</span>:   <span class="string">"openEditDialog"</span>,</span><br><span class="line">    <span class="string">"click .button.delete"</span>: <span class="string">"destroy"</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  initialize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.listenTo(<span class="keyword">this</span>.model, <span class="string">"change"</span>, <span class="keyword">this</span>.render);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tagName——代表 View 的标签类型，设置以后同时也会设置 View 的 <code>el</code></p>
+</li>
+<li>className——设置 View 的样式类</li>
+<li>events——在该视图中绑定相应的事件</li>
+<li>initialize——在 View 被实例化时执行</li>
+<li>render——默认无任何操作，我们可以重载该函数，定义如何渲染视图，将其绑定到 Model 的 change 事件，这样当 Model 发生变化时，可以立即调用 render 函数更新视图。</li>
+<li>el——引用了该 View 的 dom 元素</li>
+<li>$el——通过引用 el，对其进行封装，其可以使用 JQuery 的函数</li>
+<li>setElement——将 View 从旧的引用 dom 对象切换到新的 dom 对象引用，视图的事件委托和 $el 也响应迁移</li>
+<li>template——利用 Underscore 的 template 方法可以为 View 设定一个模板，有两种方法，如下所示：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// first</span></span><br><span class="line"><span class="keyword">var</span> LibraryView = Backbone.View.extend(&#123;</span><br><span class="line">  template: _.template(...)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// second</span></span><br><span class="line">&lt;script id=<span class="string">"teamTemplate"</span> type=<span class="string">"text/template"</span>&gt;</span><br><span class="line">    &lt;%= name %&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">App.Views.Team = Backbone.View.extend(&#123;</span><br><span class="line">    className : <span class="string">'.team-element'</span>,</span><br><span class="line">    tagName : <span class="string">'div'</span>,</span><br><span class="line">    model : <span class="keyword">new</span> App.Models.Team</span><br><span class="line">    render : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Compile the template</span></span><br><span class="line">        <span class="keyword">var</span> compiledTemplate = _.template($(<span class="string">'#teamTemplate'</span>).html());</span><br><span class="line">        <span class="comment">// Model attributes loaded into the template. Template is</span></span><br><span class="line">        <span class="comment">// appended to the DOM element referred by the el attribute</span></span><br><span class="line">        $(<span class="keyword">this</span>.el).html(compiledTemplate(<span class="keyword">this</span>.model.toJSON()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>明天继续看 Router 的使用，今晚参加了网易的笔试，还是有点累。</p>
+</blockquote>
 
       
     </div>
@@ -495,7 +517,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">1.</span> <span class="nav-text">Collection</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">1.</span> <span class="nav-text">Collection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View"><span class="nav-number">2.</span> <span class="nav-text">View</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
