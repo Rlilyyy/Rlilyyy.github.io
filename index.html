@@ -93,6 +93,15 @@
   
 
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75726349-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
 
 
 
@@ -305,7 +314,7 @@
 <p>以上代码引入了 <code>express</code> 框架模块，并且执行了 express，这样 <code>app</code> 这个变量就得到了执行后的一个实例，并可以使用其中的各种函数方法。</p>
 <h2 id="为什么使用-AMD？"><a href="#为什么使用-AMD？" class="headerlink" title="为什么使用 AMD？"></a>为什么使用 AMD？</h2><p>既然有了 CommonJS 规范来进行 JavaScript 的模块化管理，为什么还会出现 AMD 规范？原因很简单，环境不同，在服务端环境中，由于模块文件都存在于服务器中，所以请求模块的时间几乎可以忽略，而且请求模块的次数大多数只请求一次就可以从服务器开启一直使用到服务器重启。而在客户端环境中，每次刷新页面都会重新请求 JavaScript 文件，并且，CommonJS 是同步加载模块文件，所谓同步，就是必须等到 JavaScript 模块文件请求并加载完毕才会继续往下执行程序，在客户端页面中，如果一个 JavaScript 模块文件请求和加载的时间很长，那么页面的渲染和后续的程序执行将会一直被阻塞。所以，客户端的模块化管理需要一种 <code>非阻塞式</code> 和 <code>异步</code> 的加载方式，而 AMD 规范就是这么一种规范。</p>
 <h2 id="require-js"><a href="#require-js" class="headerlink" title="require.js"></a>require.js</h2><p><code>require.js</code> 是对 AMD 规范的一种实现和执行，此外，require.js 也可以使用 CommonJS 风格的方式。</p>
-<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script data-main=<span class="string">"javascripts/main.js"</span> src=<span class="string">"javascripts/require.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script data-main=<span class="string">"javascripts/main.js"</span> src=<span class="string">"javascripts/require.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>以上，引入了 require.js 的同时，使用 <code>data-main</code> 指定了最早加载的一个模块，require.js 里的 <code>baseUrl</code> 同时默认被设置为 <code>javascripts</code>，如果此后没有显式地使用 require.config() 对 baseUrl 和 paths 进行设置，那么所有依赖模块的基础路径都将会以该 baseUrl 路径作为基础路径进行搜索。</p>
 <h3 id="require-config-options"><a href="#require-config-options" class="headerlink" title="require.config(options)"></a>require.config(options)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line"></span><br><span class="line">    baseUrl: <span class="string">"./libs"</span>,</span><br><span class="line"></span><br><span class="line">    paths: &#123;</span><br><span class="line">        jquery: <span class="string">"jquery-2.2.2"</span>,</span><br><span class="line">        underscore: <span class="string">"/underscore"</span>,</span><br><span class="line">        backbone: <span class="string">"http://backbonejs.org/backbone"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>以上代码中，我们显式地设置了模块搜索路径的 baseUrl 为 <code>./libs</code>，同时在 paths 中，我们指定了 <code>jquery</code>，<code>underscore</code> 和 <code>backbone</code> 的路径，这里使用了三种不同的路径定义方式，会有不同的搜索结果。假设我们当前页面的路径为 <code>http://localhost</code>，那么三个模块文件的路径如下：</p>
