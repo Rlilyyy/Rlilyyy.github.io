@@ -59,31 +59,25 @@
 
 
 
-<meta name="description" content="以下所有结果均是使用 Chrome 51+ 进行执行的结果
-
-函数的扩展扩展符号…
+<meta name="description" content="函数的扩展扩展符号…
 ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一个数组变为一组参数传入函数中，只要实现了 Iterator 接口的对象，都可以使用该符号转换数组
 
-1234567891011121314151617181920212223242526function push(array, ...items) &amp;">
+1234567891011121314151617181920212223242526function push(array, ...items) &amp;#123;  array.push(...items);&amp;#12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6 学习笔记（二）">
 <meta property="og:url" content="http://rlilyyy.github.io/2016/04/16/ES6-学习笔记（二）/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="以下所有结果均是使用 Chrome 51+ 进行执行的结果
-
-函数的扩展扩展符号…
+<meta property="og:description" content="函数的扩展扩展符号…
 ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一个数组变为一组参数传入函数中，只要实现了 Iterator 接口的对象，都可以使用该符号转换数组
 
-1234567891011121314151617181920212223242526function push(array, ...items) &amp;">
-<meta property="og:updated_time" content="2016-04-18T07:58:24.457Z">
+1234567891011121314151617181920212223242526function push(array, ...items) &amp;#123;  array.push(...items);&amp;#12">
+<meta property="og:updated_time" content="2016-04-19T07:00:08.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6 学习笔记（二）">
-<meta name="twitter:description" content="以下所有结果均是使用 Chrome 51+ 进行执行的结果
-
-函数的扩展扩展符号…
+<meta name="twitter:description" content="函数的扩展扩展符号…
 ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一个数组变为一组参数传入函数中，只要实现了 Iterator 接口的对象，都可以使用该符号转换数组
 
-1234567891011121314151617181920212223242526function push(array, ...items) &amp;">
+1234567891011121314151617181920212223242526function push(array, ...items) &amp;#123;  array.push(...items);&amp;#12">
 
 
 
@@ -327,10 +321,7 @@ ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一
       
 
       
-        <blockquote>
-<p>以下所有结果均是使用 Chrome 51+ 进行执行的结果</p>
-</blockquote>
-<h1 id="函数的扩展"><a href="#函数的扩展" class="headerlink" title="函数的扩展"></a>函数的扩展</h1><h2 id="扩展符号…"><a href="#扩展符号…" class="headerlink" title="扩展符号…"></a>扩展符号…</h2><blockquote>
+        <h1 id="函数的扩展"><a href="#函数的扩展" class="headerlink" title="函数的扩展"></a>函数的扩展</h1><h2 id="扩展符号…"><a href="#扩展符号…" class="headerlink" title="扩展符号…"></a>扩展符号…</h2><blockquote>
 <p>ES6 新增了符号 <code>...</code>，该符号类似于剩余函数的逆运算，能将一个数组变为一组参数传入函数中，只要实现了 <code>Iterator</code> 接口的对象，都可以使用该符号转换数组</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">array, ...items</span>) </span>&#123;</span><br><span class="line">  array.push(...items);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> numbers = [<span class="number">4</span>, <span class="number">38</span>];</span><br><span class="line">add(...numbers) <span class="comment">// 42</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr1.push(...arr2);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="string">'a'</span>, <span class="string">'b'</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="string">'c'</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="string">'d'</span>, <span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES5的合并数组</span></span><br><span class="line">arr1.concat(arr2, arr3);</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6的合并数组</span></span><br><span class="line">[...arr1, ...arr2, ...arr3]</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span></span><br></pre></td></tr></table></figure>
@@ -391,6 +382,10 @@ ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/18/ES6-学习笔记（三）/" rel="prev" title="ES6 学习笔记（三）">
+                ES6 学习笔记（三） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -462,7 +457,7 @@ ES6 新增了符号 ...，该符号类似于剩余函数的逆运算，能将一
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
