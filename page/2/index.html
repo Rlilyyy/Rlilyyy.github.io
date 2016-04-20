@@ -237,6 +237,136 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/20/DAY2-播放器页面的实现/" itemprop="url">
+                  DAY2 播放器页面的实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T21:51:14+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/项目/" itemprop="url" rel="index">
+                    <span itemprop="name">项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/20/DAY2-播放器页面的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/DAY2-播放器页面的实现/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 <code>border-radius</code> 和 <code>box-shadow</code> 就没办法啦，<code>rem</code> 也不能用，但是这个能用正常的 <code>px</code> 解决。</p>
+</blockquote>
+<h2 id="最终页面效果图"><a href="#最终页面效果图" class="headerlink" title="最终页面效果图"></a>最终页面效果图</h2><p><img src="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png" alt=""></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
+<li>进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空间</li>
+<li>进度条的实现，用了三个 div 分别代表 <code>当前进度</code>，<code>加载进度</code>，<code>进度总长</code></li>
+<li>歌曲的封面，为了实现宽度固定，焦点居中，使用 div 的 <code>background</code> 加载封面，<code>background-position</code> 可以实现焦点居中</li>
+<li>歌词的显示，使用 <code>&lt;ul&gt;</code> 可以实现，后面也方便进行滚动</li>
+<li>控制器的样式，引入了 <code>font-awesome</code> 作为图标</li>
+<li>音量调节的弹出，使用 CSS 的 <code>:hover</code> 进行一个样式优先级转换，还是尽量避免使用 JS 实现效果</li>
+<li>一些字体的凹凸感，使用了 <code>text-shadow</code> 实现，阴影往下偏移1个像素，发散一个像素，颜色使用比字体颜色偏浅的黑色</li>
+</ul>
+<blockquote>
+<p><a href="http://www.libinhong.com:8080/index" target="_blank" rel="external">demo查看</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/20/DAY1-构建原型图/" itemprop="url">
                   DAY1 构建原型图
                 </a>
@@ -1463,7 +1593,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
