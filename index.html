@@ -237,6 +237,184 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/21/ES6-学习笔记（五）/" itemprop="url">
+                  ES6 学习笔记（五）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T13:57:05+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/ECMAScript-6/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMAScript 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/ES6-学习笔记（五）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/ES6-学习笔记（五）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><blockquote>
+<p>Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数</p>
+</blockquote>
+<p>Set 有以下几个特点</p>
+<ul>
+<li>值是不重复的</li>
+<li>NaN 等于自身</li>
+<li>添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的</li>
+<li>可以接受一组数组进行初始化，会自动过滤重复的数</li>
+<li>两个空对象不互相相等</li>
+</ul>
+<h2 id="Set-的方法"><a href="#Set-的方法" class="headerlink" title="Set 的方法"></a>Set 的方法</h2><ul>
+<li>Set.prototype.constructor：构造函数，默认就是Set函数</li>
+<li>Set.prototype.size：返回Set实例的成员总数</li>
+<li><p>add(value)：添加某个值，返回Set结构本身，由于返回值的特点，可以链式调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.add(<span class="number">1</span>).add(<span class="number">2</span>).add(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功</p>
+</li>
+<li>has(value)：返回一个布尔值，表示该值是否为Set的成员</li>
+<li>clear()：清除所有成员，没有返回值</li>
+<li>keys()：返回一个键名的遍历器</li>
+<li>values()：返回一个键值的遍历器</li>
+<li>entries()：返回一个键值对的遍历器</li>
+<li>forEach()：使用回调函数遍历每个成员</li>
+</ul>
+<h1 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h1><p>WeakSet 有以下几个特点</p>
+<ul>
+<li>加入成员只能是对象</li>
+<li>成员都是弱引用，即垃圾回收机制不会因其引用对象而保持对象的存在</li>
+<li>无法引用成员对象</li>
+<li>无法变量成员对象</li>
+</ul>
+<h2 id="WeakSet-的方法"><a href="#WeakSet-的方法" class="headerlink" title="WeakSet 的方法"></a>WeakSet 的方法</h2><ul>
+<li>WeakSet.prototype.add(value)：向WeakSet实例添加一个新成员</li>
+<li>WeakSet.prototype.delete(value)：清除WeakSet实例的指定成员</li>
+<li>WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在WeakSet实例之中</li>
+</ul>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><blockquote>
+<p>与对象的 key-value 结构类似的一种集合数据结构，不用的是 Map 可以使用任意一种类型的值作为 key，不会发生自动转换为字符串的情况</p>
+</blockquote>
+<ul>
+<li>size：返回Map结构的成员总数</li>
+<li>set(key, value)：设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键</li>
+<li>get(key)：读取key对应的键值，如果找不到key，返回undefined</li>
+<li>has(key)：返回一个布尔值，表示某个键是否在Map数据结构中</li>
+<li>delete(key)：删除某个键，返回true。如果删除失败，返回false</li>
+<li>clear()：清除所有成员，没有返回值</li>
+</ul>
+<h1 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h1><blockquote>
+<p>与 WeakSet 的特点类似，不过这个相对于 Map 的数据结构的，只能使用 <code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/20/ES6-学习笔记（四）/" itemprop="url">
                   ES6 学习笔记（四）
                 </a>
@@ -1729,143 +1907,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/21/DAY3-Backbone-js-API阅读/" itemprop="url">
-                  DAY3 Backbone.js API阅读
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-21T14:04:56+08:00" content="2016-03-21">
-              2016-03-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/21/DAY3-Backbone-js-API阅读/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/21/DAY3-Backbone-js-API阅读/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>原来机房看 API 的学习效率奇低，今天在机房上一天课，下午5点半下个脚都是麻的，今天主要还是熟悉一下 <code>Backbone.js</code> 的API，下面看几个比较重要的 API，也算是对今天学习的一个备忘录。官方文档写得有点简单了，后来看官方提供的 <code>Todos</code> 的例子的源码加上一边看官方文档才渐渐明白运行机制。</p>
-</blockquote>
-<h1 id="Backbone-js"><a href="#Backbone-js" class="headerlink" title="Backbone.js"></a>Backbone.js</h1><p><code>Backbone.js</code> 强制依赖 <code>Underscore.js</code>，其很多实现方式都利用了 Underscore 的 API，由于之前通读过 Underscore 的源代码，所以这个并没有太大问题。此外，Backbone.js 还半依赖 <code>JQuery.js</code>，主要是 Backbone 里的一个 <code>save</code> 函数当执行时会执行 <code>Backbone.sync</code> 从而需要使用 <code>ajax</code> 访问服务器进行 <code>Model</code> 的保存，当然，可以通过重载 <code>Backbone.sync</code> 来使用其他方式保存 Model，例如<a href="https://github.com/Rlilyyy/Backbone.localStorage" target="_blank" rel="external">Backbone.localStorage.js</a>就是一个用于重载 sync 的库。</p>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>Model 用于处理 <code>数据交互</code>和 <code>逻辑</code>，一般地，使用 Backbone.Model.extend(properties, [classProperties]) 创建一个新的模型，properties 为一个对象实例，里面包含多个属性：</p>
-<ul>
-<li><p>defaults——用于设置一些初始的模型属性，如下面代码所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Meal = Backbone.Model.extend(&#123;</span><br><span class="line">  defaults: &#123;</span><br><span class="line">    <span class="string">"appetizer"</span>:  <span class="string">"caesar salad"</span>,</span><br><span class="line">    <span class="string">"entree"</span>:     <span class="string">"ravioli"</span>,</span><br><span class="line">    <span class="string">"dessert"</span>:    <span class="string">"cheesecake"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>initialize——在模型创建后执行的函数</p>
-</li>
-<li>save——将模型的 attributes 模型状态保存到持久层</li>
-<li>validate——用于验证调用 save 以后传入的 attributes 的值的合法性，如果有返回数据，代表验证失败，save 就不会成功保存模型，如果在 set 中传入 <code>{validate:true}</code>，那么会执行 validate 验证。</li>
-<li>fetch——从服务器更新模型数据，如果数据有更新，则会触发 <code>change</code> 事件，同时接受 <code>success</code> 和 <code>error</code> 回调</li>
-<li>previous——在该模型的 change 事件中，可以通过此函数获取上一次更改的值</li>
-<li>previousAttributes——同样用过此函数获取上一次更改的属性散列副本</li>
-<li>可以重载 Model 中的函数，如 <code>get</code>，<code>set</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1906,7 +1952,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
