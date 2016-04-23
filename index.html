@@ -237,6 +237,165 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/23/ES6-学习笔记（六）/" itemprop="url">
+                  ES6 学习笔记（六）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-23T22:13:41+08:00" content="2016-04-23">
+              2016-04-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/ECMAScript-6/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMAScript 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/23/ES6-学习笔记（六）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/23/ES6-学习笔记（六）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><blockquote>
+<p>Iterator的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是ES6创造了一种新的遍历命令for…of循环，Iterator接口主要供for…of消费</p>
+</blockquote>
+<h2 id="部署-Iterator-接口"><a href="#部署-Iterator-接口" class="headerlink" title="部署 Iterator 接口"></a>部署 Iterator 接口</h2><p>数组、Map、Set、类数组都有部署 Iterator 的接口，但是对象并没有，下面展示如何为对象部署 Iterator 接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 第一种</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RangeIterator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(start, stop) &#123;</span><br><span class="line">    <span class="keyword">this</span>.value = start;</span><br><span class="line">    <span class="keyword">this</span>.stop = stop;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Symbol.Iterator 即部署接口</span></span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]() &#123; <span class="keyword">return</span> <span class="keyword">this</span>; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// next() 代表迭代器的指针运动逻辑</span></span><br><span class="line">  <span class="comment">// value 默认是当前值</span></span><br><span class="line">  <span class="comment">// done 表示当前值是否为末尾，布尔值</span></span><br><span class="line">  next() &#123;</span><br><span class="line">    <span class="keyword">var</span> value = <span class="keyword">this</span>.value;</span><br><span class="line">    <span class="keyword">if</span> (value &lt; <span class="keyword">this</span>.stop) &#123;</span><br><span class="line">      <span class="keyword">this</span>.value++;</span><br><span class="line">      <span class="keyword">return</span> &#123;done: <span class="literal">false</span>, value: value&#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;done: <span class="literal">true</span>, value: <span class="literal">undefined</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">range</span>(<span class="params">start, stop</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RangeIterator(start, stop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> range(<span class="number">0</span>, <span class="number">3</span>)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Obj</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.value = value;</span><br><span class="line">  <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Obj.prototype[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> iterator = &#123;</span><br><span class="line">    next: next</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> current = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (current)&#123;</span><br><span class="line">      <span class="keyword">var</span> value = current.value;</span><br><span class="line">      <span class="keyword">var</span> done = current === <span class="literal">null</span>;</span><br><span class="line">      current = current.next;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done: done,</span><br><span class="line">        value: value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> iterator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> one = <span class="keyword">new</span> Obj(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> two = <span class="keyword">new</span> Obj(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> three = <span class="keyword">new</span> Obj(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">one.next = two;</span><br><span class="line">two.next = three;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">of</span> one)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三种</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  data: [ <span class="string">'hello'</span>, <span class="string">'world'</span> ],</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]() &#123;</span><br><span class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next() &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; self.data.length) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123;</span><br><span class="line">            value: self.data[index++],</span><br><span class="line">            done: <span class="literal">false</span></span><br><span class="line">          &#125;;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; value: <span class="literal">undefined</span>, done: <span class="literal">true</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面的三个例子都有一个共同点，就是部署 Iterator 接口都是在对象的 <code>Symbol.iterator</code> 属性中返回一个对象，而该对象包含一个 <code>next()</code> 函数指明指针的运动逻辑，并返回 <code>value</code> 和 <code>done</code> 两个值。还有另外一个 <code>return()</code> 方法用于在中断遍历时的操作，必须返回一个对象。此外，也可以直接使用数组的 Iterator 作为对象的迭代器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">'b'</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">'c'</span>,</span><br><span class="line">  length: <span class="number">3</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="built_in">Array</span>.prototype[<span class="built_in">Symbol</span>.iterator]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item); <span class="comment">// 'a', 'b', 'c'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，如果 <code>Symbol.iterator</code> 属性返回并不是一个迭代器的标准对象，那么会报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">obj[<span class="built_in">Symbol</span>.iterator] = () =&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">[...obj] <span class="comment">// TypeError: [] is not a function</span></span><br></pre></td></tr></table></figure>
+<h2 id="Iterator-的使用场景"><a href="#Iterator-的使用场景" class="headerlink" title="Iterator 的使用场景"></a>Iterator 的使用场景</h2><h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><blockquote>
+<p>对数组的解构赋值默认会调用 <code>Symbol.iterator</code> 方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>().add(<span class="string">'a'</span>).add(<span class="string">'b'</span>).add(<span class="string">'c'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> [x,y] = set;</span><br><span class="line"><span class="comment">// x='a'; y='b'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> [first, ...rest] = set;</span><br><span class="line"><span class="comment">// first='a'; rest=['b','c'];</span></span><br></pre></td></tr></table></figure>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'hello'</span>;</span><br><span class="line">[...str] <span class="comment">//  ['h','e','l','l','o']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例二</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">'b'</span>, <span class="string">'c'</span>];</span><br><span class="line">[<span class="string">'a'</span>, ...arr, <span class="string">'d'</span>]</span><br><span class="line"><span class="comment">// ['a', 'b', 'c', 'd']</span></span><br></pre></td></tr></table></figure>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield*"></a>yield*</h3><blockquote>
+<p>这个还没学到，不予评论，后面学到了再填坑</p>
+</blockquote>
+<h3 id="其他场景"><a href="#其他场景" class="headerlink" title="其他场景"></a>其他场景</h3><ul>
+<li>for…of</li>
+<li>Array.from()</li>
+<li>Map(), Set(), WeakMap(), WeakSet()（比如new Map([[‘a’,1],[‘b’,2]])）</li>
+<li>Promise.all()</li>
+<li>Promise.race()</li>
+<li>字符串也部署了 Iterator 接口</li>
+</ul>
+<h1 id="for…of"><a href="#for…of" class="headerlink" title="for…of"></a>for…of</h1><ul>
+<li>for…of 遍历数组，key 值保持为数字，而 for…in 会把 key 值变为字符串</li>
+<li>for…of 可以 break 或 return，而 forEach() 不可以</li>
+<li>for…of 可以正确识别 32 位 UTF-16 字符</li>
+</ul>
+<blockquote>
+<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/21/ES6-学习笔记（五）/" itemprop="url">
                   ES6 学习笔记（五）
                 </a>
@@ -369,6 +528,7 @@
 </ul>
 <h1 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h1><blockquote>
 <p>与 WeakSet 的特点类似，不过这个相对于 Map 的数据结构的，只能使用 <code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></p>
+<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
 </blockquote>
 
           
@@ -1747,166 +1907,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/22/DAY4-Backbone-js-API阅读（二）/" itemprop="url">
-                  DAY4 Backbone.js API阅读（二）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-22T12:52:00+08:00" content="2016-03-22">
-              2016-03-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/22/DAY4-Backbone-js-API阅读（二）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/22/DAY4-Backbone-js-API阅读（二）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><blockquote>
-<p>Backbone.js 的 C 层不同于通常 MVC 架构的 <code>Controller</code> 层，而是 <code>Collection</code> 层，Collection 层不仅负责与数据库的交互和 Model 的数据交互，同时也是 Model 的一个有序集合。当集合中的 Model 发生变化时，将会触发该集合的 <code>change</code> 事件，当使用 <code>fetch()</code> 函数时，可能会触发 <code>add</code> 或者 <code>remove</code> 事件。而一些在 Model 上触发的事件可能也会在 Collection 中触发。</p>
-</blockquote>
-<ul>
-<li><p>extend——用于创建一个新的 Collection 集合并对其进行相应扩充和定义，如下定义：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = Backbone.Collection.extend(&#123;</span><br><span class="line">    model: Book,</span><br><span class="line">    ……</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>model——用于定义该集合中的 Model 类型</p>
-</li>
-<li>add——向 Collection 添加一个或多个 Model，同时会触发 <code>add</code> 事件</li>
-<li>remove——从 Collection 移除一个或多个 Model，同时会触发 <code>remove</code> 事件</li>
-<li>reset——当有大量 Model 需要更改的时候，这时候使用 reset 插入一个模型组，同时触发 <code>reset</code> 事件，但是不会触发 <code>add</code> 和 <code>remove</code> 事件</li>
-<li>set——通过传入一组 Model，如果传入的 Model 在 Collection 已经存在，那么将会合并，如果不存在，那么将会添加，如果 Collection 中存在传入 Model 组中不存在的 Model，那么该 Model 将会被删除。以上将会触发 <code>add</code>，<code>remove</code>，<code>change</code> 事件</li>
-<li>fetch——从服务端拉取更新数据，并使用 <code>reset</code> 到 Collection 中。</li>
-<li><p>comparator——设置 Collection 排序的依据，例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Chapter  = Backbone.Model;</span><br><span class="line"><span class="keyword">var</span> chapters = <span class="keyword">new</span> Backbone.Collection;</span><br><span class="line"></span><br><span class="line">chapters.comparator = <span class="string">'page'</span>;</span><br><span class="line"></span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">9</span>, title: <span class="string">"The End"</span>&#125;));</span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">5</span>, title: <span class="string">"The Middle"</span>&#125;));</span><br><span class="line">chapters.add(<span class="keyword">new</span> Chapter(&#123;page: <span class="number">1</span>, title: <span class="string">"The Beginning"</span>&#125;));</span><br><span class="line"></span><br><span class="line">alert(chapters.pluck(<span class="string">'title'</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Collection 同时提供了多个 Underscore.js 的函数，例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">books.each(<span class="function"><span class="keyword">function</span>(<span class="params">book</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// doing something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p><code>reset</code> 用于重置数据，即将原有数据删除，添加传入的新数据，而 <code>set</code> 则更新数据，只有当原先集合中的某个 Model 不存在于新传入的数据中时，该 Model 才会被删除，否则只是合并数据。总结就是 reset 是重置，set 是更新。</p>
-</blockquote>
-<h2 id="View"><a href="#View" class="headerlink" title="View"></a>View</h2><blockquote>
-<p>View 用来处理视图的渲染以及视图的更新，我们可以自定义一个 <code>render</code> 函数来定义当模型数据发生变化时（render 可以绑定在自身模型的 change 事件上）如何渲染视图。</p>
-</blockquote>
-<ul>
-<li><p>一般地，我们如下所示去扩充一个自定义 View：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DocumentRow = Backbone.View.extend(&#123;</span><br><span class="line"></span><br><span class="line">  tagName: <span class="string">"li"</span>,</span><br><span class="line"></span><br><span class="line">  className: <span class="string">"document-row"</span>,</span><br><span class="line"></span><br><span class="line">  events: &#123;</span><br><span class="line">    <span class="string">"click .icon"</span>:          <span class="string">"open"</span>,</span><br><span class="line">    <span class="string">"click .button.edit"</span>:   <span class="string">"openEditDialog"</span>,</span><br><span class="line">    <span class="string">"click .button.delete"</span>: <span class="string">"destroy"</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  initialize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.listenTo(<span class="keyword">this</span>.model, <span class="string">"change"</span>, <span class="keyword">this</span>.render);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>tagName——代表 View 的标签类型，设置以后同时也会设置 View 的 <code>el</code></p>
-</li>
-<li>className——设置 View 的样式类</li>
-<li>events——在该视图中绑定相应的事件</li>
-<li>initialize——在 View 被实例化时执行</li>
-<li>render——默认无任何操作，我们可以重载该函数，定义如何渲染视图，将其绑定到 Model 的 change 事件，这样当 Model 发生变化时，可以立即调用 render 函数更新视图。</li>
-<li>el——引用了该 View 的 dom 元素</li>
-<li>$el——通过引用 el，对其进行封装，其可以使用 JQuery 的函数</li>
-<li>setElement——将 View 从旧的引用 dom 对象切换到新的 dom 对象引用，视图的事件委托和 $el 也响应迁移</li>
-<li>template——利用 Underscore 的 template 方法可以为 View 设定一个模板，有两种方法，如下所示：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// first</span></span><br><span class="line"><span class="keyword">var</span> LibraryView = Backbone.View.extend(&#123;</span><br><span class="line">  template: _.template(...)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// second</span></span><br><span class="line">&lt;script id=<span class="string">"teamTemplate"</span> type=<span class="string">"text/template"</span>&gt;</span><br><span class="line">    &lt;%= name %&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">App.Views.Team = Backbone.View.extend(&#123;</span><br><span class="line">    className : <span class="string">'.team-element'</span>,</span><br><span class="line">    tagName : <span class="string">'div'</span>,</span><br><span class="line">    model : <span class="keyword">new</span> App.Models.Team</span><br><span class="line">    render : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Compile the template</span></span><br><span class="line">        <span class="keyword">var</span> compiledTemplate = _.template($(<span class="string">'#teamTemplate'</span>).html());</span><br><span class="line">        <span class="comment">// Model attributes loaded into the template. Template is</span></span><br><span class="line">        <span class="comment">// appended to the DOM element referred by the el attribute</span></span><br><span class="line">        $(<span class="keyword">this</span>.el).html(compiledTemplate(<span class="keyword">this</span>.model.toJSON()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>明天继续看 Router 的使用，今晚参加了网易的笔试，还是有点累。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1952,7 +1952,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
