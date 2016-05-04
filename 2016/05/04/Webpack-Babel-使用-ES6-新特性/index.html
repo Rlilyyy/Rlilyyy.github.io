@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Javascript," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -59,55 +59,16 @@
 
 
 
-<meta name="description" content="Set
-Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
-
-Set 有以下几个特点
-
-值是不重复的
-NaN 等于自身
-添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
-可以接受一组数组进行初始化，会自动过滤重复的数
-两个空对象不互相相等
-
-Set 的方法
-Set.prototype.constructor：构造函数，默认就是Set函数
-Set.prototyp">
+<meta name="description">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6 学习笔记（五）">
-<meta property="og:url" content="http://rlilyyy.github.io/2016/04/21/ES6-学习笔记（五）/index.html">
+<meta property="og:title" content="Webpack + Babel 使用 ES6 新特性">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/05/04/Webpack-Babel-使用-ES6-新特性/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="Set
-Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
-
-Set 有以下几个特点
-
-值是不重复的
-NaN 等于自身
-添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
-可以接受一组数组进行初始化，会自动过滤重复的数
-两个空对象不互相相等
-
-Set 的方法
-Set.prototype.constructor：构造函数，默认就是Set函数
-Set.prototyp">
-<meta property="og:updated_time" content="2016-04-23T15:04:06.033Z">
+<meta property="og:description">
+<meta property="og:updated_time" content="2016-05-04T14:49:46.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6 学习笔记（五）">
-<meta name="twitter:description" content="Set
-Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
-
-Set 有以下几个特点
-
-值是不重复的
-NaN 等于自身
-添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
-可以接受一组数组进行初始化，会自动过滤重复的数
-两个空对象不互相相等
-
-Set 的方法
-Set.prototype.constructor：构造函数，默认就是Set函数
-Set.prototyp">
+<meta name="twitter:title" content="Webpack + Babel 使用 ES6 新特性">
+<meta name="twitter:description">
 
 
 
@@ -125,7 +86,7 @@ Set.prototyp">
   };
 </script>
 
-  <title> ES6 学习笔记（五） | 滨滨和泓泓 </title>
+  <title> Webpack + Babel 使用 ES6 新特性 | 滨滨和泓泓 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +235,7 @@ Set.prototyp">
             
             
               
-                ES6 学习笔记（五）
+                Webpack + Babel 使用 ES6 新特性
               
             
           </h1>
@@ -286,50 +247,19 @@ Set.prototyp">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T13:57:05+08:00" content="2016-04-21">
-              2016-04-21
+            <time itemprop="dateCreated" datetime="2016-05-04T22:49:46+08:00" content="2016-05-04">
+              2016-05-04
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/ECMAScript-6/" itemprop="url" rel="index">
-                    <span itemprop="name">ECMAScript 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/21/ES6-学习笔记（五）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/ES6-学习笔记（五）/" itemprop="commentsCount"></span>
+                <a href="/2016/05/04/Webpack-Babel-使用-ES6-新特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/04/Webpack-Babel-使用-ES6-新特性/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -351,60 +281,7 @@ Set.prototyp">
       
 
       
-        <h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><blockquote>
-<p>Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数</p>
-</blockquote>
-<p>Set 有以下几个特点</p>
-<ul>
-<li>值是不重复的</li>
-<li>NaN 等于自身</li>
-<li>添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的</li>
-<li>可以接受一组数组进行初始化，会自动过滤重复的数</li>
-<li>两个空对象不互相相等</li>
-</ul>
-<h2 id="Set-的方法"><a href="#Set-的方法" class="headerlink" title="Set 的方法"></a>Set 的方法</h2><ul>
-<li>Set.prototype.constructor：构造函数，默认就是Set函数</li>
-<li>Set.prototype.size：返回Set实例的成员总数</li>
-<li><p>add(value)：添加某个值，返回Set结构本身，由于返回值的特点，可以链式调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.add(<span class="number">1</span>).add(<span class="number">2</span>).add(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功</p>
-</li>
-<li>has(value)：返回一个布尔值，表示该值是否为Set的成员</li>
-<li>clear()：清除所有成员，没有返回值</li>
-<li>keys()：返回一个键名的遍历器</li>
-<li>values()：返回一个键值的遍历器</li>
-<li>entries()：返回一个键值对的遍历器</li>
-<li>forEach()：使用回调函数遍历每个成员</li>
-</ul>
-<h1 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h1><p>WeakSet 有以下几个特点</p>
-<ul>
-<li>加入成员只能是对象</li>
-<li>成员都是弱引用，即垃圾回收机制不会因其引用对象而保持对象的存在</li>
-<li>无法引用成员对象</li>
-<li>无法变量成员对象</li>
-</ul>
-<h2 id="WeakSet-的方法"><a href="#WeakSet-的方法" class="headerlink" title="WeakSet 的方法"></a>WeakSet 的方法</h2><ul>
-<li>WeakSet.prototype.add(value)：向WeakSet实例添加一个新成员</li>
-<li>WeakSet.prototype.delete(value)：清除WeakSet实例的指定成员</li>
-<li>WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在WeakSet实例之中</li>
-</ul>
-<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><blockquote>
-<p>与对象的 key-value 结构类似的一种集合数据结构，不用的是 Map 可以使用任意一种类型的值作为 key，不会发生自动转换为字符串的情况</p>
-</blockquote>
-<ul>
-<li>size：返回Map结构的成员总数</li>
-<li>set(key, value)：设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键</li>
-<li>get(key)：读取key对应的键值，如果找不到key，返回undefined</li>
-<li>has(key)：返回一个布尔值，表示某个键是否在Map数据结构中</li>
-<li>delete(key)：删除某个键，返回true。如果删除失败，返回false</li>
-<li>clear()：清除所有成员，没有返回值</li>
-</ul>
-<h1 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h1><blockquote>
-<p>与 WeakSet 的特点类似，不过这个相对于 Map 的数据结构的，只能使用 <code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></p>
-<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
-</blockquote>
-
+        
       
     </div>
 
@@ -416,28 +293,18 @@ Set.prototyp">
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Javascript/" rel="tag">#Javascript</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/20/ES6-学习笔记（四）/" rel="next" title="ES6 学习笔记（四）">
-                <i class="fa fa-chevron-left"></i> ES6 学习笔记（四）
+              <a href="/2016/04/24/ES6-学习笔记（七）/" rel="next" title="ES6 学习笔记（七）">
+                <i class="fa fa-chevron-left"></i> ES6 学习笔记（七）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/23/ES6-学习笔记（六）/" rel="prev" title="ES6 学习笔记（六）">
-                ES6 学习笔记（六） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -463,8 +330,8 @@ Set.prototyp">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/21/ES6-学习笔记（五）/"
-           data-title="ES6 学习笔记（五）" data-url="http://rlilyyy.github.io/2016/04/21/ES6-学习笔记（五）/">
+      <div class="ds-thread" data-thread-key="2016/05/04/Webpack-Babel-使用-ES6-新特性/"
+           data-title="Webpack + Babel 使用 ES6 新特性" data-url="http://rlilyyy.github.io/2016/05/04/Webpack-Babel-使用-ES6-新特性/">
       </div>
     
   </div>
@@ -585,7 +452,7 @@ Set.prototyp">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">1.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-的方法"><span class="nav-number">1.1.</span> <span class="nav-text">Set 的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WeakSet"><span class="nav-number">2.</span> <span class="nav-text">WeakSet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakSet-的方法"><span class="nav-number">2.1.</span> <span class="nav-text">WeakSet 的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WeakMap"><span class="nav-number">4.</span> <span class="nav-text">WeakMap</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
