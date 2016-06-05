@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Oxygen," />
+  <meta name="keywords" content="Javascript," />
 
 
 
@@ -59,30 +59,25 @@
 
 
 
-<meta name="description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+<meta name="description" content="ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
 
-最终页面效果图
-实现过程
-进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng-repeat: &amp;#123;&amp;#123; content &amp;#125;&amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DAY2 播放器页面的实现">
-<meta property="og:url" content="http://rlilyyy.github.io/2016/03/20/DAY2-播放器页面的实现/index.html">
+<meta property="og:title" content="angular 注意点（长期更新）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/06/05/angular-注意点-长期更新/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+<meta property="og:description" content="ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
 
-最终页面效果图
-实现过程
-进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
-<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png">
-<meta property="og:updated_time" content="2016-03-20T14:10:55.575Z">
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng-repeat: &amp;#123;&amp;#123; content &amp;#125;&amp;#125;">
+<meta property="og:updated_time" content="2016-06-05T09:32:56.555Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DAY2 播放器页面的实现">
-<meta name="twitter:description" content="早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 border-radius 和 box-shadow 就没办法啦，rem 也不能用，但是这个能用正常的 px 解决。
+<meta name="twitter:title" content="angular 注意点（长期更新）">
+<meta name="twitter:description" content="ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
 
-最终页面效果图
-实现过程
-进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空">
-<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png">
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng-repeat: &amp;#123;&amp;#123; content &amp;#125;&amp;#125;">
 
 
 
@@ -100,7 +95,7 @@
   };
 </script>
 
-  <title> DAY2 播放器页面的实现 | 滨滨和泓泓 </title>
+  <title> angular 注意点（长期更新） | 滨滨和泓泓 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +244,7 @@
             
             
               
-                DAY2 播放器页面的实现
+                angular 注意点（长期更新）
               
             
           </h1>
@@ -261,8 +256,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T21:51:14+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-06-05T17:30:38+08:00" content="2016-06-05">
+              2016-06-05
             </time>
           </span>
 
@@ -275,8 +270,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/Angular/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular</span>
                   </a>
                 </span>
 
@@ -291,8 +298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/DAY2-播放器页面的实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/DAY2-播放器页面的实现/" itemprop="commentsCount"></span>
+                <a href="/2016/06/05/angular-注意点-长期更新/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/05/angular-注意点-长期更新/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,22 +321,26 @@
       
 
       
-        <blockquote>
-<p>早上8点多起床转角遇到爱——一只好大的蜘蛛，面对面吓蒙逼了。下午将播放器的图给切出来，主要还是微调一下样式比较麻烦，测试了一下 IE 9+ 都是正常显示的，IE 8 不支持 <code>border-radius</code> 和 <code>box-shadow</code> 就没办法啦，<code>rem</code> 也不能用，但是这个能用正常的 <code>px</code> 解决。</p>
+        <h1 id="ng-repeat"><a href="#ng-repeat" class="headerlink" title="ng-repeat"></a>ng-repeat</h1><blockquote>
+<p><code>ng-repeat</code> 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一</p>
 </blockquote>
-<h2 id="最终页面效果图"><a href="#最终页面效果图" class="headerlink" title="最终页面效果图"></a>最终页面效果图</h2><p><img src="http://7xoehm.com1.z0.glb.clouddn.com/github%E7%AC%AC%E4%BA%8C%E7%89%88.png" alt=""></p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
-<li>进度条的布局，典型的双飞翼布局方式，左右固定了 60px 作为左右两个时间的空间</li>
-<li>进度条的实现，用了三个 div 分别代表 <code>当前进度</code>，<code>加载进度</code>，<code>进度总长</code></li>
-<li>歌曲的封面，为了实现宽度固定，焦点居中，使用 div 的 <code>background</code> 加载封面，<code>background-position</code> 可以实现焦点居中</li>
-<li>歌词的显示，使用 <code>&lt;ul&gt;</code> 可以实现，后面也方便进行滚动</li>
-<li>控制器的样式，引入了 <code>font-awesome</code> 作为图标</li>
-<li>音量调节的弹出，使用 CSS 的 <code>:hover</code> 进行一个样式优先级转换，还是尽量避免使用 JS 实现效果</li>
-<li>一些字体的凹凸感，使用了 <code>text-shadow</code> 实现，阴影往下偏移1个像素，发散一个像素，颜色使用比字体颜色偏浅的黑色</li>
-</ul>
-<blockquote>
-<p><a href="http://www.libinhong.com:8080/index" target="_blank" rel="external">demo查看</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"app"</span> <span class="attr">ng-controller</span>=<span class="string">"control"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span> <span class="attr">ng-repeat</span>=<span class="string">"content in repeatContent"</span>&gt;</span>ng-repeat: &#123;&#123; content &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</span><br><span class="line">app.controller(<span class="string">"control"</span>, ($scope) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 输出李滨泓</span></span><br><span class="line">    $scope.repeatContent = [<span class="string">"李"</span>, <span class="string">"滨"</span>, <span class="string">"泓"</span>];</span><br><span class="line">    <span class="comment">// 下面存在两个“泓”，会报错</span></span><br><span class="line">    <span class="comment">// $scope.repeatContent = ["李", "滨", "泓", "泓"];</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="provider-service-factory-之间的关系"><a href="#provider-service-factory-之间的关系" class="headerlink" title="provider, service, factory 之间的关系"></a>provider, service, factory 之间的关系</h1><h2 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h2><blockquote>
+<p><code>factory</code> 很像 <code>service</code>，不同之处在于，service 在 Angular 中是一个单例对象，即当需要使用 service 时，使用 new 关键字来创建一个（也仅此一个）service。而 factory 则是一个普通的函数，当需要用时，他也仅仅是一个普通函数的调用方式，它可以返回各种形式的数据，例如通过返回一个功能函数的集合对象来将供与使用。</p>
 </blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></span><br><span class="line">app.factory(<span class="string">"Today"</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        year: date.getFullYear(),</span><br><span class="line">        month: date.getMonth() + <span class="number">1</span>,</span><br><span class="line">        day: date.getDate()</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(Today.year);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.month);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.day);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><blockquote>
+<p><code>service</code> 在使用时是一个单例对象，同时也是一个 constructor，它的特点让它可以不返回任何东西，因为它使用 new 关键字新建，同时它可以用在 controller 之间的通讯与数据交互，因为 controller 在无用时其作用域链会被销毁（例如使用路由跳转到另一个页面，同时使用了另一个 controller）</p>
+</blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></span><br><span class="line"><span class="comment">// 注意这里不可以使用 arrow function</span></span><br><span class="line"><span class="comment">// arrow function 不能作为 constructor</span></span><br><span class="line">app.service(<span class="string">"Today"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">this</span>.year = date.getFullYear();</span><br><span class="line">    <span class="keyword">this</span>.month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">this</span>.day = date.getDate();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(Today.year);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.month);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.day);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><blockquote>
+<p><code>provider</code> 是 <code>service</code> 的底层创建方式，可以理解 provider 是一个可配置版的 service，我们可以在正式注入 provider 前对 provider 进行一些参数的配置。</p>
+</blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></span><br><span class="line"><span class="comment">// 注意这里不可以使用 arrow function</span></span><br><span class="line"><span class="comment">// arrow function 不能作为 constructor</span></span><br><span class="line">app.provider(<span class="string">"Today"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.setDate = (year, month, day) =&gt; &#123;</span><br><span class="line">        <span class="keyword">this</span>.date = <span class="keyword">new</span> <span class="built_in">Date</span>(year, month - <span class="number">1</span>, day);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.$get = () =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            year: <span class="keyword">this</span>.date.getFullYear(),</span><br><span class="line">            month: <span class="keyword">this</span>.date.getMonth() + <span class="number">1</span>,</span><br><span class="line">            day: <span class="keyword">this</span>.date.getDate()</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里重新配置了今天的日期是 2015年2月15日</span></span><br><span class="line"><span class="comment">// 注意这里注入的是 TodayProvider，使用驼峰命名来注入正确的需要配置的 provider</span></span><br><span class="line">app.config((TodayProvider) =&gt; &#123;</span><br><span class="line">    TodayProvider.setDate(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">15</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(Today.year);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.month);</span><br><span class="line">    <span class="built_in">console</span>.log(Today.day);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -344,7 +355,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Oxygen/" rel="tag">#Oxygen</a>
+            <a href="/tags/Javascript/" rel="tag">#Javascript</a>
           
         </div>
       
@@ -353,17 +364,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/DAY1-构建原型图/" rel="next" title="DAY1 构建原型图">
-                <i class="fa fa-chevron-left"></i> DAY1 构建原型图
+              <a href="/2016/05/04/Webpack-Babel-使用-ES6-新特性/" rel="next" title="webpack + Babel 使用 ES6 新特性">
+                <i class="fa fa-chevron-left"></i> webpack + Babel 使用 ES6 新特性
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/21/DAY3-Backbone-js-API阅读/" rel="prev" title="DAY3 Backbone.js API阅读">
-                DAY3 Backbone.js API阅读 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,8 +396,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/DAY2-播放器页面的实现/"
-           data-title="DAY2 播放器页面的实现" data-url="http://rlilyyy.github.io/2016/03/20/DAY2-播放器页面的实现/">
+      <div class="ds-thread" data-thread-key="2016/06/05/angular-注意点-长期更新/"
+           data-title="angular 注意点（长期更新）" data-url="http://rlilyyy.github.io/2016/06/05/angular-注意点-长期更新/">
       </div>
     
   </div>
@@ -511,7 +518,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最终页面效果图"><span class="nav-number">1.</span> <span class="nav-text">最终页面效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ng-repeat"><span class="nav-number">1.</span> <span class="nav-text">ng-repeat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#provider-service-factory-之间的关系"><span class="nav-number">2.</span> <span class="nav-text">provider, service, factory 之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#factory"><span class="nav-number">2.1.</span> <span class="nav-text">factory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service"><span class="nav-number">2.2.</span> <span class="nav-text">service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#provider"><span class="nav-number">2.3.</span> <span class="nav-text">provider</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
