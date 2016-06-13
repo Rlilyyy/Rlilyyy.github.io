@@ -367,6 +367,15 @@
 <li><code>listener</code> 将在当前 <code>watchExpression</code> 返回值和上次的 <code>watchExpression</code> 返回值不一致时被调用（使用 <code>!==</code> 来严格地判断不一致性，而不是使用 <code>==</code> 来判断，不过 <code>objectEquality == true</code> 除外）</li>
 <li><code>objectEquality</code> 为 <code>boolean</code> 值，当为 <code>true</code> 时，将使用 <code>angular.equals</code> 来判断一致性，并使用 <code>angular.copy</code> 来保存此次的 Object 拷贝副本供给下一次的比较，这意味着复杂的对象检测将会有性能和内存上的问题</li>
 </ul>
+<h2 id="apply-exp"><a href="#apply-exp" class="headerlink" title="$apply([exp])"></a>$apply([exp])</h2><blockquote>
+<p><code>$apply</code> 是 <code>$scope</code> 的一个函数，用于触发 <code>$digest</code> 循环</p>
+</blockquote>
+<p>$apply 伪代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">$apply</span>(<span class="params">expr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> $<span class="built_in">eval</span>(expr);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        $exceptionHandler(e);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        $root.$digest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>使用 <code>$eval(expr)</code> 执行 <code>expr</code> 表达式</li>
+<li>如果在执行过程中跑出 exception，那么执行 $exceptionHandler(e)</li>
+<li>最后无论结果，都会执行一次 <code>$digest</code> 循环</li>
+</ul>
 
           
         
