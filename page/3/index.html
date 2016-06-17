@@ -237,6 +237,129 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/18/clearfix-闭合浮动/" itemprop="url">
+                  clearfix 闭合浮动
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-18T13:57:45+08:00" content="2016-03-18">
+              2016-03-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/clearfix-闭合浮动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/clearfix-闭合浮动/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/** *  For modern browsers */</span><br><span class="line"></span><br><span class="line">.clearfix:before, .clearfix:after &#123;</span><br><span class="line">    content: "";</span><br><span class="line">    display: table;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** * For IE 6/7 (trigger hasLayout) */</span><br><span class="line">.clearfix &#123;</span><br><span class="line">    *zoom: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>.clearfix:after {content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }</code><br>这里也是一种方法，<code>content</code>为一个<code>.</code>的原因是在 Firefox 里，空的 content 会有额外间隙，所以使用<code>.</code>，此外的<code>height</code>等属性只是为了隐藏 content 不影响布局。而最新的方法 <code>display: table</code> 的 content 可以为空，且不会产生间隙，所以额外的属性都可以去除。</p>
+<p>在父元素使用<code>overflow</code>清除浮动的原理是，将父元素变为一个新的<code>BFC</code>，根据 BFC 的特点，BFC 可以包含浮动元素，所以，不仅仅是 overflow 能清除浮动，只要能触发父元素的BFC的方式都可以清除浮动，例如<code>display: table-cell</code>,<code>float:left</code>等等都可以触发BFC。</p>
+<p>传统的加一个空的div去清除浮动的方法有一个缺点，当子元素是浮动元素且有外边距是，清除浮动以后，父元素的高度仅仅是包裹子元素的高度（不包括外边距的高度），那么子元素明显会被边距顶出了父元素外边，虽然父元素会被撑开一段高度，但是由于子元素外边距的存在，父元素无法完全包裹子元素。</p>
+<p>关于BFC的知识，可浏览</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/leejersey/p/3991400.html" target="_blank" rel="external">http://www.cnblogs.com/leejersey/p/3991400.html</a></p>
+<p><a href="http://kayosite.com/remove-floating-style-in-detail.html" target="_blank" rel="external">http://kayosite.com/remove-floating-style-in-detail.html</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/18/Javascript-事件监听-event-和-target-兼容性写法/" itemprop="url">
                   Javascript 事件监听 event 和 target 兼容性写法
                 </a>
@@ -932,7 +1055,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -940,7 +1063,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -949,7 +1072,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

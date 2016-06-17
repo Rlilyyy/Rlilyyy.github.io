@@ -237,6 +237,259 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/17/reflow-和-repaint-简易分析/" itemprop="url">
+                  reflow 和 repaint 简易分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-17T10:16:50+08:00" content="2016-06-17">
+              2016-06-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/17/reflow-和-repaint-简易分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/17/reflow-和-repaint-简易分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1><p>当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 <code>repaint</code> 和 <code>reflow</code> 的操作？首先我们要先知道用于该操作的 <code>渲染树</code> 的由来。</p>
+<h2 id="DOM-Tree-的生成"><a href="#DOM-Tree-的生成" class="headerlink" title="DOM Tree 的生成"></a>DOM Tree 的生成</h2><blockquote>
+<p>浏览器首先会解析 HTML 代码，生成一颗 <code>DOM Tree</code>，DOM（文档对象模型）</p>
+</blockquote>
+<p>简单地说，<code>DOM Tree</code> 的生成一般经历了四个阶段</p>
+<ul>
+<li>转换——浏览器将从供应方（例如本地磁盘或服务器）获取到的 HTML 字节，根据 HTML 的文件编码格式转换为字符</li>
+<li>符号化——浏览对转换好的字符串进行解析，将 <code>&lt;&gt;</code> 识别为对应的符号</li>
+<li>词法分析——将符号化的字符串转换为 <code>对象</code>，一般来说是节点（Node）</li>
+<li>DOM 构建——对象生成完毕后，将根据对象之间的关系（父子、兄弟）生成 <code>DOM Tree</code>，在 <code>DOM Tree</code> 中可以确认 Node 节点间的关系</li>
+</ul>
+<h2 id="CSSOM-的生成"><a href="#CSSOM-的生成" class="headerlink" title="CSSOM 的生成"></a>CSSOM 的生成</h2><blockquote>
+<p>在生成 <code>DOM Tree</code> 以后，将会生成 <code>CSSOM</code>（CSS 对象模型）的树形结构</p>
+</blockquote>
+<p>与构建 <code>DOM</code> 的过程类似是，<code>CSSOM</code> 的构建过程也是读取 CSS 字节，进行转换解析，并生成对应的 <code>CSSOM Tree</code>，不同的是，<code>CSSOM</code> 为 CSS 样式服务，而 <code>DOM</code> 为节点服务</p>
+<h3 id="CSSOM-能干什么？"><a href="#CSSOM-能干什么？" class="headerlink" title="CSSOM 能干什么？"></a>CSSOM 能干什么？</h3><p>CSSOM 通过复杂而具体的规则计算 CSS 样式，并将其映射到对应的需要样式的节点上，其遵循 <code>向下层叠</code> 的计算规则，例如下图</p>
+<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/cssom-tree.png" alt="向下层叠"></p>
+<p>可以看到，body 处使用了 <code>font-size: 16px</code>，根据 <code>向下层叠</code> 的规则，body 的子节点如果没有其自己的 <code>font-size</code> 规则，那么 body 的 <code>font-size</code> 规则将会层叠给该节点</p>
+<h3 id="CSSOM-注意点"><a href="#CSSOM-注意点" class="headerlink" title="CSSOM 注意点"></a>CSSOM 注意点</h3><ul>
+<li><code>CSSOM</code> 的构建会阻塞页面的渲染——假设页面的呈现没有等待 <code>CSSOM</code> 的构建和计算，那么用户看到的将会是一堆没有样式的页面，等到 <code>CSSOM</code> 构建以后，页面又突然间变成有样式的页面，所以等待 <code>CSSOM</code> 的构建完成再进行渲染并呈现页面是必须的，不过如果 <code>CSSOM</code> 的构建的效率很低，那么将会出现常见的 <code>白屏</code> 现象。</li>
+<li>只要重新加载页面，那么 <code>CSSOM</code> 也会重新构建——不管 CSS 样式文件是否被浏览器进行了缓存，<code>CSSOM</code> 是永远不会被缓存的，它会伴随页面的每一次重新加载而加载。</li>
+<li>JS 的运行所阻塞会被 <code>CSSOM</code> 的构建阻塞——在构建 <code>DOM</code> 时，遇见 <code>&lt;script&gt;</code> 标签时，浏览器会发出 HTTP 请求资源，并将控制权移交给 JavaScript 引擎，等待 JS 执行完毕归还控制权继续 <code>DOM</code> 的构建，然而，如果此时 <code>CSSOM</code> 未下载并构建完成，JS 的执行时机将被延迟</li>
+</ul>
+<h2 id="Render-Tree——渲染树"><a href="#Render-Tree——渲染树" class="headerlink" title="Render Tree——渲染树"></a>Render Tree——渲染树</h2><blockquote>
+<p><code>渲染树</code> 由 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 融合构成，渲染树与 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 不同，渲染树只包含需要渲染的节点信息，例如 <code>display: none</code> 的节点是不存在于 <code>渲染树</code> 内的</p>
+</blockquote>
+<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="合成渲染树"></p>
+<p>可以发现，<code>span</code> 由于拥有 <code>display: none</code> 并未包含在 <code>渲染树</code> 里。</p>
+<h2 id="渲染树构建和渲染步骤"><a href="#渲染树构建和渲染步骤" class="headerlink" title="渲染树构建和渲染步骤"></a>渲染树构建和渲染步骤</h2><p>在这里我们简单说一下 <code>渲染树</code> 的构建和渲染步骤：</p>
+<ul>
+<li>从 <code>DOM Tree</code> 根节点开始遍历所有可见节点<ul>
+<li>不可见节点（如 <code>&lt;script&gt;</code> 和 <code>&lt;meta&gt;</code> 等）将不会包含在内，会被忽略</li>
+<li>通过 CSS 样式设置不可见的节点也不被包括，例如 <code>display: none</code>，不包括 <code>visibility: hidden</code> 等</li>
+</ul>
+</li>
+<li>从 <code>CSSOM Tree</code> 找到对应节点的规则，进行匹配</li>
+<li>发射可见节点，连带其内容及计算的样式</li>
+<li>根据生成的渲染树计算每个节点在屏幕中的绝对像素位置</li>
+<li>根据计算结果开始渲染，这一步通常称为 <code>绘制</code> 或者 <code>栅格化</code></li>
+</ul>
+<h1 id="重绘（repaint）和重排（reflow）"><a href="#重绘（repaint）和重排（reflow）" class="headerlink" title="重绘（repaint）和重排（reflow）"></a>重绘（repaint）和重排（reflow）</h1><p>上面我们知道了 <code>渲染树</code> 由 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 融合构建而成，但是页面并不是进行一次渲染就可以适应各种节点的几何属性改变等变化的，页面会在某些时机进行 <code>重绘（repaint）</code> 和 <code>重排（reflow）</code>。</p>
+<p>我们首先要知道其二者的区别：</p>
+<ul>
+<li>重绘（repaint）——页面部分样式属性改变了（背景颜色，字体颜色等），但是几何属性没有改变，页面需要重绘该部分的内容，这就叫 <code>重绘（repaint）</code></li>
+<li>重排（reflow）——页面节点的几何属性改变，这时候需要重新计算元素的几何属性，重新构建 <code>渲染树</code>，这就叫 <code>重排（reflow）</code></li>
+</ul>
+<p>同时，我们要记得一下这句话：</p>
+<blockquote>
+<p>重绘不一定导致重排，但是重排一定会导致重绘</p>
+</blockquote>
+<h2 id="repaint-和-reflow-所带来的性能问题"><a href="#repaint-和-reflow-所带来的性能问题" class="headerlink" title="repaint 和 reflow 所带来的性能问题"></a>repaint 和 reflow 所带来的性能问题</h2><p>通过前面的分析，可以预见的是，<code>repaint</code> 和 <code>reflow</code> 所需的性能消耗代价必然巨大，下面通过一个例子来说明：</p>
+<p>HTML:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-a"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-b"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-c"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-d"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>JavaScript:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// example 1</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-a render time"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>).innerHTML += idx;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-a render time"</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// example 2</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-b render time"</span>);</span><br><span class="line">    <span class="keyword">let</span> elemB = <span class="built_in">document</span>.getElementById(<span class="string">"elem-b"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</span><br><span class="line">        elemB.innerHTML += idx;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-b render time"</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// example 3</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-c render time"</span>);</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</span><br><span class="line">        <span class="keyword">let</span> elemC = <span class="built_in">document</span>.getElementById(<span class="string">"elem-c"</span>);</span><br><span class="line">        str += idx;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"elem-c"</span>).innerHTML = str;</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-c render time"</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// example 4</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-d render time"</span>);</span><br><span class="line">    <span class="keyword">let</span> elemD = <span class="built_in">document</span>.getElementById(<span class="string">"elem-d"</span>);</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</span><br><span class="line">        str += idx;</span><br><span class="line">    &#125;</span><br><span class="line">    elemD.innerHTML += str;</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-d render time"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>上面进行了 4 次试验，每次试验的内容不一样，下面进行分析：</p>
+<ul>
+<li>example 1——进行 10000 次的 “DOM 索引 + 重绘 + 重排”</li>
+<li>example 2——进行 10000 次的 “重绘 + 重排”，进行 1 次的 “DOM 索引”</li>
+<li>example 3——进行 10000 次的 “DOM 索引”，进行 1 次的 “重绘 + 重排”</li>
+<li>example 4——进行 10000 次的 “字符串拼接”，进行一次的 “DOM 索引 + 重绘 + 重排”</li>
+</ul>
+<p>控制台打印结果如下：</p>
+<ul>
+<li>elem-a render time: 6020.826ms</li>
+<li>elem-b render time: 5797.140ms</li>
+<li>elem-c render time: 14.061ms</li>
+<li>elem-d render time: 3.905ms</li>
+</ul>
+<p>由结果分析可知：</p>
+<ul>
+<li><code>repaint</code> 和 <code>reflow</code> 消耗的性能是无比巨大的</li>
+<li>DOM 索引也消耗一定的性能，但是比起 <code>repaint</code> 和 <code>reflow</code> 简直是小巫见大巫</li>
+<li>优化的重点在于减少 DOM 重复索引和循环引起的 <code>repaint</code> 和 <code>reflow</code>，尽量压缩为一次</li>
+</ul>
+<h2 id="如何减少-repaint-和-reflow-的发生？"><a href="#如何减少-repaint-和-reflow-的发生？" class="headerlink" title="如何减少 repaint 和 reflow 的发生？"></a>如何减少 <code>repaint</code> 和 <code>reflow</code> 的发生？</h2><p>要知道如何减少 <code>repaint</code> 和 <code>reflow</code> 的发生，我们就得先知道引起它们的原因， <code>repaint</code> 无疑就是改变 DOM 的背景颜色等导致，重点在于 <code>reflow</code> 的原因：</p>
+<ul>
+<li>页面初始化必须进行一次的 <code>reflow</code></li>
+<li>缩放窗口</li>
+<li>改变字体</li>
+<li>添加或删除样式</li>
+<li>添加或删除元素</li>
+<li>内容改变，例如用户在输入框中输入文本</li>
+<li>激活了伪类样式，例如：hover</li>
+<li>脚本操作 DOM 并改变了其样式</li>
+<li>计算 offsetWidth 和 offsetHeight</li>
+<li>设置样式属性（width，height等）</li>
+</ul>
+<p>以上种种都有可能引起页面的 <code>reflow</code>，而且不止这些，但是我们无法完全避免 <code>reflow</code>，所以我们必须想方设法去减少 <code>reflow</code>，例如：</p>
+<ul>
+<li>减少单一操作样式属性，使用 class 一次性替换</li>
+<li>对有动画的元素，使其 <code>position</code> 为 <code>fixed</code> 或 <code>absolute</code>，这样会减少元素间的影响</li>
+<li>使用平滑的过渡动画，例如尽量少用 1 个像素的移动动画，可以改为 3 个像素，<a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/#smooth" target="_blank" rel="external">具体原因</a></li>
+<li>避免使用 table 布局，<a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/#tables" target="_blank" rel="external">具体原因</a></li>
+<li>减少在 CSS 样式中使用 JS 表达式</li>
+<li>将元素 <code>display: none</code> 后再修改样式</li>
+<li>创建一个新的节点元素，进行样式操作后替代原先的元素，不过可能会出现页面闪烁</li>
+<li>创建 DocumentFragment 来进行更新</li>
+</ul>
+<p>这里提一下浏览器自身对减少 <code>reflow</code> 的优化，下面例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> elemA = <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>);</span><br><span class="line"></span><br><span class="line">elemA.style.width = <span class="string">"100px"</span>;</span><br><span class="line">elemA.style.height = <span class="string">"100px"</span>;</span><br><span class="line">elemA.style.backgroundColor = <span class="string">"yellow"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>以上例子浏览器只会一次性进行 <code>reflow</code> 而非 3 次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> elemA = <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>);</span><br><span class="line"></span><br><span class="line">elemA.style.width = <span class="string">"100px"</span>;</span><br><span class="line">elemA.style.height = <span class="string">"100px"</span>;</span><br><span class="line">elemA.getComputedStyle();</span><br><span class="line">elemA.style.backgroundColor = <span class="string">"yellow"</span>;</span><br></pre></td></tr></table></figure>
+<p>以上例子浏览器会进行 2 次 <code>reflow</code>，因为中间需要获取当前的样式信息，浏览器必须先进行 <code>渲染树</code> 的重新计算，只要是获取以下样式信息的，都会引起浏览器立即重新渲染（如果必须则会 <code>reflow</code>）：</p>
+<ul>
+<li>offsetTop</li>
+<li>offsetLeft</li>
+<li>offsetWidth</li>
+<li>offsetHeight</li>
+<li>scrollTop</li>
+<li>scrollLeft</li>
+<li>scrollWidth</li>
+<li>scrollHeight</li>
+<li>clientTop</li>
+<li>clientLeft</li>
+<li>clientWidth</li>
+<li>clientHeight</li>
+<li>getComputedStyle()</li>
+<li>currentStyle（just for IE）</li>
+</ul>
+<blockquote>
+<p>参考</p>
+</blockquote>
+<ul>
+<li><a href="https://varvy.com/performance/cssom.html" target="_blank" rel="external">https://varvy.com/performance/cssom.html</a></li>
+<li><a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/" target="_blank" rel="external">http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=zh-cn" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=zh-cn</a></li>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">http://taligarsiel.com/Projects/howbrowserswork1.htm</a></li>
+<li><a href="http://www.cnblogs.com/zichi/p/4720000.html" target="_blank" rel="external">http://www.cnblogs.com/zichi/p/4720000.html</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/05/angular-注意点-长期更新/" itemprop="url">
                   angular 注意点（长期更新）
                 </a>
@@ -1764,186 +2017,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/06/ES6-学习笔记/" itemprop="url">
-                  ES6 学习笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-06T08:11:04+08:00" content="2016-04-06">
-              2016-04-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/ECMAScript-6/" itemprop="url" rel="index">
-                    <span itemprop="name">ECMAScript 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/06/ES6-学习笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/ES6-学习笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="let-和-const"><a href="#let-和-const" class="headerlink" title="let 和 const"></a>let 和 const</h1><h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><blockquote>
-<p>使用 <code>let</code> 定义的变量只在块级作用域里可以访问，而 <code>var</code> 定义的变量没有块级作用域的概念，只要在作用域内即可访问</p>
-</blockquote>
-<h3 id="我们可以在循环内使用-let-代替-var"><a href="#我们可以在循环内使用-let-代替-var" class="headerlink" title="我们可以在循环内使用 let 代替 var"></a>我们可以在循环内使用 let 代替 var</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);<span class="comment">// 0,1,2,3,4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i);<span class="comment">// Uncaught ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure>
-<h3 id="let-声明的变量不存在变量提升"><a href="#let-声明的变量不存在变量提升" class="headerlink" title="let 声明的变量不存在变量提升"></a>let 声明的变量不存在变量提升</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(i);<span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(j);<span class="comment">// Uncaught ReferenceError</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> j = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="暂时性死区-temporal-dead-zone，简称TDZ"><a href="#暂时性死区-temporal-dead-zone，简称TDZ" class="headerlink" title="暂时性死区(temporal dead zone，简称TDZ)"></a>暂时性死区(temporal dead zone，简称TDZ)</h3><blockquote>
-<p>在使用 let 和 const 定义变量的块级作用域里，会形成封闭的块级作用域，在使用 let 或 const 定义变量的语句之前，该变量无法被赋值，都会抛出 ReferenceError</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    tmp = <span class="string">"a"</span>;<span class="comment">// ReferenceError</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// ReferenceError</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 死区结束</span></span><br><span class="line">    <span class="keyword">let</span> tmp;</span><br><span class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">    tmp = <span class="string">"b"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// b</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="其他一些限制"><a href="#其他一些限制" class="headerlink" title="其他一些限制"></a>其他一些限制</h3><ul>
-<li>使用 let 声明的变量不允许在同一块级作用域内重复声明</li>
-<li>块级作用域内声明的函数只在该块级作用域内可用</li>
-<li>ES6 块级作用域内的声明的函数不存在函数提升</li>
-</ul>
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><blockquote>
-<p>使用 <code>const</code> 声明的变量无法更改，严格模式下重复赋值会报错，而常规模式下不报错也不赋值成功</p>
-</blockquote>
-<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><ul>
-<li>const 同样存在暂时性死区</li>
-<li>const 不允许重复定义，不存在变量提升</li>
-<li>使用 const 声明一个对象，只保证该对象的指针不被修改，不保证该对象内部属性不被修改</li>
-<li>使用 const 声明的变量只在当前块级作用域内有效</li>
-<li><p>使用 const 声明的变量可以跨模块使用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// constants.js 模块</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> A = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> B = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> C = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test1.js 模块</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> constants <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(constants.A); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(constants.B); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// test2.js 模块</span></span><br><span class="line"><span class="keyword">import</span> &#123;A, B&#125; <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(A); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(B); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 window 作用域下使用 const 声明的变量不会变为 window.? 变量</p>
-</li>
-</ul>
-<h1 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h1><blockquote>
-<p>ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="comment">// 解构成功</span></span><br><span class="line"><span class="keyword">var</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解构失败——部分解构</span></span><br><span class="line"><span class="keyword">var</span> [x, y] = [<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y);<span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解构成功——不完全解构</span></span><br><span class="line"><span class="keyword">var</span> [i, [j], k] = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>];</span><br><span class="line"><span class="built_in">console</span>.log(i);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(j);<span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(k);<span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 模式匹配的解构</span></span><br><span class="line"><span class="keyword">var</span> [a1, [a2, a3]] = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>]];</span><br><span class="line"><span class="built_in">console</span>.log(a1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(a2);<span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(a3);<span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> [, , tmp] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(tmp);<span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> [x1, ...x2] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(x2);<span class="comment">// [2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> [y1, y2, ...y3] = [<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(y1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y2);<span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(y3);<span class="comment">// []</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 有默认值的解构赋值</span></span><br><span class="line"><span class="comment">// 只有对应赋值是 undefined，默认值才会生效</span></span><br><span class="line"><span class="keyword">var</span> [z1 ,z2 = <span class="number">2</span>] = [<span class="number">1</span>, <span class="literal">undefined</span>];</span><br><span class="line"><span class="built_in">console</span>.log(z1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(z2);<span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象的解构赋值</span></span><br><span class="line"><span class="comment">// 位置可以不同</span></span><br><span class="line"><span class="keyword">var</span> &#123;q2, q1&#125; = &#123;q1: <span class="number">1</span>, q2: <span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(q1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(q2);<span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这个有点反人类</span></span><br><span class="line"><span class="comment">// 真正被赋值的是后者 t1, t2，而不是前者 r1, r2</span></span><br><span class="line"><span class="keyword">var</span> &#123;r1: t1, r2: t2&#125; = &#123;r1: <span class="number">1</span>, r2: <span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t1);<span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(t2);<span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串的解构赋值</span></span><br><span class="line"><span class="keyword">var</span> [s1, s2, s3] = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s1);<span class="comment">// a</span></span><br><span class="line"><span class="built_in">console</span>.log(s2);<span class="comment">// b</span></span><br><span class="line"><span class="built_in">console</span>.log(s3);<span class="comment">// c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数参数的解构赋值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">[x, y]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line">func([<span class="number">1</span>, <span class="number">2</span>]);<span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func2</span>(<span class="params">[x = 1, y = 2] = []</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line">func2([<span class="number">2</span>, <span class="number">3</span>]);<span class="comment">// [2, 3]</span></span><br><span class="line">func2([<span class="number">2</span>]);<span class="comment">// [2, 2]</span></span><br><span class="line">func2([]);<span class="comment">// [1, 2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量赋值交换</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exchange</span>(<span class="params">[x, y]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> [x, y] = [y, x];</span><br><span class="line">    <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line">exchange([<span class="number">1</span>, <span class="number">2</span>]);<span class="comment">// [2, 1]</span></span><br></pre></td></tr></table></figure>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="Unicode-表示法"><a href="#Unicode-表示法" class="headerlink" title="Unicode 表示法"></a>Unicode 表示法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单字节 Unicode</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"\u0061"</span>);<span class="comment">// a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 双字节 Unicode</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"\u&#123;20BB7&#125;"</span>);<span class="comment">// 𠮷</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> hello = <span class="number">123</span>;</span><br><span class="line">hell\u&#123;<span class="number">6</span>F&#125; <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于双字节字符，用 codePointAt() 正确获取对应十进制字符码</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">"𠮷a"</span>;</span><br><span class="line"><span class="comment">// 这里是“𠮷”的十进制字符码</span></span><br><span class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">0</span>));<span class="comment">// 134071</span></span><br><span class="line"><span class="comment">// 这里是“𠮷”的第二个十进制字符码</span></span><br><span class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">1</span>));<span class="comment">// 57271</span></span><br><span class="line"><span class="comment">// 这里是“a”的十进制字符码</span></span><br><span class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">2</span>));<span class="comment">// 97</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 合成字符的规范化，用于正确判断相等性</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"\u01D1"</span>.normalize() === <span class="string">"\u004F\u030C"</span>.normalize()) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"\u01D1"</span> === <span class="string">"\u004F\u030C"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><ul>
-<li>includes(code, startIndex)：返回布尔值，表示是否找到了参数字符串</li>
-<li>startsWith(code, startIndex)：返回布尔值，表示参数字符串是否在源字符串的头部</li>
-<li>endsWith(code, startIndex)：返回布尔值，表示参数字符串是否在源字符串的尾部</li>
-<li>repeat()：返回一个新字符串，表示将原字符串重复n次</li>
-</ul>
-<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line">$(<span class="string">"#result"</span>).append(</span><br><span class="line">  <span class="string">"There are &lt;b&gt;"</span> + basket.count + <span class="string">"&lt;/b&gt; "</span> +</span><br><span class="line">  <span class="string">"items in your basket, "</span> +</span><br><span class="line">  <span class="string">"&lt;em&gt;"</span> + basket.onSale +</span><br><span class="line">  <span class="string">"&lt;/em&gt; are on sale!"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="comment">// 注意模板字符串使用 `` 代替 ""</span></span><br><span class="line"><span class="comment">// $&#123;&#125; 代表变量</span></span><br><span class="line">$(<span class="string">"#result"</span>).append(<span class="string">`</span><br><span class="line">  There are &lt;b&gt;<span class="subst">$&#123;basket.count&#125;</span>&lt;/b&gt; items</span><br><span class="line">   in your basket, &lt;em&gt;<span class="subst">$&#123;basket.onSale&#125;</span>&lt;/em&gt;</span><br><span class="line">  are on sale!</span><br><span class="line">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以在模板字符串内运算</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="string">`<span class="subst">$&#123;x&#125;</span> + <span class="subst">$&#123;y&#125;</span> = <span class="subst">$&#123;x + y&#125;</span>`</span></span><br><span class="line"><span class="comment">// "1 + 2 = 3"</span></span><br><span class="line"></span><br><span class="line"><span class="string">`<span class="subst">$&#123;x&#125;</span> + <span class="subst">$&#123;y * 2&#125;</span> = <span class="subst">$&#123;x + y * 2&#125;</span>`</span></span><br><span class="line"><span class="comment">// "1 + 4 = 5"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;x: <span class="number">1</span>, y: <span class="number">2</span>&#125;;</span><br><span class="line"><span class="string">`<span class="subst">$&#123;obj.x + obj.y&#125;</span>`</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以调用函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"Hello World"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">`foo <span class="subst">$&#123;fn()&#125;</span> bar`</span></span><br><span class="line"><span class="comment">// foo Hello World bar</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// raw 会自动转义斜杠</span></span><br><span class="line"><span class="built_in">String</span>.raw<span class="string">`Hi\n<span class="subst">$&#123;2+3&#125;</span>!`</span>;<span class="comment">// Hi\n5!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 此外还有标签模板等扩展，更详细的看教程</span></span><br></pre></td></tr></table></figure>
-<h1 id="数组的扩展"><a href="#数组的扩展" class="headerlink" title="数组的扩展"></a>数组的扩展</h1><h2 id="新的数组函数"><a href="#新的数组函数" class="headerlink" title="新的数组函数"></a>新的数组函数</h2><ul>
-<li>Array.from()，用于将类数组对象转换为真正的数组，如果有第二个参数可是实现类似 map() 的效果，使用[…array]会有相同结果</li>
-<li>Array.of()，用于将一组数值转换为数组对象</li>
-<li>(new Array()).copyWithin(target, startIndex, endIndex)，用于将 startIndex 到 endIndex 的元素复制到 target 位为开头的位置上</li>
-<li>(new Array()).find(arr, callback)，用于寻找 arr 数组中符合 callback 中条件的第一个元素</li>
-<li>(new Array()).findIndex(arr, callback)，用于寻找 arr 数组中符合 callback 中条件的第一个元素的索引</li>
-<li>(new Array()).fill(char, starIndex, endIndex)，用于用 char 填充数组</li>
-<li>(new Array()).entries()，返回所有键-值(key-value)对</li>
-<li>(new Array()).keys()，返回所有键(key)的值</li>
-<li>(new Array()).values()，返回所有值(value)</li>
-</ul>
-<blockquote>
-<p>以上例子参考自阮一峰老师的《ECMAScript 6入门》一书的开源版本，地址：<a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1989,7 +2062,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1997,7 +2070,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2006,7 +2079,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
