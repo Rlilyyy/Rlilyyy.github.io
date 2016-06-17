@@ -318,7 +318,8 @@
       
         
           
-            <h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1><p>当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 <code>repaint</code> 和 <code>reflow</code> 的操作？首先我们要先知道用于该操作的 <code>渲染树</code> 的由来。</p>
+            <p><img src="http://7xoehm.com1.z0.glb.clouddn.com/1448333443367.jpg" alt="福利"></p>
+<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1><p>当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 <code>repaint</code> 和 <code>reflow</code> 的操作？首先我们要先知道用于该操作的 <code>渲染树</code> 的由来。</p>
 <h2 id="DOM-Tree-的生成"><a href="#DOM-Tree-的生成" class="headerlink" title="DOM Tree 的生成"></a>DOM Tree 的生成</h2><blockquote>
 <p>浏览器首先会解析 HTML 代码，生成一颗 <code>DOM Tree</code>，DOM（文档对象模型）</p>
 </blockquote>
@@ -334,7 +335,7 @@
 </blockquote>
 <p>与构建 <code>DOM</code> 的过程类似是，<code>CSSOM</code> 的构建过程也是读取 CSS 字节，进行转换解析，并生成对应的 <code>CSSOM Tree</code>，不同的是，<code>CSSOM</code> 为 CSS 样式服务，而 <code>DOM</code> 为节点服务</p>
 <h3 id="CSSOM-能干什么？"><a href="#CSSOM-能干什么？" class="headerlink" title="CSSOM 能干什么？"></a>CSSOM 能干什么？</h3><p>CSSOM 通过复杂而具体的规则计算 CSS 样式，并将其映射到对应的需要样式的节点上，其遵循 <code>向下层叠</code> 的计算规则，例如下图</p>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/cssom-tree.png" alt="向下层叠"></p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/cssom-tree.png" alt="向下层叠"></p>
 <p>可以看到，body 处使用了 <code>font-size: 16px</code>，根据 <code>向下层叠</code> 的规则，body 的子节点如果没有其自己的 <code>font-size</code> 规则，那么 body 的 <code>font-size</code> 规则将会层叠给该节点</p>
 <h3 id="CSSOM-注意点"><a href="#CSSOM-注意点" class="headerlink" title="CSSOM 注意点"></a>CSSOM 注意点</h3><ul>
 <li><code>CSSOM</code> 的构建会阻塞页面的渲染——假设页面的呈现没有等待 <code>CSSOM</code> 的构建和计算，那么用户看到的将会是一堆没有样式的页面，等到 <code>CSSOM</code> 构建以后，页面又突然间变成有样式的页面，所以等待 <code>CSSOM</code> 的构建完成再进行渲染并呈现页面是必须的，不过如果 <code>CSSOM</code> 的构建的效率很低，那么将会出现常见的 <code>白屏</code> 现象。</li>
@@ -344,7 +345,7 @@
 <h2 id="Render-Tree——渲染树"><a href="#Render-Tree——渲染树" class="headerlink" title="Render Tree——渲染树"></a>Render Tree——渲染树</h2><blockquote>
 <p><code>渲染树</code> 由 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 融合构成，渲染树与 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 不同，渲染树只包含需要渲染的节点信息，例如 <code>display: none</code> 的节点是不存在于 <code>渲染树</code> 内的</p>
 </blockquote>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="合成渲染树"></p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/render-tree-construction.png" alt="合成渲染树"></p>
 <p>可以发现，<code>span</code> 由于拥有 <code>display: none</code> 并未包含在 <code>渲染树</code> 里。</p>
 <h2 id="渲染树构建和渲染步骤"><a href="#渲染树构建和渲染步骤" class="headerlink" title="渲染树构建和渲染步骤"></a>渲染树构建和渲染步骤</h2><p>在这里我们简单说一下 <code>渲染树</code> 的构建和渲染步骤：</p>
 <ul>
