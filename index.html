@@ -237,6 +237,161 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" itemprop="url">
+                  SameSite-Cookie——防御 CSRF & XSSI
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-10T23:06:38+08:00" content="2016-07-10">
+              2016-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/前端安全/" itemprop="url" rel="index">
+                    <span itemprop="name">前端安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SameSite——防御-CSRF-amp-XSSI-新机制"><a href="#SameSite——防御-CSRF-amp-XSSI-新机制" class="headerlink" title="SameSite——防御 CSRF &amp; XSSI 新机制"></a>SameSite——防御 CSRF &amp; XSSI 新机制</h1><blockquote>
+<p><code>SameSite-cookies</code> 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 <code>Set-Cookie</code> 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.0.2704.4）中可用。</p>
+</blockquote>
+<h2 id="XSSI——Cross-Site-Script-Inclusion"><a href="#XSSI——Cross-Site-Script-Inclusion" class="headerlink" title="XSSI——Cross Site Script Inclusion"></a>XSSI——Cross Site Script Inclusion</h2><p><code>XSSI</code> 属于 <code>XSS</code> 攻击的一种攻击方式，一般来说，浏览器允许网页加载其他域的脚本或图片等，假设我们在安全的网站上 a.com 包含一个脚本文件 <code>getData.js</code> 用于读取用户的私人信息，第一次用户需要在 a.com 登录，然后就可以根据验证返回用户私人信息并设置 cookie 以便下次使用，此时我们只做一个恶意网站 c.com，并包含了 <code>getData.js</code> 这个脚本文件，当用户点击 c.com 时，他的信息就泄露了。</p>
+<p>当然，这种方法可以用 <code>token</code> 令牌等来解决，另外一种方法就是 <code>SameSite-Cookies</code>，通过验证是否是从 a.com 访问的 getData.js 的方式来阻止 cookie 的发送。</p>
+<h2 id="SameSite-使用方式"><a href="#SameSite-使用方式" class="headerlink" title="SameSite 使用方式"></a>SameSite 使用方式</h2><p>需要在 <code>Set-Cookie</code> 中加入 <code>SameSite</code> 关键字，例如</p>
+<blockquote>
+<p>Set-Cookie: key=value; HttpOnly; SameSite=Strict</p>
+</blockquote>
+<h2 id="SameSite-的两个属性"><a href="#SameSite-的两个属性" class="headerlink" title="SameSite 的两个属性"></a>SameSite 的两个属性</h2><h3 id="no-restriction"><a href="#no-restriction" class="headerlink" title="no_restriction"></a>no_restriction</h3><p>当没有添加 SameSite 关键字的时候，默认是空的</p>
+<h3 id="Lax"><a href="#Lax" class="headerlink" title="Lax"></a>Lax</h3><ul>
+<li>允许发送安全 HTTP 方法（<code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>TRACE</code>）第三方链接的 cookies</li>
+<li>必须是 TOP-LEVEL 即可引起地址栏变化的跳转方式，例如 <code>&lt;a&gt;</code>, <code>&lt;link rel=&quot;prerender&quot;&gt;</code>, <code>GET 方式的 form 表单</code>，此外，<code>XMLHttpRequest</code>, <code>&lt;img&gt;</code> 等方式进行 GET 方式的访问将不会发送 cookies</li>
+<li>但是禁止发送不安全 HTTP 方法（<code>POST</code>, <code>PUT</code>, <code>DELETE</code>）第三方链接的cookies</li>
+</ul>
+<h3 id="Strict"><a href="#Strict" class="headerlink" title="Strict"></a>Strict</h3><p>禁止发送所有第三方链接的 cookies，默认情况下，如果添加了 SameSite 关键字，但是没有指定 value（Lax or Stict），那么默认为 Strict</p>
+<h2 id="Strict-下的-Request-Cookie-变化"><a href="#Strict-下的-Request-Cookie-变化" class="headerlink" title="Strict 下的 Request Cookie 变化"></a>Strict 下的 Request Cookie 变化</h2><p>当我们通过其他网站来访问一个有 SameSite-Cookies 机制的网站时，例如从 a.com 点击链接进入 b.com，如果 b.com 设置了 <code>Set-Cookie:foo=bar;SameSite=Strict</code>，那么，<code>foo=bar</code> 这一 cookie 是不会随着 request 发送的，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png" alt="outerLink"></p>
+<p>可以看到 <code>foo=bar</code> 并没有发送，假如此时刷新一下页面或者直接从地址栏输入 b.com 的地址，那么 cookie 将会正常发送，不过假设用户点击了外链进入了 b.com，由于 SameSite-Cookies 的保护，他的 cookie 第一次受到了保护，但是假设用户此时手动刷新了一下页面，那么 cookie 将会被发送出去，所以可能需要其他一些验证手段来对 cookie 未随 request 发送的情况来做相对应的处理，不过该种情况仅限于 GET 方法下，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/innerLink.png" alt="innerLink"></p>
+<p>此外，为了更清楚地了解 cookie 中哪些字段是 SameSite 控制并且级别为 Lax 或 Strict 或 none，我们可以在 Chrome DevTools 上清楚地看到，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/devTools.png" alt="devTools"></p>
+<p><a href="http://www.libinhong.com:5000" target="_blank" rel="external">点击查看 DEMO</a></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/" target="_blank" rel="external">http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/</a></li>
+<li><a href="https://tools.ietf.org/html/draft-west-first-party-cookies-07" target="_blank" rel="external">https://tools.ietf.org/html/draft-west-first-party-cookies-07</a></li>
+<li><a href="https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/" target="_blank" rel="external">https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/17/reflow-和-repaint-简易分析/" itemprop="url">
                   reflow 和 repaint 简易分析
                 </a>
@@ -1906,118 +2061,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/13/ele-me-二面代码题实现/" itemprop="url">
-                  ele.me 二面代码题实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-13T15:53:59+08:00" content="2016-04-13">
-              2016-04-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/13/ele-me-二面代码题实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/ele-me-二面代码题实现/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>饿了么二面是在线写代码，有三道题，一道题十分钟内写完提交，在一个网站写，会自动录制代码编写过程</p>
-</blockquote>
-<ol>
-<li><p>首先写了一个判断数组的函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !!array &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(array) === <span class="string">"[object Array]"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有序数组的打乱</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">random</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isArray(array)) <span class="keyword">return</span> array;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> array.sort(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.8</span> - <span class="built_in">Math</span>.random();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多维数组变为一维数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isArray(array)) <span class="keyword">return</span> [array];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> len = array.length;</span><br><span class="line">    <span class="keyword">let</span> flattenArr = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;len;idx++) &#123;</span><br><span class="line">        <span class="built_in">Array</span>.prototype.push.apply(flattenArr, isArray(array[idx]) ? flatten(array[idx]) : [array[idx]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> flattenArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 ES6 的 Generator 函数实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flattenES6</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span>* <span class="title">iterator</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(isArray(array)) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;array.length;i++) &#123;</span><br><span class="line">                <span class="keyword">yield</span>* iterator(array[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">yield</span> array;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> value <span class="keyword">of</span> iterator(array)) &#123;</span><br><span class="line">        result.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将一个乱序数组，里面有<code>*</code>和<code>数字</code>，将<code>*</code>提到最前，数字往后放，并且数字顺序不变</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrange</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isArray(array)) <span class="keyword">return</span> array;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> prePoint = <span class="number">0</span>,</span><br><span class="line">        nextPoint = <span class="number">1</span>,</span><br><span class="line">        len = array.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(array[prePoint] === <span class="string">"*"</span> &amp;&amp; prePoint &lt; len) &#123;</span><br><span class="line">            prePoint++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(array[nextPoint] !== <span class="string">"*"</span> &amp;&amp; nextPoint &lt; len) &#123;</span><br><span class="line">            nextPoint++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(prePoint &gt; nextPoint) &#123;</span><br><span class="line">            nextPoint++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(prePoint &gt;= len || nextPoint &gt;= len) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// exchange</span></span><br><span class="line">        [array[prePoint], array[nextPoint]] = [array[nextPoint], array[prePoint]];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2063,7 +2106,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2071,7 +2114,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2080,7 +2123,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
