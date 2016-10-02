@@ -71,7 +71,7 @@ Negation pseudo-class——:not()
 
 Negation pseudo-class——:not()
 :not() 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not() 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p)">
-<meta property="og:updated_time" content="2016-10-02T13:40:01.078Z">
+<meta property="og:updated_time" content="2016-10-02T13:51:32.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS Selectors Level 4 中的新东西">
 <meta name="twitter:description" content="以下所有示例在 Safari Technology Preview 饮用最佳，Chrome Canary 有些示例都还没实现，可能是我使用的姿势不对……
@@ -343,7 +343,7 @@ Negation pseudo-class——:not()
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"negation"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">rel</span>=<span class="string">"green"</span>&gt;</span>这里是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.ele.me"</span> <span class="attr">rel</span>=<span class="string">"default"</span>&gt;</span>这里也是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.sina.com"</span> <span class="attr">rel</span>=<span class="string">"blue"</span>&gt;</span>这里是蓝色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    这里是黑色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line">    这里是红色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="not-tips"><a href="#not-tips" class="headerlink" title=":not() tips"></a><code>:not()</code> tips</h2><p>我们可以利用 <code>:not()</code> 来对 CSS 样式进行一个优先级提升，例如 <code>div:not(span) {…}</code> 跟 <code>div {…}</code> 是同个概念，但是明显地前者的优先级更高。</p>
 <blockquote>
-<p>解锁更多 <code>:not()</code> 的使用姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#negation" target="_blank" rel="external">The Negation Pseudo-class 草案</a>。</p>
+<p>想解锁更多 <code>:not()</code> 的使用姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#negation" target="_blank" rel="external">The Negation Pseudo-class 草案</a>。</p>
 </blockquote>
 <h1 id="Matches-any-Pseudo-class——-matches-伪类"><a href="#Matches-any-Pseudo-class——-matches-伪类" class="headerlink" title="Matches-any Pseudo-class——:matches 伪类"></a>Matches-any Pseudo-class——:matches 伪类</h1><blockquote>
 <p><code>:matches()</code> 用于匹配所述规则的元素，并应用相应的样式规则，同样不允许嵌套使用，<code>-webkit-any()</code> 和 <code>-moz-any()</code> 是它的两个兼容性写法。</p>
@@ -508,7 +508,7 @@ Negation pseudo-class——:not()
 <p>想解锁更多姿势就去看 <a href="https://drafts.csswg.org/selectors-4/#selectordef-drop-function" target="_blank" rel="external">The Drag-and-Drop Pseudo-class 草案</a></p>
 </blockquote>
 <h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>这篇博客算是一篇科普文，趁着空余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我也十分各位帮我指出错误之处或不足之处！另外，国庆节快乐，祝你们玩得开心，单身狗继续写代码了~</p>
-<p>参考文档：</p>
+<p>参考资料：</p>
 <blockquote>
 <p><a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/" target="_blank" rel="external">https://www.w3.org/TR/2013/WD-selectors4-20130502/</a><br><a href="https://drafts.csswg.org/selectors-4/" target="_blank" rel="external">https://drafts.csswg.org/selectors-4/</a><br><a href="http://css4.rocks/selectors-level-4/" target="_blank" rel="external">http://css4.rocks/selectors-level-4/</a><br><a href="http://css4-selectors.com/selectors/" target="_blank" rel="external">http://css4-selectors.com/selectors/</a></p>
 </blockquote>
@@ -621,7 +621,7 @@ Negation pseudo-class——:not()
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
