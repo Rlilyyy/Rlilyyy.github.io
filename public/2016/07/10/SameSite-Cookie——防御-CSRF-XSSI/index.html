@@ -1,0 +1,837 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="cookie," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SameSite-Cookie——防御 CSRF & XSSI">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/innerLink.png">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/devTools.png">
+<meta property="og:updated_time" content="2016-07-10T15:10:30.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SameSite-Cookie——防御 CSRF & XSSI">
+<meta name="twitter:description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6263065978234471000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> SameSite-Cookie——防御 CSRF & XSSI | 滨滨和泓泓 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-75726349-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">滨滨和泓泓</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">我被外星飞船劫走了，被逼着学前端</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fuli">
+          <a href="http://www.libinhong.com:5000" rel="section">
+            
+              <i class="menu-item-icon fa fa-gift fa-fw"></i> <br />
+            
+            福利
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SameSite-Cookie——防御 CSRF & XSSI
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-10T23:06:38+08:00" content="2016-07-10">
+              2016-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/前端安全/" itemprop="url" rel="index">
+                    <span itemprop="name">前端安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="SameSite——防御-CSRF-amp-XSSI-新机制"><a href="#SameSite——防御-CSRF-amp-XSSI-新机制" class="headerlink" title="SameSite——防御 CSRF &amp; XSSI 新机制"></a>SameSite——防御 CSRF &amp; XSSI 新机制</h1><blockquote>
+<p><code>SameSite-cookies</code> 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 <code>Set-Cookie</code> 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.0.2704.4）中可用。</p>
+</blockquote>
+<h2 id="XSSI——Cross-Site-Script-Inclusion"><a href="#XSSI——Cross-Site-Script-Inclusion" class="headerlink" title="XSSI——Cross Site Script Inclusion"></a>XSSI——Cross Site Script Inclusion</h2><p><code>XSSI</code> 属于 <code>XSS</code> 攻击的一种攻击方式，一般来说，浏览器允许网页加载其他域的脚本或图片等，假设我们在安全的网站上 a.com 包含一个脚本文件 <code>getData.js</code> 用于读取用户的私人信息，第一次用户需要在 a.com 登录，然后就可以根据验证返回用户私人信息并设置 cookie 以便下次使用，此时我们只做一个恶意网站 c.com，并包含了 <code>getData.js</code> 这个脚本文件，当用户点击 c.com 时，他的信息就泄露了。</p>
+<p>当然，这种方法可以用 <code>token</code> 令牌等来解决，另外一种方法就是 <code>SameSite-Cookies</code>，通过验证是否是从 a.com 访问的 getData.js 的方式来阻止 cookie 的发送。</p>
+<h2 id="SameSite-使用方式"><a href="#SameSite-使用方式" class="headerlink" title="SameSite 使用方式"></a>SameSite 使用方式</h2><p>需要在 <code>Set-Cookie</code> 中加入 <code>SameSite</code> 关键字，例如</p>
+<blockquote>
+<p>Set-Cookie: key=value; HttpOnly; SameSite=Strict</p>
+</blockquote>
+<h2 id="SameSite-的两个属性"><a href="#SameSite-的两个属性" class="headerlink" title="SameSite 的两个属性"></a>SameSite 的两个属性</h2><h3 id="no-restriction"><a href="#no-restriction" class="headerlink" title="no_restriction"></a>no_restriction</h3><p>当没有添加 SameSite 关键字的时候，默认是空的</p>
+<h3 id="Lax"><a href="#Lax" class="headerlink" title="Lax"></a>Lax</h3><ul>
+<li>允许发送安全 HTTP 方法（<code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>TRACE</code>）第三方链接的 cookies</li>
+<li>必须是 TOP-LEVEL 即可引起地址栏变化的跳转方式，例如 <code>&lt;a&gt;</code>, <code>&lt;link rel=&quot;prerender&quot;&gt;</code>, <code>GET 方式的 form 表单</code>，此外，<code>XMLHttpRequest</code>, <code>&lt;img&gt;</code> 等方式进行 GET 方式的访问将不会发送 cookies</li>
+<li>但是禁止发送不安全 HTTP 方法（<code>POST</code>, <code>PUT</code>, <code>DELETE</code>）第三方链接的cookies</li>
+</ul>
+<h3 id="Strict"><a href="#Strict" class="headerlink" title="Strict"></a>Strict</h3><p>禁止发送所有第三方链接的 cookies，默认情况下，如果添加了 SameSite 关键字，但是没有指定 value（Lax or Stict），那么默认为 Strict</p>
+<h2 id="Strict-下的-Request-Cookie-变化"><a href="#Strict-下的-Request-Cookie-变化" class="headerlink" title="Strict 下的 Request Cookie 变化"></a>Strict 下的 Request Cookie 变化</h2><p>当我们通过其他网站来访问一个有 SameSite-Cookies 机制的网站时，例如从 a.com 点击链接进入 b.com，如果 b.com 设置了 <code>Set-Cookie:foo=bar;SameSite=Strict</code>，那么，<code>foo=bar</code> 这一 cookie 是不会随着 request 发送的，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png" alt="outerLink"></p>
+<p>可以看到 <code>foo=bar</code> 并没有发送，假如此时刷新一下页面或者直接从地址栏输入 b.com 的地址，那么 cookie 将会正常发送，不过假设用户点击了外链进入了 b.com，由于 SameSite-Cookies 的保护，他的 cookie 第一次受到了保护，但是假设用户此时手动刷新了一下页面，那么 cookie 将会被发送出去，所以可能需要其他一些验证手段来对 cookie 未随 request 发送的情况来做相对应的处理，不过该种情况仅限于 GET 方法下，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/innerLink.png" alt="innerLink"></p>
+<p>此外，为了更清楚地了解 cookie 中哪些字段是 SameSite 控制并且级别为 Lax 或 Strict 或 none，我们可以在 Chrome DevTools 上清楚地看到，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/devTools.png" alt="devTools"></p>
+<p><a href="http://www.libinhong.com:5000" target="_blank" rel="external">点击查看 DEMO</a></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/" target="_blank" rel="external">http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/</a></li>
+<li><a href="https://tools.ietf.org/html/draft-west-first-party-cookies-07" target="_blank" rel="external">https://tools.ietf.org/html/draft-west-first-party-cookies-07</a></li>
+<li><a href="https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/" target="_blank" rel="external">https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cookie/" rel="tag">#cookie</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/17/reflow-和-repaint-简易分析/" rel="next" title="reflow 和 repaint 简易分析">
+                <i class="fa fa-chevron-left"></i> reflow 和 repaint 简易分析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/02/CSS-Level-4-中的新东西/" rel="prev" title="CSS Selectors Level 4 中的新东西">
+                CSS Selectors Level 4 中的新东西 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/"
+           data-title="SameSite-Cookie——防御 CSRF & XSSI" data-url="http://rlilyyy.github.io/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/me.jpg"
+               alt="滨滨和泓泓" />
+          <p class="site-author-name" itemprop="name">滨滨和泓泓</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rlilyyy" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1883893572" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SameSite——防御-CSRF-amp-XSSI-新机制"><span class="nav-number">1.</span> <span class="nav-text">SameSite——防御 CSRF & XSSI 新机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XSSI——Cross-Site-Script-Inclusion"><span class="nav-number">1.1.</span> <span class="nav-text">XSSI——Cross Site Script Inclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SameSite-使用方式"><span class="nav-number">1.2.</span> <span class="nav-text">SameSite 使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SameSite-的两个属性"><span class="nav-number">1.3.</span> <span class="nav-text">SameSite 的两个属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#no-restriction"><span class="nav-number">1.3.1.</span> <span class="nav-text">no_restriction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lax"><span class="nav-number">1.3.2.</span> <span class="nav-text">Lax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strict"><span class="nav-number">1.3.3.</span> <span class="nav-text">Strict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Strict-下的-Request-Cookie-变化"><span class="nav-number">1.4.</span> <span class="nav-text">Strict 下的 Request Cookie 变化</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">滨滨和泓泓</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rlilyyy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>
