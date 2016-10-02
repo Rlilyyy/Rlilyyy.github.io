@@ -192,7 +192,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
       
         
         <li class="menu-item menu-item-fuli">
-          <a href="http://www.libinhong.com" rel="section">
+          <a href="http://www.libinhong.com:5000" rel="section">
             
               <i class="menu-item-icon fa fa-gift fa-fw"></i> <br />
             
@@ -343,7 +343,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
 <li>el——引用了该 View 的 dom 元素</li>
 <li>$el——通过引用 el，对其进行封装，其可以使用 JQuery 的函数</li>
 <li>setElement——将 View 从旧的引用 dom 对象切换到新的 dom 对象引用，视图的事件委托和 $el 也响应迁移</li>
-<li>template——利用 Underscore 的 template 方法可以为 View 设定一个模板，有两种方法，如下所示：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// first</span></span><br><span class="line"><span class="keyword">var</span> LibraryView = Backbone.View.extend(&#123;</span><br><span class="line">  template: _.template(...)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// second</span></span><br><span class="line">&lt;script id=<span class="string">"teamTemplate"</span> type=<span class="string">"text/template"</span>&gt;</span><br><span class="line">    &lt;%= name %&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">App.Views.Team = Backbone.View.extend(&#123;</span><br><span class="line">    className : <span class="string">'.team-element'</span>,</span><br><span class="line">    tagName : <span class="string">'div'</span>,</span><br><span class="line">    model : <span class="keyword">new</span> App.Models.Team</span><br><span class="line">    render : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Compile the template</span></span><br><span class="line">        <span class="keyword">var</span> compiledTemplate = _.template($(<span class="string">'#teamTemplate'</span>).html());</span><br><span class="line">        <span class="comment">// Model attributes loaded into the template. Template is</span></span><br><span class="line">        <span class="comment">// appended to the DOM element referred by the el attribute</span></span><br><span class="line">        $(<span class="keyword">this</span>.el).html(compiledTemplate(<span class="keyword">this</span>.model.toJSON()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<li>template——利用 Underscore 的 template 方法可以为 View 设定一个模板，有两种方法，如下所示：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// first</span></span><br><span class="line"><span class="keyword">var</span> LibraryView = Backbone.View.extend(&#123;</span><br><span class="line">  template: _.template(...)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// second</span></span><br><span class="line">&lt;script id=<span class="string">"teamTemplate"</span> type=<span class="string">"text/template"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">name</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">App.Views.Team = Backbone.View.extend(&#123;</span><br><span class="line">    className : <span class="string">'.team-element'</span>,</span><br><span class="line">    tagName : <span class="string">'div'</span>,</span><br><span class="line">    model : <span class="keyword">new</span> App.Models.Team</span><br><span class="line">    render : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Compile the template</span></span><br><span class="line">        <span class="keyword">var</span> compiledTemplate = _.template($(<span class="string">'#teamTemplate'</span>).html());</span><br><span class="line">        <span class="comment">// Model attributes loaded into the template. Template is</span></span><br><span class="line">        <span class="comment">// appended to the DOM element referred by the el attribute</span></span><br><span class="line">        $(<span class="keyword">this</span>.el).html(compiledTemplate(<span class="keyword">this</span>.model.toJSON()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -454,7 +454,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -462,7 +462,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -471,7 +471,7 @@ Backbone.js 的 C 层不同于通常 MVC 架构的 Controller 层，而是 Colle
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
