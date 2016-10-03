@@ -59,25 +59,25 @@
 
 
 
-<meta name="description" content="以下所有示例在 Safari Technology Preview 食用最佳，Chrome Canary 有些示例都还没实现，可能是我使用的姿势不对……
+<meta name="description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
 
 Negation pseudo-class——:not()
-:not() 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not() 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p)">
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS Selectors Level 4 中的新东西">
 <meta property="og:url" content="http://rlilyyy.github.io/2016/10/02/CSS-Level-4-中的新东西/index.html">
 <meta property="og:site_name" content="滨滨和泓泓">
-<meta property="og:description" content="以下所有示例在 Safari Technology Preview 食用最佳，Chrome Canary 有些示例都还没实现，可能是我使用的姿势不对……
+<meta property="og:description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
 
 Negation pseudo-class——:not()
-:not() 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not() 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p)">
-<meta property="og:updated_time" content="2016-10-02T13:54:24.427Z">
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
+<meta property="og:updated_time" content="2016-10-03T07:34:36.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS Selectors Level 4 中的新东西">
-<meta name="twitter:description" content="以下所有示例在 Safari Technology Preview 食用最佳，Chrome Canary 有些示例都还没实现，可能是我使用的姿势不对……
+<meta name="twitter:description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
 
 Negation pseudo-class——:not()
-:not() 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not() 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p)">
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
 
 
 
@@ -334,10 +334,10 @@ Negation pseudo-class——:not()
 
       
         <blockquote>
-<p>以下所有示例在 <code>Safari Technology Preview</code> 食用最佳，<code>Chrome Canary</code> 有些示例都还没实现，可能是我使用的姿势不对……</p>
+<p>以下所有示例在 <code>Safari Technology Preview</code> 使用最佳，<code>Chrome Canary</code> 有些都还没实现，可能是我使用的姿势不对……</p>
 </blockquote>
 <h1 id="Negation-pseudo-class——-not"><a href="#Negation-pseudo-class——-not" class="headerlink" title="Negation pseudo-class——:not()"></a>Negation pseudo-class——:not()</h1><blockquote>
-<p><code>:not()</code> 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 <code>:not()</code> 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 <code>:not(p)</code> 用来选择不是 <code>&lt;p&gt;&lt;/p&gt;</code> 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 <code>:not(:not(...))</code>。</p>
+<p><code>:not()</code> 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 <code>:not()</code>，不过在 CSS3 中只能使用简单的匹配规则，例如 <code>:not(p)</code> 用来选择不是 <code>&lt;p&gt;&lt;/p&gt;</code> 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 <code>:not(:not(...))</code>。</p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.negation</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[data-red="no"]</span>) &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[rel="green"]</span>, <span class="selector-attr">[rel="default"]</span>) &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"negation"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">rel</span>=<span class="string">"green"</span>&gt;</span>这里是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.ele.me"</span> <span class="attr">rel</span>=<span class="string">"default"</span>&gt;</span>这里也是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.sina.com"</span> <span class="attr">rel</span>=<span class="string">"blue"</span>&gt;</span>这里是蓝色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    这里是黑色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line">    这里是红色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -387,7 +387,7 @@ Negation pseudo-class——:not()
 <p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#the-any-link-pseudo" target="_blank" rel="external">The Hyperlink Pseudo-class 草案</a></p>
 </blockquote>
 <h1 id="The-contextual-reference-element-pseudo-class——-scope"><a href="#The-contextual-reference-element-pseudo-class——-scope" class="headerlink" title="The contextual reference element pseudo-class——:scope"></a>The contextual reference element pseudo-class——:scope</h1><blockquote>
-<p><code>:scope</code> 用于匹配当前作用域下的顶级元素。但是目前已经被移出规范——<a href="https://github.com/whatwg/html/issues/552#issuecomment-249038746" target="_blank" rel="external">issue</a></p>
+<p><code>:scope</code> 用于匹配当前作用域下的顶级元素。但是目前 <code>&lt;style scoped&gt;</code> 已经被移除——<a href="https://github.com/whatwg/html/issues/552" target="_blank" rel="external">issue</a></p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is outside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span><br><span class="line">      <span class="selector-pseudo">:scope</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: red;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="selector-tag">p</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">      &#125;</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is inside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>以上代码，第二个 <code>div</code> 将会有红色背景，并且他的所有 <code>&lt;p&gt;</code> 子元素都将拥有蓝色文字。</p>
@@ -507,7 +507,7 @@ Negation pseudo-class——:not()
 <p><code>:drop</code> 和 <code>:drop()</code> 匹配可被放置拖动元素的目标元素，两者区别在于 <code>:drop()</code> 可以匹配一些规则，包括 <code>active</code>, <code>valid</code>, <code>invalid</code>。<code>active</code> 会匹配可被放置的目标元素，<code>valid</code> 匹配放置的元素为合法元素的目标元素，<code>invalid</code> 反之。如果 <code>:drop()</code> 括号里没有任何过滤，那么将和 <code>:drop</code> 没有区别。</p>
 <p>想解锁更多姿势就去看 <a href="https://drafts.csswg.org/selectors-4/#selectordef-drop-function" target="_blank" rel="external">The Drag-and-Drop Pseudo-class 草案</a></p>
 </blockquote>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>这篇博客算是一篇科普文，趁着空余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我也十分各位帮我指出错误之处或不足之处！另外，国庆节快乐，祝你们玩得开心，单身狗继续写代码了~</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>其实这就是一篇科普文， 趁着国庆的闲余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我十分的希望各位大牛帮我指出错误之处或不足之处！另外，祝大家国庆快乐。作为一只 single dog 还是写代码为好！</p>
 <p>参考资料：</p>
 <blockquote>
 <p><a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/" target="_blank" rel="external">https://www.w3.org/TR/2013/WD-selectors4-20130502/</a><br><a href="https://drafts.csswg.org/selectors-4/" target="_blank" rel="external">https://drafts.csswg.org/selectors-4/</a><br><a href="http://css4.rocks/selectors-level-4/" target="_blank" rel="external">http://css4.rocks/selectors-level-4/</a><br><a href="http://css4-selectors.com/selectors/" target="_blank" rel="external">http://css4-selectors.com/selectors/</a></p>
