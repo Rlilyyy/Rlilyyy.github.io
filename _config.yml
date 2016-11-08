@@ -4,15 +4,15 @@
 
 # Site
 title: 滨滨和泓泓
-subtitle: 我被外星飞船劫走了，被逼着学前端
-description:
-author: 滨滨和泓泓
-language: zh-Hans
+subtitle:
+description: Stay folish, Stay hungry
+author: Rlilyyy
+language: cn
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://rlilyyy.github.io
+url: http://rlilyyy.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -63,11 +63,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repository: git@github.com:Rlilyyy/Rlilyyy.github.io.git
-  branch: master
+  branch: newone
