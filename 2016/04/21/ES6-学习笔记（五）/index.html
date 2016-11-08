@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>ES6 学习笔记（五） | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Set
+Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
+
+Set 有以下几个特点
+
+值是不重复的
+NaN 等于自身
+添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
+可以接受一组数组进行初始化，会自动过滤重复的数
+两个空对象不互相相等
+
+Set 的方法
+Set.prototype.constructor：构造函数，默认就是Set函数
+Set.prototyp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 学习笔记（五）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/04/21/ES6-学习笔记（五）/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="Set
+Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
+
+Set 有以下几个特点
+
+值是不重复的
+NaN 等于自身
+添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
+可以接受一组数组进行初始化，会自动过滤重复的数
+两个空对象不互相相等
+
+Set 的方法
+Set.prototype.constructor：构造函数，默认就是Set函数
+Set.prototyp">
+<meta property="og:updated_time" content="2016-04-23T15:04:06.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 学习笔记（五）">
+<meta name="twitter:description" content="Set
+Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数
+
+Set 有以下几个特点
+
+值是不重复的
+NaN 等于自身
+添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的
+可以接受一组数组进行初始化，会自动过滤重复的数
+两个空对象不互相相等
+
+Set 的方法
+Set.prototype.constructor：构造函数，默认就是Set函数
+Set.prototyp">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ES6-学习笔记（五）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 学习笔记（五）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><blockquote>
+<p>Set 是一个类数组的数据结构，但是它的值都是独一无二的，并且它是一个构造函数</p>
+</blockquote>
+<p>Set 有以下几个特点</p>
+<ul>
+<li>值是不重复的</li>
+<li>NaN 等于自身</li>
+<li>添加值的时候不会进行类型转换，5 和 ‘5’ 是不一样的</li>
+<li>可以接受一组数组进行初始化，会自动过滤重复的数</li>
+<li>两个空对象不互相相等</li>
+</ul>
+<h2 id="Set-的方法"><a href="#Set-的方法" class="headerlink" title="Set 的方法"></a>Set 的方法</h2><ul>
+<li>Set.prototype.constructor：构造函数，默认就是Set函数</li>
+<li>Set.prototype.size：返回Set实例的成员总数</li>
+<li><p>add(value)：添加某个值，返回Set结构本身，由于返回值的特点，可以链式调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.add(<span class="number">1</span>).add(<span class="number">2</span>).add(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功</p>
+</li>
+<li>has(value)：返回一个布尔值，表示该值是否为Set的成员</li>
+<li>clear()：清除所有成员，没有返回值</li>
+<li>keys()：返回一个键名的遍历器</li>
+<li>values()：返回一个键值的遍历器</li>
+<li>entries()：返回一个键值对的遍历器</li>
+<li>forEach()：使用回调函数遍历每个成员</li>
+</ul>
+<h1 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h1><p>WeakSet 有以下几个特点</p>
+<ul>
+<li>加入成员只能是对象</li>
+<li>成员都是弱引用，即垃圾回收机制不会因其引用对象而保持对象的存在</li>
+<li>无法引用成员对象</li>
+<li>无法变量成员对象</li>
+</ul>
+<h2 id="WeakSet-的方法"><a href="#WeakSet-的方法" class="headerlink" title="WeakSet 的方法"></a>WeakSet 的方法</h2><ul>
+<li>WeakSet.prototype.add(value)：向WeakSet实例添加一个新成员</li>
+<li>WeakSet.prototype.delete(value)：清除WeakSet实例的指定成员</li>
+<li>WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在WeakSet实例之中</li>
+</ul>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><blockquote>
+<p>与对象的 key-value 结构类似的一种集合数据结构，不用的是 Map 可以使用任意一种类型的值作为 key，不会发生自动转换为字符串的情况</p>
+</blockquote>
+<ul>
+<li>size：返回Map结构的成员总数</li>
+<li>set(key, value)：设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键</li>
+<li>get(key)：读取key对应的键值，如果找不到key，返回undefined</li>
+<li>has(key)：返回一个布尔值，表示某个键是否在Map数据结构中</li>
+<li>delete(key)：删除某个键，返回true。如果删除失败，返回false</li>
+<li>clear()：清除所有成员，没有返回值</li>
+</ul>
+<h1 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h1><blockquote>
+<p>与 WeakSet 的特点类似，不过这个相对于 Map 的数据结构的，只能使用 <code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></p>
+<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/21/ES6-学习笔记（五）/" class="archive-article-date">
+  	<time datetime="2016-04-21T05:57:05.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/ECMAScript-6/">ECMAScript 6</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/23/ES6-学习笔记（六）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ES6 学习笔记（六）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/20/ES6-学习笔记（四）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 学习笔记（四）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

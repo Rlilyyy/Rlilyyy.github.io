@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>一道有趣的JS题目的分析 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天在微博看到有人发了一道题目，代码如下：
+123456789101112131415161718function Foo() &amp;#123;    getName = function() &amp;#123;console.log(1);&amp;#125;    return this;&amp;#125;Foo.getName = function() &amp;#123;console.log(2);&amp;#125;;Foo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道有趣的JS题目的分析">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/18/一道有趣的JS题目的分析/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="今天在微博看到有人发了一道题目，代码如下：
+123456789101112131415161718function Foo() &amp;#123;    getName = function() &amp;#123;console.log(1);&amp;#125;    return this;&amp;#125;Foo.getName = function() &amp;#123;console.log(2);&amp;#125;;Foo">
+<meta property="og:updated_time" content="2016-03-18T07:10:35.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一道有趣的JS题目的分析">
+<meta name="twitter:description" content="今天在微博看到有人发了一道题目，代码如下：
+123456789101112131415161718function Foo() &amp;#123;    getName = function() &amp;#123;console.log(1);&amp;#125;    return this;&amp;#125;Foo.getName = function() &amp;#123;console.log(2);&amp;#125;;Foo">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-一道有趣的JS题目的分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一道有趣的JS题目的分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在微博看到有人发了一道题目，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>);&#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line">Foo.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>);&#125;;</div><div class="line">Foo.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">3</span>);&#125;;</div><div class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">4</span>);&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">5</span>);&#125;;</div><div class="line"></div><div class="line">Foo.getName();<span class="comment">//2</span></div><div class="line">getName();<span class="comment">//4</span></div><div class="line">Foo().getName();<span class="comment">//1</span></div><div class="line">getName();<span class="comment">//1</span></div><div class="line"><span class="keyword">new</span> Foo.getName();<span class="comment">//2</span></div><div class="line"><span class="keyword">new</span> Foo().getName();<span class="comment">//3</span></div><div class="line"><span class="keyword">new</span> <span class="keyword">new</span> Foo().getName();<span class="comment">//3</span></div><div class="line"></div><div class="line">Foo.getName()，这里调用的方法是第<span class="number">5</span>行代码的函数，这个没什么疑问。</div></pre></td></tr></table></figure>
+<p><code>getName()</code>，这里调用的是第 7 行的函数，有人要问了，为什么不是第 8 行，这里涉及到JS解析器中一个<code>function declaration hoisting(函数声明提升)</code>的过程，在 JS 代码中，使用<code>var x = function(){}</code>叫作<code>函数表达式</code>，使用<code>function x(){}</code>叫作<code>函数声明</code>，在 JS 代码加载的过程中，函数声明会在第一时间加载到源代码树的顶部，所以即使你调用使用函数声明的函数比该函数的声明还早，也是无异常的。反之，函数表达式则要在 JS 加载到该行代码时，函数才算是真正可以使用。所以这道题里，第 8 行比第 7 行的函数声明早，所以第7行的函数表达式覆盖了第 8 行的函数内容。</p>
+<p><code>Foo().getName()</code>，这里执行 Foo() 后返回的 this 是 window，即全局对象，而 Foo() 内部的<code>getName</code>由于没有使用 var 去声明，故默认为 window 的 getName 属性，所以又再一次覆盖了原先的 getName()，所以打印是1。</p>
+<p><code>getName()</code>，由于上一行代码的执行已经导致了 window 下的 getName() 被覆盖，所以依旧打印1。</p>
+<p><code>new Foo.getName()</code>，这里 new 的是 getName() 而不是 Foo()，所以打印了2，与第 10 行的调用方法类似，不过这里还会返回一个 Foo.getName 的实例。</p>
+<p><code>new Foo().getName()</code>，这里首先 new Foo() 返回 Foo() 的实例对象，这里注意，构造函数中如果没有指明 return，那么默认返回构造函数的实例，如果指定了 return，那么返回指定的 return 的值（只能是引用类型的值，如{},[]等），这里指定了 return this，this 在 new 的情况下是实例本身，所以跟默认情况下是一致的，然后又调用了 getName()，这里调用的是原型中的函数，所以打印3。</p>
+<p><code>new new Foo().getName()</code>，先不看第一个 new，则后面的步骤跟上面一致，不过到了调用函数的时候，第一个 new 发生作用了，实例化了 getName()，不过这里的 getName() 依旧是原型中的函数，只不过将他实例化了，所以依旧打印3。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/18/一道有趣的JS题目的分析/" class="archive-article-date">
+  	<time datetime="2016-03-18T06:08:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/03/19/准备开始一个新的项目-Oxygen轻音乐/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          准备开始一个新的项目 Oxygen轻音乐
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/18/clearfix-闭合浮动/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">clearfix 闭合浮动</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

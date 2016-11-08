@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>DAY3 Backbone.js API阅读 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原来机房看 API 的学习效率奇低，今天在机房上一天课，下午5点半下个脚都是麻的，今天主要还是熟悉一下 Backbone.js 的API，下面看几个比较重要的 API，也算是对今天学习的一个备忘录。官方文档写得有点简单了，后来看官方提供的 Todos 的例子的源码加上一边看官方文档才渐渐明白运行机制。
+
+Backbone.jsBackbone.js 强制依赖 Underscore.js，其很多实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DAY3 Backbone.js API阅读">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/21/DAY3-Backbone-js-API阅读/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="原来机房看 API 的学习效率奇低，今天在机房上一天课，下午5点半下个脚都是麻的，今天主要还是熟悉一下 Backbone.js 的API，下面看几个比较重要的 API，也算是对今天学习的一个备忘录。官方文档写得有点简单了，后来看官方提供的 Todos 的例子的源码加上一边看官方文档才渐渐明白运行机制。
+
+Backbone.jsBackbone.js 强制依赖 Underscore.js，其很多实">
+<meta property="og:updated_time" content="2016-04-04T13:09:41.163Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DAY3 Backbone.js API阅读">
+<meta name="twitter:description" content="原来机房看 API 的学习效率奇低，今天在机房上一天课，下午5点半下个脚都是麻的，今天主要还是熟悉一下 Backbone.js 的API，下面看几个比较重要的 API，也算是对今天学习的一个备忘录。官方文档写得有点简单了，后来看官方提供的 Todos 的例子的源码加上一边看官方文档才渐渐明白运行机制。
+
+Backbone.jsBackbone.js 强制依赖 Underscore.js，其很多实">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-DAY3-Backbone-js-API阅读" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DAY3 Backbone.js API阅读
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>原来机房看 API 的学习效率奇低，今天在机房上一天课，下午5点半下个脚都是麻的，今天主要还是熟悉一下 <code>Backbone.js</code> 的API，下面看几个比较重要的 API，也算是对今天学习的一个备忘录。官方文档写得有点简单了，后来看官方提供的 <code>Todos</code> 的例子的源码加上一边看官方文档才渐渐明白运行机制。</p>
+</blockquote>
+<h1 id="Backbone-js"><a href="#Backbone-js" class="headerlink" title="Backbone.js"></a>Backbone.js</h1><p><code>Backbone.js</code> 强制依赖 <code>Underscore.js</code>，其很多实现方式都利用了 Underscore 的 API，由于之前通读过 Underscore 的源代码，所以这个并没有太大问题。此外，Backbone.js 还半依赖 <code>JQuery.js</code>，主要是 Backbone 里的一个 <code>save</code> 函数当执行时会执行 <code>Backbone.sync</code> 从而需要使用 <code>ajax</code> 访问服务器进行 <code>Model</code> 的保存，当然，可以通过重载 <code>Backbone.sync</code> 来使用其他方式保存 Model，例如<a href="https://github.com/Rlilyyy/Backbone.localStorage" target="_blank" rel="external">Backbone.localStorage.js</a>就是一个用于重载 sync 的库。</p>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>Model 用于处理 <code>数据交互</code>和 <code>逻辑</code>，一般地，使用 Backbone.Model.extend(properties, [classProperties]) 创建一个新的模型，properties 为一个对象实例，里面包含多个属性：</p>
+<ul>
+<li><p>defaults——用于设置一些初始的模型属性，如下面代码所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Meal = Backbone.Model.extend(&#123;</div><div class="line">  <span class="attr">defaults</span>: &#123;</div><div class="line">    <span class="string">"appetizer"</span>:  <span class="string">"caesar salad"</span>,</div><div class="line">    <span class="string">"entree"</span>:     <span class="string">"ravioli"</span>,</div><div class="line">    <span class="string">"dessert"</span>:    <span class="string">"cheesecake"</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>initialize——在模型创建后执行的函数</p>
+</li>
+<li>save——将模型的 attributes 模型状态保存到持久层</li>
+<li>validate——用于验证调用 save 以后传入的 attributes 的值的合法性，如果有返回数据，代表验证失败，save 就不会成功保存模型，如果在 set 中传入 <code>{validate:true}</code>，那么会执行 validate 验证。</li>
+<li>fetch——从服务器更新模型数据，如果数据有更新，则会触发 <code>change</code> 事件，同时接受 <code>success</code> 和 <code>error</code> 回调</li>
+<li>previous——在该模型的 change 事件中，可以通过此函数获取上一次更改的值</li>
+<li>previousAttributes——同样用过此函数获取上一次更改的属性散列副本</li>
+<li>可以重载 Model 中的函数，如 <code>get</code>，<code>set</code></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/21/DAY3-Backbone-js-API阅读/" class="archive-article-date">
+  	<time datetime="2016-03-21T06:04:56.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oxygen/">Oxygen</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/项目/">项目</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/03/22/DAY4-Backbone-js-API阅读（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          DAY4 Backbone.js API阅读（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/20/DAY2-播放器页面的实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DAY2 播放器页面的实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

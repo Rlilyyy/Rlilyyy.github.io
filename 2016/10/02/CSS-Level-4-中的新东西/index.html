@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>CSS Selectors Level 4 中的新东西 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
+
+Negation pseudo-class——:not()
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Selectors Level 4 中的新东西">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/10/02/CSS-Level-4-中的新东西/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
+
+Negation pseudo-class——:not()
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
+<meta property="og:updated_time" content="2016-10-03T07:34:36.263Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Selectors Level 4 中的新东西">
+<meta name="twitter:description" content="以下所有示例在 Safari Technology Preview 使用最佳，Chrome Canary 有些都还没实现，可能是我使用的姿势不对……
+
+Negation pseudo-class——:not()
+:not() 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 :not()，不过在 CSS3 中只能使用简单的匹配规则，例如 :not(p) 用来选择不是">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-CSS-Level-4-中的新东西" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS Selectors Level 4 中的新东西
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>以下所有示例在 <code>Safari Technology Preview</code> 使用最佳，<code>Chrome Canary</code> 有些都还没实现，可能是我使用的姿势不对……</p>
+</blockquote>
+<h1 id="Negation-pseudo-class——-not"><a href="#Negation-pseudo-class——-not" class="headerlink" title="Negation pseudo-class——:not()"></a>Negation pseudo-class——:not()</h1><blockquote>
+<p><code>:not()</code> 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 <code>:not()</code>，不过在 CSS3 中只能使用简单的匹配规则，例如 <code>:not(p)</code> 用来选择不是 <code>&lt;p&gt;&lt;/p&gt;</code> 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 <code>:not(:not(...))</code>。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.negation</span> &#123;</div><div class="line">  <span class="attribute">color</span>: black;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[data-red="no"]</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[rel="green"]</span>, <span class="selector-attr">[rel="default"]</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: blue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"negation"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">rel</span>=<span class="string">"green"</span>&gt;</span>这里是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.ele.me"</span> <span class="attr">rel</span>=<span class="string">"default"</span>&gt;</span>这里也是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.sina.com"</span> <span class="attr">rel</span>=<span class="string">"blue"</span>&gt;</span>这里是蓝色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></div><div class="line">    这里是黑色</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line">    这里是红色</div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="not-tips"><a href="#not-tips" class="headerlink" title=":not() tips"></a><code>:not()</code> tips</h2><p>我们可以利用 <code>:not()</code> 来对 CSS 样式进行一个优先级提升，例如 <code>div:not(span) {…}</code> 跟 <code>div {…}</code> 是同个概念，但是明显地前者的优先级更高。</p>
+<blockquote>
+<p>想解锁更多 <code>:not()</code> 的使用姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#negation" target="_blank" rel="external">The Negation Pseudo-class 草案</a>。</p>
+</blockquote>
+<h1 id="Matches-any-Pseudo-class——-matches-伪类"><a href="#Matches-any-Pseudo-class——-matches-伪类" class="headerlink" title="Matches-any Pseudo-class——:matches 伪类"></a>Matches-any Pseudo-class——:matches 伪类</h1><blockquote>
+<p><code>:matches()</code> 用于匹配所述规则的元素，并应用相应的样式规则，同样不允许嵌套使用，<code>-webkit-any()</code> 和 <code>-moz-any()</code> 是它的两个兼容性写法。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.matches</span> &#123;</div><div class="line">  <span class="attribute">color</span>: black;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:matches(span</span>, <span class="selector-tag">div</span>) <span class="selector-pseudo">:matches(span</span>, <span class="selector-tag">div</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">等同于</div><div class="line">.matches span div,</div><div class="line">.matches span span,</div><div class="line">.matches div span,</div><div class="line">.matches div div &#123;</div><div class="line">  color: green;</div><div class="line">&#125;</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:-webkit-any(span</span>, <span class="selector-tag">div</span>) <span class="selector-pseudo">:-webkit-any(span</span>, <span class="selector-tag">div</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:-moz-any(span</span>, <span class="selector-tag">div</span>) <span class="selector-pseudo">:-moz-any(span</span>, <span class="selector-tag">div</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:matches(.a</span>, <span class="selector-class">.b</span>) <span class="selector-pseudo">:matches(.a</span>, <span class="selector-class">.b</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">等同于</div><div class="line">.matches .a .a,</div><div class="line">.matches .a .b,</div><div class="line">.matches .b .a,</div><div class="line">.matches .b .b &#123;</div><div class="line">  color: red;</div><div class="line">&#125;</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:-webkit-any(.a</span>, <span class="selector-class">.b</span>) <span class="selector-pseudo">:-webkit-any(.a</span>, <span class="selector-class">.b</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.matches</span> <span class="selector-pseudo">:-moz-any(.a</span>, <span class="selector-class">.b</span>) <span class="selector-pseudo">:-moz-any(.a</span>, <span class="selector-class">.b</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"matches"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>绿色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b"</span>&gt;</span>红色<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#matches" target="_blank" rel="external">The Matches-any Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="Case-Sensitivity——不区分大小写匹配标识"><a href="#Case-Sensitivity——不区分大小写匹配标识" class="headerlink" title="Case-Sensitivity——不区分大小写匹配标识"></a>Case-Sensitivity——不区分大小写匹配标识</h1><blockquote>
+<p><code>Case-Sensitivity</code> 用于声明某个匹配规则中，对字符串或者某个 value 的匹配不区分大小写。该标志声明于 <code>]</code> 即右中括号之前，例如 <code>[data-value=&quot;case&quot; i]</code>，其中的 <code>i</code> 就是 Case-Sensitivity 标识。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.case-sensitivity</span> <span class="selector-pseudo">:matches(</span><span class="selector-attr">[data-value="case" i]</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: yellow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"case-sensitivity"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">data-value</span>=<span class="string">'Case'</span>&gt;</span>Case<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">data-value</span>=<span class="string">"case"</span>&gt;</span>case<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上的例子，<code>data-value</code> 虽然既有大写也有小写，但是由于我们声明了 <code>Case-Sensitivity</code>，所以无论大小写都会被匹配。像例子中 <code>case</code>，<code>Case</code>，<code>CASE</code> 等都会被匹配。</p>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#attribute-case" target="_blank" rel="external">Case-sensitivity 草案</a></p>
+</blockquote>
+<h1 id="The-Directionality-Pseudo-class——-dir"><a href="#The-Directionality-Pseudo-class——-dir" class="headerlink" title="The Directionality Pseudo-class——:dir()"></a>The Directionality Pseudo-class——:dir()</h1><blockquote>
+<p><code>:dir()</code> 伪类用于匹配符合某个方向性的元素，例如 <code>:dir(ltr)</code> 和 <code>dir(rtl)</code>。顾名思义，<code>ltr</code> 表示 <code>left to right</code>，即方向从左到右，<code>rtl</code> 表示 <code>right-to-left</code>，即方向从右到左。值得注意的是，使用 <code>:dir()</code> 匹配元素和使用 <code>[dir=...]</code> 在某个程度上是一样的效果，但是一个区别是 <code>[dir=...]</code> 无法匹配到没有显示声明 <code>dir</code> 的元素，但是 <code>:dir()</code> 却可以匹配到由浏览器计算得到或者继承来的 <code>dir</code> 属性的元素，详情可以看一下<a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#dir-pseudo" target="_blank" rel="external">草案</a>。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.dir</span> <span class="selector-pseudo">:dir(ltr)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: blue;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.dir</span> <span class="selector-pseudo">:dir(rtl)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dir"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">dir</span>=<span class="string">"ltr"</span>&gt;</span>从左到右<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">dir</span>=<span class="string">"rtl"</span>&gt;</span>从右到左<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#dir-pseudo" target="_blank" rel="external">The Directionality Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-Language-Pseudo-class——-lang"><a href="#The-Language-Pseudo-class——-lang" class="headerlink" title="The Language Pseudo-class——:lang()"></a>The Language Pseudo-class——:lang()</h1><blockquote>
+<p><code>:lang()</code> 用于匹配声明了 <code>lang=value</code> 的元素，并且可以使用通配符匹配，例如 <code>p:lang(*-CH)</code> 将可以匹配 <code>de-CH</code> 的 <code>p</code> 元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.lang</span> <span class="selector-tag">p</span><span class="selector-pseudo">:lang(de-DE)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.lang</span> <span class="selector-tag">p</span><span class="selector-pseudo">:lang(</span>*<span class="selector-tag">-CH</span>) &#123;</div><div class="line">  <span class="attribute">color</span>: blue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"lang"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">lang</span>=<span class="string">"de-DE-1996"</span>&gt;</span>de-DE-1996<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">lang</span>=<span class="string">"de-CH"</span>&gt;</span>de-CH<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#lang-pseudo" target="_blank" rel="external">The language pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-Hyperlink-Pseudo-class——-any-link-伪类"><a href="#The-Hyperlink-Pseudo-class——-any-link-伪类" class="headerlink" title="The Hyperlink Pseudo-class——:any-link 伪类"></a>The Hyperlink Pseudo-class——:any-link 伪类</h1><blockquote>
+<p><code>:any-link</code> 用于匹配带有 <code>href</code> 属性的超链接元素，例如 <code>&lt;a&gt;</code>，<code>&lt;area&gt;</code>，<code>&lt;link&gt;</code> 等带有 <code>href</code> 属性的元素。<code>:-webkit-any-link</code> 和 <code>:-moz-any-link</code> 是它的兼容性写法。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.link</span> <span class="selector-tag">a</span><span class="selector-pseudo">:any-link</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.link</span> <span class="selector-tag">a</span><span class="selector-pseudo">:-webkit-any-link</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.link</span> <span class="selector-tag">a</span><span class="selector-pseudo">:-moz-any-link</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"link"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>我是带有颜色的超链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#the-any-link-pseudo" target="_blank" rel="external">The Hyperlink Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-contextual-reference-element-pseudo-class——-scope"><a href="#The-contextual-reference-element-pseudo-class——-scope" class="headerlink" title="The contextual reference element pseudo-class——:scope"></a>The contextual reference element pseudo-class——:scope</h1><blockquote>
+<p><code>:scope</code> 用于匹配当前作用域下的顶级元素。但是目前 <code>&lt;style scoped&gt;</code> 已经被移除——<a href="https://github.com/whatwg/html/issues/552" target="_blank" rel="external">issue</a></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scope"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is outside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span></div><div class="line">      <span class="selector-pseudo">:scope</span> &#123;</div><div class="line">        <span class="attribute">background-color</span>: red;</div><div class="line">      &#125;</div><div class="line">      <span class="selector-tag">p</span> &#123;</div><div class="line">        <span class="attribute">color</span>: blue;</div><div class="line">      &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is inside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上代码，第二个 <code>div</code> 将会有红色背景，并且他的所有 <code>&lt;p&gt;</code> 子元素都将拥有蓝色文字。</p>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#the-scope-pseudo" target="_blank" rel="external">The contextual reference element pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="Time-dimensional-Pseudo-classes——-current-past-future"><a href="#Time-dimensional-Pseudo-classes——-current-past-future" class="headerlink" title="Time-dimensional Pseudo-classes——:current(), :past(), :future()"></a>Time-dimensional Pseudo-classes——:current(), :past(), :future()</h1><blockquote>
+<p>我个人用 <code>时间轴伪类</code> 统一称呼 <code>:current()</code>, <code>:past()</code>, <code>:future()</code> 这三个伪类。<code>:current()</code> 匹配时间轴当前的元素，<code>:past()</code> 匹配 <code>:current()</code>元素之前的元素，<code>:future()</code> 则匹配当前时间轴后的所有元素。这里说的时间轴指的是例如 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Video_Text_Tracks_Format" target="_blank" rel="external"><code>WebVTT</code></a>。值得注意的是，规范中写道如果使用的时间轴并不是文档语言所规定的，那么 <code>:past()</code> 和 <code>:future()</code> 有可能分别匹配 <code>:current()</code> 元素的前面的兄弟元素和后面的兄弟元素。由于在 Chrome Canary 和 Safari TP 上都不支持这几个伪类，所以无法实验正确性。下面使用的例子是从<a href="http://css4-selectors.com/selector/css4/time-dimensional-pseudo-class/" target="_blank" rel="external">这个网址</a>摘过来的。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:current(p</span>, <span class="selector-tag">span</span>) &#123;</div><div class="line">  <span class="attribute">background-color</span>: yellow;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-pseudo">:past(p</span>, <span class="selector-tag">span</span>),</div><div class="line"><span class="selector-pseudo">:future(p</span>, <span class="selector-tag">span</span>) &#123;</div><div class="line">  <span class="attribute">background-color</span>: gray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">preload</span>=<span class="string">"metadata"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"http://html5demos.com/assets/dizzy.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"http://html5demos.com/assets/dizzy.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"http://html5demos.com/assets/dizzy.ogv"</span> <span class="attr">type</span>=<span class="string">"video/ogv"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">track</span> <span class="attr">label</span>=<span class="string">"English"</span> <span class="attr">kind</span>=<span class="string">"subtitles"</span> <span class="attr">srclang</span>=<span class="string">"en"</span> <span class="attr">src</span>=<span class="string">"http://www.iandevlin.com/html5test/webvtt/upc-video-subtitles-en.vtt"</span> <span class="attr">default</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#time-pseudos" target="_blank" rel="external">Time-dimensional Pseudo-classes 草案</a></p>
+</blockquote>
+<h1 id="The-Indeterminate-value-Pseudo-class——-indeterminate"><a href="#The-Indeterminate-value-Pseudo-class——-indeterminate" class="headerlink" title="The Indeterminate-value Pseudo-class——:indeterminate"></a>The Indeterminate-value Pseudo-class——:indeterminate</h1><blockquote>
+<p>在 <code>radio</code> 和 <code>checkbox</code> 元素上一般有两种状态——<code>选中</code> 和 <code>未选中</code>，但是有的时候的状态会是不确定状态，而 <code>:indeterminate</code> 就是匹配这种不确定状态的 <code>radio</code> 或 <code>checkbox</code>。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:indeterminate</span> + <span class="selector-tag">label</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: gray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"test"</span>&gt;</span>未确定状态<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面例子的 <code>&lt;label&gt;</code> 在 <code>&lt;input&gt;</code> 处于 <code>indeterminate state</code> 的时候，文字将会变为灰色。</p>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#indeterminate" target="_blank" rel="external">The Indeterminate-value Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-default-option-pseudo-class——-default"><a href="#The-default-option-pseudo-class——-default" class="headerlink" title="The default-option pseudo-class——:default"></a>The default-option pseudo-class——:default</h1><blockquote>
+<p><code>:default</code> 匹配一组相似元素集合中的默认元素，例如 <code>&lt;form&gt;</code> 中有多个 <code>&lt;input&gt;</code>，其中有一个是 <code>&lt;input type=&quot;submit&quot;&gt;</code>，那么该元素将会被匹配。此外还有 <code>&lt;option&gt;</code> 也有默认元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.default</span> <span class="selector-class">.default-form</span> <span class="selector-pseudo">:default</span> &#123;</div><div class="line">  <span class="attribute">background-color</span>: gray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"default-form"</span> <span class="attr">action</span>=<span class="string">"#"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"reset"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#the-default-pseudo" target="_blank" rel="external">The default-option pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-validity-pseudo-classes——-valid-invalid"><a href="#The-validity-pseudo-classes——-valid-invalid" class="headerlink" title="The validity pseudo-classes——:valid, :invalid"></a>The validity pseudo-classes——:valid, :invalid</h1><blockquote>
+<p>在 <code>&lt;input type=&quot;email&quot;&gt;</code> 中，如果我们输入了 <code>abc123</code>，那么此时 <code>:invalid</code> 将会匹配该元素，假如我们输入 <code>abc123@163.com</code>，那么此时 <code>:valid</code> 将会匹配该元素。这里要注意假如我们没有为 <code>&lt;input&gt;</code> 作约束，例如 <code>&lt;input type=&quot;text&quot;&gt;</code>，那么它的任意输入将使元素既不会被 <code>:valid</code> 匹配，也不会被 <code>:invalid</code> 匹配。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.valid</span> <span class="selector-tag">input</span><span class="selector-pseudo">:valid</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.valid</span> <span class="selector-tag">input</span><span class="selector-pseudo">:invalid</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"valid"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"eamil_valid"</span> <span class="attr">value</span>=<span class="string">"abc@abc.com"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email_invalid"</span> <span class="attr">value</span>=<span class="string">"abc"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#validity-pseudos" target="_blank" rel="external">The validity pseudo-classes 草案</a></p>
+</blockquote>
+<h1 id="The-range-pseudo-classes——-in-range-out-of-range"><a href="#The-range-pseudo-classes——-in-range-out-of-range" class="headerlink" title="The range pseudo-classes——:in-range, :out-of-range"></a>The range pseudo-classes——:in-range, :out-of-range</h1><blockquote>
+<p><code>:in-range</code> 和 <code>:out-of-range</code> 只对有被条件约束的元素起作用，例如 <code>&lt;input type=&quot;number&quot; min=&quot;1&quot; value=&quot;1&quot;&gt;</code>，如果输入数字小于 1，那么将会被 <code>:out-of-range</code> 匹配，反之则是被 <code>:in-range</code> 匹配。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.range</span> <span class="selector-tag">input</span><span class="selector-pseudo">:in-range</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.range</span> <span class="selector-tag">input</span><span class="selector-pseudo">:out-of-range</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"range"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">name</span>=<span class="string">"range"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">min</span>=<span class="string">"1"</span> <span class="attr">max</span>=<span class="string">"10"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#range-pseudos" target="_blank" rel="external">The range pseudo-classes 草案</a></p>
+</blockquote>
+<h1 id="The-optionality-pseudo-classes——-required-optional"><a href="#The-optionality-pseudo-classes——-required-optional" class="headerlink" title="The optionality pseudo-classes——:required, :optional"></a>The optionality pseudo-classes——:required, :optional</h1><blockquote>
+<p><code>:required</code> 和 <code>:optional</code> 分别匹配带有 <code>required</code> 标识的元素和不带 <code>required</code> 标识的元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.optionality</span> <span class="selector-tag">input</span><span class="selector-pseudo">:required</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.optionality</span> <span class="selector-tag">input</span><span class="selector-pseudo">:optional</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"optionality"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"required"</span> <span class="attr">value</span>=<span class="string">"required"</span> <span class="attr">required</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"optional"</span> <span class="attr">value</span>=<span class="string">"optional"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#opt-pseudos" target="_blank" rel="external">The optionality pseudo-classes 草案</a></p>
+</blockquote>
+<h1 id="The-user-interaction-pseudo-class——-user-error"><a href="#The-user-interaction-pseudo-class——-user-error" class="headerlink" title="The user-interaction pseudo-class——:user-error"></a>The user-interaction pseudo-class——:user-error</h1><blockquote>
+<p><code>:user-error</code> 会匹配 <code>:invalid</code>, <code>:out-of-range</code> 和没有任何值的 <code>:required</code> 元素，但是假如是初始化时就触发这三种错误，<code>user-error</code> 将不会匹配该元素，只有当用户和元素进行交互或者提交了该表单并且触发了这三种错误，<code>:user-error</code> 才会被触发。Chrome 和 Safari 可能尚未支持（也可能是我使用姿势不对，希望指正），所以无法验证正确性。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.user-error</span> <span class="selector-tag">input</span><span class="selector-pseudo">:user-error</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.user-error</span> <span class="selector-tag">input</span><span class="selector-pseudo">:valid</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user-error"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"eamil_valid"</span> <span class="attr">value</span>=<span class="string">"abc@abc.com"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email_invalid"</span> <span class="attr">value</span>=<span class="string">"abc"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#user-pseudos" target="_blank" rel="external">The user-interaction pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-mutability-pseudo-classes——-read-only-read-write"><a href="#The-mutability-pseudo-classes——-read-only-read-write" class="headerlink" title="The mutability pseudo-classes——:read-only, :read-write"></a>The mutability pseudo-classes——:read-only, :read-write</h1><blockquote>
+<p><code>:read-only</code> 匹配不可被编辑的元素，<code>:read-write</code> 则匹配可被编辑的元素，例如 <code>&lt;input&gt;</code> 或者 <code>contenteditable=&quot;true&quot;</code> 的元素。<code>:-moz-read-only</code> 和 <code>:-moz-read-write</code> 分别是他们的兼容性写法。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.mutability</span> <span class="selector-pseudo">:read-only</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.mutability</span> <span class="selector-pseudo">:read-write</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mutability"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"read-write-input"</span> <span class="attr">value</span>=<span class="string">"read-write"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">contenteditable</span>=<span class="string">"true"</span>&gt;</span>read-write-paragraph<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>read-only-paragraph<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#rw-pseudos" target="_blank" rel="external">The mutability pseudo-classes 草案</a></p>
+</blockquote>
+<h1 id="The-placeholder-shown-pseudo-class——-placeholder-shown"><a href="#The-placeholder-shown-pseudo-class——-placeholder-shown" class="headerlink" title="The placeholder-shown pseudo-class——:placeholder-shown"></a>The placeholder-shown pseudo-class——:placeholder-shown</h1><blockquote>
+<p><code>:placeholder-shown</code> 匹配 <code>placeholder</code> 文字显示时的 <code>&lt;input&gt;</code> 元素。<code>::-webkit-input-placeholder</code>, <code>::-moz-placeholder</code>, <code>:-ms-input-placeholder</code> 分别是它在不同浏览器的兼容性写法。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.placeholder</span> <span class="selector-tag">input</span><span class="selector-pseudo">:placeholder-shown</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.placeholder</span> <span class="selector-tag">input</span><span class="selector-pseudo">::-webkit-input-placeholder</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.placeholder</span> <span class="selector-tag">input</span><span class="selector-pseudo">::-moz-placeholder</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.placeholder</span> <span class="selector-tag">input</span><span class="selector-pseudo">:-ms-input-placeholder</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"placeholder"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"placeholder"</span> <span class="attr">placeholder</span>=<span class="string">"placeholder is green"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#placeholder" target="_blank" rel="external">The placeholder-shown pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="Grid-Structural-Selectors"><a href="#Grid-Structural-Selectors" class="headerlink" title="Grid-Structural Selectors"></a>Grid-Structural Selectors</h1><blockquote>
+<p>该特性将对例如 <code>&lt;table&gt;</code> 的栅格布局起作用。它包含 <code>:column(selector)</code>, <code>:nth-column(n)</code> 和 <code>:nth-last-column(n)</code>。目前浏览器都还未支持，无法实验正确性。</p>
+</blockquote>
+<h2 id="column-selector"><a href="#column-selector" class="headerlink" title=":column(selector)"></a>:column(selector)</h2><blockquote>
+<p><code>:column(selector)</code> 将匹配例如 <code>&lt;table&gt;</code> 中 带有 <code>selector</code> 类名的那一列的所有元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:column(.selected)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"selected"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"blur"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"blur"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>A<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>B<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>C<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>D<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>E<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>F<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>G<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>H<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>I<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在上面的例子中，A、D、G 都将是绿色的。</p>
+<h2 id="nth-column-n-和-nth-last-column-n"><a href="#nth-column-n-和-nth-last-column-n" class="headerlink" title=":nth-column(n) 和 :nth-last-column(n)"></a>:nth-column(n) 和 :nth-last-column(n)</h2><blockquote>
+<p><code>:nth-column(n)</code> 匹配括号内 <code>n</code> 的计算值的某一列的元素，计算方式是从头开始计算，而 <code>:nth-last-column(n)</code> 则是从后开始计算。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-pseudo">:nth-column(2n)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-pseudo">:nth-last-column(3n)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"selected"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"blur"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">col</span> <span class="attr">class</span>=<span class="string">"blur"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>A<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>B<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>C<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>D<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>E<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>F<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>G<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>H<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>I<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#table-pseudos" target="_blank" rel="external">Grid-Structural Selectors 草案</a></p>
+</blockquote>
+<h1 id="Tree-Structural-pseudo-classes——-blank"><a href="#Tree-Structural-pseudo-classes——-blank" class="headerlink" title="Tree-Structural pseudo-classes——:blank"></a>Tree-Structural pseudo-classes——:blank</h1><blockquote>
+<p>Tree-Structural pseudo-classes 是 CSS3 中的规范，但在 CSS Selectors Level 4 中加入了 <code>:blank</code>，它和 <code>:empty</code> 类似，区别在于 <code>:empty</code> 只能匹配没有任何内容的元素，而 <code>:blank</code> 可以匹配带有 <code>spaces（空格）</code>, <code>tabs（缩进符）</code> and <code>segment breaks（段落过段）</code> 内容的元素。</p>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#blank-pseudo" target="_blank" rel="external">:blank pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="Combinators——-gt-gt"><a href="#Combinators——-gt-gt" class="headerlink" title="Combinators——&gt;&gt;"></a>Combinators——<code>&gt;&gt;</code></h1><blockquote>
+<p><code>A &gt;&gt; B</code> 匹配祖先元素为 A 的 B元素，其用法与 <code>A B</code> 一样，与 <code>&gt;</code>, <code>+</code>, <code>~</code> 用意一样，不过意义不同。</p>
+<p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#combinators" target="_blank" rel="external">Combinators 草案</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>上面的特性都已经存在 Working Draft 中，还有一些 Editor’s Draft 的特性，也顺带一提。</p>
+</blockquote>
+<h1 id="The-Relational-Pseudo-class——-has"><a href="#The-Relational-Pseudo-class——-has" class="headerlink" title="The Relational Pseudo-class——:has()"></a>The Relational Pseudo-class——:has()</h1><blockquote>
+<p><code>:has(selector)</code> 匹配含有 <code>某些规则</code> 的元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 将匹配含有 img 子元素的 a 元素 */</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:has(</span>&gt; <span class="selector-tag">img</span>)</div><div class="line"></div><div class="line"><span class="comment">/* 将匹配拥有 dt 兄弟元素的 dt 元素 */</span></div><div class="line"><span class="selector-tag">dt</span><span class="selector-pseudo">:has(+</span> <span class="selector-tag">dt</span>)</div><div class="line"></div><div class="line"><span class="comment">/* 将匹配不含有 h1、h2、h3、h4、h5、h6 元素的 section 元素 */</span></div><div class="line"><span class="selector-tag">section</span><span class="selector-pseudo">:not(</span><span class="selector-pseudo">:has(h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>))</div><div class="line"></div><div class="line"><span class="comment">/* 和上面例子不同，下面交换了两个伪类的嵌套，表示匹配含有的不是 h1、h2、h3、h4、h5、h6 子元素的元素，区别在于这种写法要求必须含有一个子元素，而上面的写法可以不含有子元素也会被匹配 */</span></div><div class="line"><span class="selector-tag">section</span><span class="selector-pseudo">:has(</span><span class="selector-pseudo">:not(h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>))</div></pre></td></tr></table></figure>
+<blockquote>
+<p>想解锁更多姿势就去看 <a href="https://drafts.csswg.org/selectors-4/#has-pseudo" target="_blank" rel="external">The Relational Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="The-Drag-and-Drop-Pseudo-class——-drop-drop"><a href="#The-Drag-and-Drop-Pseudo-class——-drop-drop" class="headerlink" title="The Drag-and-Drop Pseudo-class——:drop, :drop()"></a>The Drag-and-Drop Pseudo-class——:drop, :drop()</h1><blockquote>
+<p><code>:drop</code> 和 <code>:drop()</code> 匹配可被放置拖动元素的目标元素，两者区别在于 <code>:drop()</code> 可以匹配一些规则，包括 <code>active</code>, <code>valid</code>, <code>invalid</code>。<code>active</code> 会匹配可被放置的目标元素，<code>valid</code> 匹配放置的元素为合法元素的目标元素，<code>invalid</code> 反之。如果 <code>:drop()</code> 括号里没有任何过滤，那么将和 <code>:drop</code> 没有区别。</p>
+<p>想解锁更多姿势就去看 <a href="https://drafts.csswg.org/selectors-4/#selectordef-drop-function" target="_blank" rel="external">The Drag-and-Drop Pseudo-class 草案</a></p>
+</blockquote>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>其实这就是一篇科普文， 趁着国庆的闲余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我十分的希望各位大牛帮我指出错误之处或不足之处！另外，祝大家国庆快乐。作为一只 single dog 还是写代码为好！</p>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/" target="_blank" rel="external">https://www.w3.org/TR/2013/WD-selectors4-20130502/</a><br><a href="https://drafts.csswg.org/selectors-4/" target="_blank" rel="external">https://drafts.csswg.org/selectors-4/</a><br><a href="http://css4.rocks/selectors-level-4/" target="_blank" rel="external">http://css4.rocks/selectors-level-4/</a><br><a href="http://css4-selectors.com/selectors/" target="_blank" rel="external">http://css4-selectors.com/selectors/</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/02/CSS-Level-4-中的新东西/" class="archive-article-date">
+  	<time datetime="2016-10-02T13:25:50.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/CSS-Selectors-Level-4/">CSS Selectors Level 4</a><a class="article-category-link" href="/categories/前端/CSS-Selectors-Level-4/CSS4/">CSS4</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/24/svg-sprite-简介/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          svg sprite 简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SameSite-Cookie——防御 CSRF &amp; XSSI</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

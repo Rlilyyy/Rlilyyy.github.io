@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>gulp 简单使用 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言
+今天必须安利一下 gulp 这个前端自动化构建工具，天呐噜，今天学了一下怎么用以后，我已经忘记什么是 Grunt 了！gulp 比 Grunt 好的地方就是，基于 Node.js 的流，使用 JS 语法，配置项相对于 Grunt 的简直就简单得不要不要的（虽然我 Grunt 也用得很少，因为发现用 Grunt 的配置时间比我自己去压缩什么用的时间还长……），另外，两个配置文件的代码清晰度和简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp 简单使用">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/04/04/gulp-简单使用/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="前言
+今天必须安利一下 gulp 这个前端自动化构建工具，天呐噜，今天学了一下怎么用以后，我已经忘记什么是 Grunt 了！gulp 比 Grunt 好的地方就是，基于 Node.js 的流，使用 JS 语法，配置项相对于 Grunt 的简直就简单得不要不要的（虽然我 Grunt 也用得很少，因为发现用 Grunt 的配置时间比我自己去压缩什么用的时间还长……），另外，两个配置文件的代码清晰度和简">
+<meta property="og:updated_time" content="2016-04-04T14:13:28.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp 简单使用">
+<meta name="twitter:description" content="前言
+今天必须安利一下 gulp 这个前端自动化构建工具，天呐噜，今天学了一下怎么用以后，我已经忘记什么是 Grunt 了！gulp 比 Grunt 好的地方就是，基于 Node.js 的流，使用 JS 语法，配置项相对于 Grunt 的简直就简单得不要不要的（虽然我 Grunt 也用得很少，因为发现用 Grunt 的配置时间比我自己去压缩什么用的时间还长……），另外，两个配置文件的代码清晰度和简">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-gulp-简单使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gulp 简单使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>今天必须安利一下 gulp 这个前端自动化构建工具，天呐噜，今天学了一下怎么用以后，我已经忘记什么是 Grunt 了！gulp 比 Grunt 好的地方就是，基于 Node.js 的流，使用 JS 语法，配置项相对于 Grunt 的简直就简单得不要不要的（虽然我 Grunt 也用得很少，因为发现用 Grunt 的配置时间比我自己去压缩什么用的时间还长……），另外，两个配置文件的代码清晰度和简洁度的对比上，gulp 就是完胜啊么么哒~</p>
+</blockquote>
+<h1 id="引入和使用"><a href="#引入和使用" class="headerlink" title="引入和使用"></a>引入和使用</h1><ol>
+<li><p>安装好 <code>Node.js</code> 和 <code>npm</code> 两个神器以后，往下看</p>
+</li>
+<li><p>使用 npm 全局安装 gulp，命令行如下所示</p>
+<blockquote>
+<p>npm install gulp -g</p>
+</blockquote>
+</li>
+<li><p>或者你也可以不全局安装，仅仅作为项目开发依赖，那么使用如下命令行安装 gulp</p>
+<blockquote>
+<p>npm install gulp –save-dev</p>
+</blockquote>
+</li>
+<li><p>在项目根目录下创建一个 <code>gulpfile.js</code> 文件，用于 gulp 任务的配置</p>
+</li>
+<li><p>在 <code>gulpfile.js</code> 里进行任务配置，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">"gulp"</span>);</div><div class="line"><span class="comment">// JavaScript 压缩</span></div><div class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">"gulp-uglify"</span>);</div><div class="line"><span class="comment">// JavaScript 语法检测</span></div><div class="line"><span class="keyword">var</span> jshint = <span class="built_in">require</span>(<span class="string">"gulp-jshint"</span>);</div><div class="line"><span class="comment">// 文件输出重命名</span></div><div class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">"gulp-rename"</span>);</div><div class="line"></div><div class="line">gulp.task(<span class="string">"jshint"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">"Nope.js"</span>)</div><div class="line">        .pipe(jshint())</div><div class="line">        .pipe(jshint.reporter(<span class="string">"default"</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(<span class="string">"compress"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">"Nope.js"</span>)</div><div class="line">        .pipe(rename(<span class="string">"Nope.min.js"</span>))</div><div class="line">        .pipe(uglify())</div><div class="line">        .pipe(gulp.dest(<span class="string">"gulpJS/"</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(<span class="string">"default"</span>, [<span class="string">"jshint"</span>, <span class="string">"compress"</span>]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>在当先目录下使用命令行工具，输入命令执行 gulp 进行自动构建</p>
+<blockquote>
+<p>gulp<br>或者<br>gulp jshint</p>
+</blockquote>
+</li>
+</ol>
+<p>如果单独输入 gulp，那么会执行 <code>default</code> 任务，如果在 gulp 后面加一个任务名称，那么就是执行特定名称任务</p>
+<h1 id="API-说明"><a href="#API-说明" class="headerlink" title="API 说明"></a>API 说明</h1><ul>
+<li><p>gulp.task(name[, deps], fn)</p>
+<blockquote>
+<p>task 用于配置一个单独的任务，name 是该任务的名称；deps 是该任务的依赖任务，会在该任务执行前执行完毕；fn 是该任务的执行体。</p>
+</blockquote>
+</li>
+<li><p>gulp.src(globs[, options])</p>
+<blockquote>
+<p>src 用于配置该任务的目标文件，globs 可以配置文件路径，当然不止于此，更多的写法可以查看官网的 API 文档；options 用于配置一些选项，如 <code>{buffer: false}</code>，将文件输入改为 stream 而不是 buffer。</p>
+</blockquote>
+</li>
+<li><p>gulp.pipe()</p>
+<blockquote>
+<p>使用过 Node.js 就很容易明白中间件的概念，pipe 的作用类似于中间件的作用，对文件进行处理后输出。</p>
+</blockquote>
+</li>
+<li><p>gulp.dest(path[, options])</p>
+<blockquote>
+<p>dest 用于将 pipe 进来的文件流输出到 path 下，options 用于配置写文件的一些权限等。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><blockquote>
+<p>上面提到了 gulp 的几个常用 API，此外还有几个 API 我没用到，例如 watch，可能后续在使用 less 的时候会用到。gulp 的 API 就是这么少，更多的依赖中间件处理，所以代码也更简洁，gulp 还有很多有趣的地方我没发现，希望后续学习可以发掘更多 gulp 的优点。</p>
+<p>官方中文文档：<a href="http://www.gulpjs.com.cn/docs/api/" target="_blank" rel="external">http://www.gulpjs.com.cn/docs/api/</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/04/gulp-简单使用/" class="archive-article-date">
+  	<time datetime="2016-04-04T13:08:57.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/06/ES6-学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ES6 学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/28/简单使用-require-js/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简单使用 require.js</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

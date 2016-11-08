@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>ES6 学习笔记 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="let 和 constlet
+使用 let 定义的变量只在块级作用域里可以访问，而 var 定义的变量没有块级作用域的概念，只要在作用域内即可访问
+
+我们可以在循环内使用 let 代替 var1234for(let i=0;i&amp;lt;5;i++) &amp;#123;    console.log(i);// 0,1,2,3,4&amp;#125;console.log(i);// Uncaught Refere">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 学习笔记">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/04/06/ES6-学习笔记/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="let 和 constlet
+使用 let 定义的变量只在块级作用域里可以访问，而 var 定义的变量没有块级作用域的概念，只要在作用域内即可访问
+
+我们可以在循环内使用 let 代替 var1234for(let i=0;i&amp;lt;5;i++) &amp;#123;    console.log(i);// 0,1,2,3,4&amp;#125;console.log(i);// Uncaught Refere">
+<meta property="og:updated_time" content="2016-04-19T07:00:05.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 学习笔记">
+<meta name="twitter:description" content="let 和 constlet
+使用 let 定义的变量只在块级作用域里可以访问，而 var 定义的变量没有块级作用域的概念，只要在作用域内即可访问
+
+我们可以在循环内使用 let 代替 var1234for(let i=0;i&amp;lt;5;i++) &amp;#123;    console.log(i);// 0,1,2,3,4&amp;#125;console.log(i);// Uncaught Refere">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ES6-学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="let-和-const"><a href="#let-和-const" class="headerlink" title="let 和 const"></a>let 和 const</h1><h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><blockquote>
+<p>使用 <code>let</code> 定义的变量只在块级作用域里可以访问，而 <code>var</code> 定义的变量没有块级作用域的概念，只要在作用域内即可访问</p>
+</blockquote>
+<h3 id="我们可以在循环内使用-let-代替-var"><a href="#我们可以在循环内使用-let-代替-var" class="headerlink" title="我们可以在循环内使用 let 代替 var"></a>我们可以在循环内使用 let 代替 var</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</div><div class="line">    <span class="built_in">console</span>.log(i);<span class="comment">// 0,1,2,3,4</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(i);<span class="comment">// Uncaught ReferenceError: i is not defined</span></div></pre></td></tr></table></figure>
+<h3 id="let-声明的变量不存在变量提升"><a href="#let-声明的变量不存在变量提升" class="headerlink" title="let 声明的变量不存在变量提升"></a>let 声明的变量不存在变量提升</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(i);<span class="comment">// undefined</span></div><div class="line"><span class="built_in">console</span>.log(j);<span class="comment">// Uncaught ReferenceError</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> i = <span class="number">5</span>;</div><div class="line"><span class="keyword">let</span> j = <span class="number">6</span>;</div></pre></td></tr></table></figure>
+<h3 id="暂时性死区-temporal-dead-zone，简称TDZ"><a href="#暂时性死区-temporal-dead-zone，简称TDZ" class="headerlink" title="暂时性死区(temporal dead zone，简称TDZ)"></a>暂时性死区(temporal dead zone，简称TDZ)</h3><blockquote>
+<p>在使用 let 和 const 定义变量的块级作用域里，会形成封闭的块级作用域，在使用 let 或 const 定义变量的语句之前，该变量无法被赋值，都会抛出 ReferenceError</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</div><div class="line">    tmp = <span class="string">"a"</span>;<span class="comment">// ReferenceError</span></div><div class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// ReferenceError</span></div><div class="line"></div><div class="line">    <span class="comment">// 死区结束</span></div><div class="line">    <span class="keyword">let</span> tmp;</div><div class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// undefined</span></div><div class="line"></div><div class="line">    tmp = <span class="string">"b"</span>;</div><div class="line">    <span class="built_in">console</span>.log(tmp);<span class="comment">// b</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="其他一些限制"><a href="#其他一些限制" class="headerlink" title="其他一些限制"></a>其他一些限制</h3><ul>
+<li>使用 let 声明的变量不允许在同一块级作用域内重复声明</li>
+<li>块级作用域内声明的函数只在该块级作用域内可用</li>
+<li>ES6 块级作用域内的声明的函数不存在函数提升</li>
+</ul>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><blockquote>
+<p>使用 <code>const</code> 声明的变量无法更改，严格模式下重复赋值会报错，而常规模式下不报错也不赋值成功</p>
+</blockquote>
+<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><ul>
+<li>const 同样存在暂时性死区</li>
+<li>const 不允许重复定义，不存在变量提升</li>
+<li>使用 const 声明一个对象，只保证该对象的指针不被修改，不保证该对象内部属性不被修改</li>
+<li>使用 const 声明的变量只在当前块级作用域内有效</li>
+<li><p>使用 const 声明的变量可以跨模块使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// constants.js 模块</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> A = <span class="number">1</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> B = <span class="number">3</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> C = <span class="number">4</span>;</div><div class="line"></div><div class="line"><span class="comment">// test1.js 模块</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> constants <span class="keyword">from</span> <span class="string">'./constants'</span>;</div><div class="line"><span class="built_in">console</span>.log(constants.A); <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(constants.B); <span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="comment">// test2.js 模块</span></div><div class="line"><span class="keyword">import</span> &#123;A, B&#125; <span class="keyword">from</span> <span class="string">'./constants'</span>;</div><div class="line"><span class="built_in">console</span>.log(A); <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(B); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在 window 作用域下使用 const 声明的变量不会变为 window.? 变量</p>
+</li>
+</ul>
+<h1 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h1><blockquote>
+<p>ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> c = <span class="number">3</span>;</div><div class="line"></div><div class="line"><span class="comment">// ES6</span></div><div class="line"><span class="comment">// 解构成功</span></div><div class="line"><span class="keyword">var</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"></div><div class="line"><span class="comment">// 解构失败——部分解构</span></div><div class="line"><span class="keyword">var</span> [x, y] = [<span class="number">1</span>];</div><div class="line"><span class="built_in">console</span>.log(x);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(y);<span class="comment">// undefined</span></div><div class="line"></div><div class="line"><span class="comment">// 解构成功——不完全解构</span></div><div class="line"><span class="keyword">var</span> [i, [j], k] = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>];</div><div class="line"><span class="built_in">console</span>.log(i);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(j);<span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(k);<span class="comment">// 4</span></div><div class="line"></div><div class="line"><span class="comment">// 模式匹配的解构</span></div><div class="line"><span class="keyword">var</span> [a1, [a2, a3]] = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>]];</div><div class="line"><span class="built_in">console</span>.log(a1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(a2);<span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(a3);<span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> [, , tmp] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="built_in">console</span>.log(tmp);<span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> [x1, ...x2] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="built_in">console</span>.log(x1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(x2);<span class="comment">// [2, 3, 4, 5]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> [y1, y2, ...y3] = [<span class="number">1</span>];</div><div class="line"><span class="built_in">console</span>.log(y1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(y2);<span class="comment">// undefined</span></div><div class="line"><span class="built_in">console</span>.log(y3);<span class="comment">// []</span></div><div class="line"></div><div class="line"><span class="comment">// 有默认值的解构赋值</span></div><div class="line"><span class="comment">// 只有对应赋值是 undefined，默认值才会生效</span></div><div class="line"><span class="keyword">var</span> [z1 ,z2 = <span class="number">2</span>] = [<span class="number">1</span>, <span class="literal">undefined</span>];</div><div class="line"><span class="built_in">console</span>.log(z1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(z2);<span class="comment">// 2</span></div><div class="line"></div><div class="line"><span class="comment">// 对象的解构赋值</span></div><div class="line"><span class="comment">// 位置可以不同</span></div><div class="line"><span class="keyword">var</span> &#123;q2, q1&#125; = &#123;<span class="attr">q1</span>: <span class="number">1</span>, <span class="attr">q2</span>: <span class="number">2</span>&#125;;</div><div class="line"><span class="built_in">console</span>.log(q1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(q2);<span class="comment">// 2</span></div><div class="line"></div><div class="line"><span class="comment">// 下面这个有点反人类</span></div><div class="line"><span class="comment">// 真正被赋值的是后者 t1, t2，而不是前者 r1, r2</span></div><div class="line"><span class="keyword">var</span> &#123;<span class="attr">r1</span>: t1, <span class="attr">r2</span>: t2&#125; = &#123;<span class="attr">r1</span>: <span class="number">1</span>, <span class="attr">r2</span>: <span class="number">2</span>&#125;;</div><div class="line"><span class="built_in">console</span>.log(t1);<span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(t2);<span class="comment">// 2</span></div><div class="line"></div><div class="line"><span class="comment">// 字符串的解构赋值</span></div><div class="line"><span class="keyword">var</span> [s1, s2, s3] = <span class="string">"abc"</span>;</div><div class="line"><span class="built_in">console</span>.log(s1);<span class="comment">// a</span></div><div class="line"><span class="built_in">console</span>.log(s2);<span class="comment">// b</span></div><div class="line"><span class="built_in">console</span>.log(s3);<span class="comment">// c</span></div><div class="line"></div><div class="line"><span class="comment">// 函数参数的解构赋值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">[x, y]</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> x + y;</div><div class="line">&#125;</div><div class="line">func([<span class="number">1</span>, <span class="number">2</span>]);<span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func2</span>(<span class="params">[x = <span class="number">1</span>, y = <span class="number">2</span>] = []</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> [x, y];</div><div class="line">&#125;</div><div class="line">func2([<span class="number">2</span>, <span class="number">3</span>]);<span class="comment">// [2, 3]</span></div><div class="line">func2([<span class="number">2</span>]);<span class="comment">// [2, 2]</span></div><div class="line">func2([]);<span class="comment">// [1, 2]</span></div><div class="line"></div><div class="line"><span class="comment">// 变量赋值交换</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">exchange</span>(<span class="params">[x, y]</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> [x, y] = [y, x];</div><div class="line">    <span class="keyword">return</span> [x, y];</div><div class="line">&#125;</div><div class="line">exchange([<span class="number">1</span>, <span class="number">2</span>]);<span class="comment">// [2, 1]</span></div></pre></td></tr></table></figure>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="Unicode-表示法"><a href="#Unicode-表示法" class="headerlink" title="Unicode 表示法"></a>Unicode 表示法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 单字节 Unicode</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"\u0061"</span>);<span class="comment">// a</span></div><div class="line"></div><div class="line"><span class="comment">// 双字节 Unicode</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"\u&#123;20BB7&#125;"</span>);<span class="comment">// 𠮷</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> hello = <span class="number">123</span>;</div><div class="line">hell\u&#123;<span class="number">6</span>F&#125; <span class="comment">// 123</span></div><div class="line"></div><div class="line"><span class="comment">// 对于双字节字符，用 codePointAt() 正确获取对应十进制字符码</span></div><div class="line"><span class="keyword">var</span> s = <span class="string">"𠮷a"</span>;</div><div class="line"><span class="comment">// 这里是“𠮷”的十进制字符码</span></div><div class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">0</span>));<span class="comment">// 134071</span></div><div class="line"><span class="comment">// 这里是“𠮷”的第二个十进制字符码</span></div><div class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">1</span>));<span class="comment">// 57271</span></div><div class="line"><span class="comment">// 这里是“a”的十进制字符码</span></div><div class="line"><span class="built_in">console</span>.log(s.codePointAt(<span class="number">2</span>));<span class="comment">// 97</span></div><div class="line"></div><div class="line"><span class="comment">// 合成字符的规范化，用于正确判断相等性</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"\u01D1"</span>.normalize() === <span class="string">"\u004F\u030C"</span>.normalize()) <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"\u01D1"</span> === <span class="string">"\u004F\u030C"</span>);</div></pre></td></tr></table></figure>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><ul>
+<li>includes(code, startIndex)：返回布尔值，表示是否找到了参数字符串</li>
+<li>startsWith(code, startIndex)：返回布尔值，表示参数字符串是否在源字符串的头部</li>
+<li>endsWith(code, startIndex)：返回布尔值，表示参数字符串是否在源字符串的尾部</li>
+<li>repeat()：返回一个新字符串，表示将原字符串重复n次</li>
+</ul>
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line">$(<span class="string">"#result"</span>).append(</div><div class="line">  <span class="string">"There are &lt;b&gt;"</span> + basket.count + <span class="string">"&lt;/b&gt; "</span> +</div><div class="line">  <span class="string">"items in your basket, "</span> +</div><div class="line">  <span class="string">"&lt;em&gt;"</span> + basket.onSale +</div><div class="line">  <span class="string">"&lt;/em&gt; are on sale!"</span></div><div class="line">);</div><div class="line"></div><div class="line"><span class="comment">// ES6</span></div><div class="line"><span class="comment">// 注意模板字符串使用 `` 代替 ""</span></div><div class="line"><span class="comment">// $&#123;&#125; 代表变量</span></div><div class="line">$(<span class="string">"#result"</span>).append(<span class="string">`</span></div><div class="line">  There are &lt;b&gt;<span class="subst">$&#123;basket.count&#125;</span>&lt;/b&gt; items</div><div class="line">   in your basket, &lt;em&gt;<span class="subst">$&#123;basket.onSale&#125;</span>&lt;/em&gt;</div><div class="line">  are on sale!</div><div class="line">`);</div><div class="line"></div><div class="line"><span class="comment">// 可以在模板字符串内运算</span></div><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> y = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="string">`<span class="subst">$&#123;x&#125;</span> + <span class="subst">$&#123;y&#125;</span> = <span class="subst">$&#123;x + y&#125;</span>`</span></div><div class="line"><span class="comment">// "1 + 2 = 3"</span></div><div class="line"></div><div class="line"><span class="string">`<span class="subst">$&#123;x&#125;</span> + <span class="subst">$&#123;y * <span class="number">2</span>&#125;</span> = <span class="subst">$&#123;x + y * <span class="number">2</span>&#125;</span>`</span></div><div class="line"><span class="comment">// "1 + 4 = 5"</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>&#125;;</div><div class="line"><span class="string">`<span class="subst">$&#123;obj.x + obj.y&#125;</span>`</span></div><div class="line"><span class="comment">// 3</span></div><div class="line"></div><div class="line"><span class="comment">// 可以调用函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"Hello World"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="string">`foo <span class="subst">$&#123;fn()&#125;</span> bar`</span></div><div class="line"><span class="comment">// foo Hello World bar</span></div><div class="line"></div><div class="line"><span class="comment">// raw 会自动转义斜杠</span></div><div class="line"><span class="built_in">String</span>.raw<span class="string">`Hi\n<span class="subst">$&#123;<span class="number">2</span>+<span class="number">3</span>&#125;</span>!`</span>;<span class="comment">// Hi\n5!</span></div><div class="line"></div><div class="line"><span class="comment">// 此外还有标签模板等扩展，更详细的看教程</span></div></pre></td></tr></table></figure>
+<h1 id="数组的扩展"><a href="#数组的扩展" class="headerlink" title="数组的扩展"></a>数组的扩展</h1><h2 id="新的数组函数"><a href="#新的数组函数" class="headerlink" title="新的数组函数"></a>新的数组函数</h2><ul>
+<li>Array.from()，用于将类数组对象转换为真正的数组，如果有第二个参数可是实现类似 map() 的效果，使用[…array]会有相同结果</li>
+<li>Array.of()，用于将一组数值转换为数组对象</li>
+<li>(new Array()).copyWithin(target, startIndex, endIndex)，用于将 startIndex 到 endIndex 的元素复制到 target 位为开头的位置上</li>
+<li>(new Array()).find(arr, callback)，用于寻找 arr 数组中符合 callback 中条件的第一个元素</li>
+<li>(new Array()).findIndex(arr, callback)，用于寻找 arr 数组中符合 callback 中条件的第一个元素的索引</li>
+<li>(new Array()).fill(char, starIndex, endIndex)，用于用 char 填充数组</li>
+<li>(new Array()).entries()，返回所有键-值(key-value)对</li>
+<li>(new Array()).keys()，返回所有键(key)的值</li>
+<li>(new Array()).values()，返回所有值(value)</li>
+</ul>
+<blockquote>
+<p>以上例子参考自阮一峰老师的《ECMAScript 6入门》一书的开源版本，地址：<a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/06/ES6-学习笔记/" class="archive-article-date">
+  	<time datetime="2016-04-06T00:11:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/ECMAScript-6/">ECMAScript 6</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/13/ele-me-二面代码题实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ele.me 二面代码题实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/04/gulp-简单使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">gulp 简单使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

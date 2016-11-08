@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>svg sprite 简介 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言&amp;emsp;&amp;emsp;首页的高速加载和渲染一直是前端开发者们津津乐道的事情，因此各种技术也应运而生。在 HTTP1.1 时代，为了减少请求的发送，加快首页加载，压缩和合并成了必不可少的技术，其中包括了 JavaScript 文件的压缩、混淆和合并，还有 CSS 文件的压缩和合并，最后还有一个是针对小图片的请求优化，也就是 CSS Sprite，也叫 雪碧图 或 CSS 精灵。其大概的思想就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svg sprite 简介">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/10/24/svg-sprite-简介/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;首页的高速加载和渲染一直是前端开发者们津津乐道的事情，因此各种技术也应运而生。在 HTTP1.1 时代，为了减少请求的发送，加快首页加载，压缩和合并成了必不可少的技术，其中包括了 JavaScript 文件的压缩、混淆和合并，还有 CSS 文件的压缩和合并，最后还有一个是针对小图片的请求优化，也就是 CSS Sprite，也叫 雪碧图 或 CSS 精灵。其大概的思想就是">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/svg-%E5%85%BC%E5%AE%B9%E6%80%A7.jpeg">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/%E6%95%88%E6%9E%9C.jpeg">
+<meta property="og:updated_time" content="2016-10-24T14:33:06.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="svg sprite 简介">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;首页的高速加载和渲染一直是前端开发者们津津乐道的事情，因此各种技术也应运而生。在 HTTP1.1 时代，为了减少请求的发送，加快首页加载，压缩和合并成了必不可少的技术，其中包括了 JavaScript 文件的压缩、混淆和合并，还有 CSS 文件的压缩和合并，最后还有一个是针对小图片的请求优化，也就是 CSS Sprite，也叫 雪碧图 或 CSS 精灵。其大概的思想就是">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/svg-%E5%85%BC%E5%AE%B9%E6%80%A7.jpeg">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-svg-sprite-简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      svg sprite 简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;首页的高速加载和渲染一直是前端开发者们津津乐道的事情，因此各种技术也应运而生。在 HTTP1.1 时代，为了减少请求的发送，加快首页加载，压缩和合并成了必不可少的技术，其中包括了 JavaScript 文件的压缩、混淆和合并，还有 CSS 文件的压缩和合并，最后还有一个是针对小图片的请求优化，也就是 <code>CSS Sprite</code>，也叫 <code>雪碧图</code> 或 <code>CSS 精灵</code>。其大概的思想就是将多个小图片按照一定的尺寸和位置排列好，然后合成一张图片，最后用户访问页面时，只要请求这一张合成图，而开发者利用 <code>background-position</code> 等属性控制显示合成图某个位置的图片，即可达到一张图片多个图标的效果，同时也将请求数量压缩为一个。当然，这次我们要说的并不是这个技术，而是与之运用思想类似的 <code>SVG Sprite</code>。</p>
+<h1 id="SVG-Sprite"><a href="#SVG-Sprite" class="headerlink" title="SVG Sprite"></a>SVG Sprite</h1><p>&emsp;&emsp;<code>SVG Sprite</code> 使用 <code>&lt;symbol&gt;</code> 标签来定义一个图形模板对象，好处在于其可以重复利用，我们可以看一下 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol" target="_blank" rel="external">MDN</a> 中对 <code>&lt;symbol&gt;</code> 的定义：</p>
+<blockquote>
+<p>symbol元素用来定义一个图形模板对象，它可以用一个<use></use>元素实例化。symbol元素对图形的作用是在同一文档中多次使用，添加结构和语义。结构丰富的文档可以更生动地呈现出来，类似讲演稿或盲文，从而提升了可访问性。注意，一个symbol元素本身是不呈现的。只有symbol元素的实例（亦即，一个引用了symbol的 <use></use>元素）才能呈现。</p>
+</blockquote>
+<p>&emsp;&emsp;可以看到，<code>&lt;symbol&gt;</code> 定义的图形并不会第一时间显示出来，只有使用了 <code>&lt;use&gt;</code> 标签进行实例化以后才会显现。<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use" target="_blank" rel="external">MDN</a> 中对其做出了如下定义：</p>
+<blockquote>
+<p>use元素在SVG文档内取得目标节点，并在别的地方复制它们。它的效果等同于这些节点被深克隆到一个不可见的DOM中，然后将其粘贴到use元素的位置，很像HTML5中的克隆模板元素。</p>
+</blockquote>
+<p>&emsp;&emsp;而要使用 <code>&lt;use&gt;</code> 来实例化一个 <code>svg图形模板对象</code>，则要使用其中的 <code>xlink:href</code> 属性，在我们处理好的 <code>&lt;symbol&gt;</code> 上都会带有一个 <code>id</code>，如下所示（伪代码）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span> <span class="attr">style</span>=<span class="string">"position:absolute;width:0;height:0;visibility:hidden"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">defs</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon1"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon2"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon3"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;根据每一个 <code>&lt;symbol&gt;</code> 的 <code>id</code>，我们可以使用 <code>&lt;use&gt;</code> 根据这些 <code>id</code> 来使用 <code>svg</code>，如下所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icons"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon1"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon2"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon3"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;<code>SVG Sprite</code> 的基本原理就是运用这些元素，相比较 <code>CSS Sprite</code>，<code>SVG Sprite</code> 显得更为友好，不用多余的例如 <code>background-position</code> 属性来控制位置。</p>
+<h1 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h1><p>&emsp;&emsp;运用一个技术的前提都是其兼容性满足项目的最低要求，或者在不兼容的情况下有相对应的替代方案。在饿了么 Web 的兼容性要求为 PC 端 IE9+，安卓移动端 4.4+，IOS7+，具体可以看 ElemeFE 的 <a href="https://github.com/ElemeFE/style-guide/blob/master/compatibility-web.md" target="_blank" rel="external">style-guide</a>。下面是在 <a href="http://caniuse.com/#search=SVG" target="_blank" rel="external">caniuse</a> 上的结果：<br><img src="http://7xoehm.com1.z0.glb.clouddn.com/svg-%E5%85%BC%E5%AE%B9%E6%80%A7.jpeg" alt="SVG-兼容性"></p>
+<p>&emsp;&emsp;可以看到兼容性在 PC 端上是完全没有问题的，而在移动端上也能支持，所以可以安心地用起来了。</p>
+<h1 id="结合-Webpack-使用-SVG-Sprite"><a href="#结合-Webpack-使用-SVG-Sprite" class="headerlink" title="结合 Webpack 使用 SVG Sprite"></a>结合 Webpack 使用 <code>SVG Sprite</code></h1><p>&emsp;&emsp;我们使用 <code>Webpack</code> 来对多个分离的 SVG 文件进行自动化处理为合并好的多个 <code>&lt;symbol&gt;</code>，并插入到 <code>&lt;body&gt;</code> 顶部。首先我们要对 <code>webpack.config.js</code> 进行配置。</p>
+<p>首先看一下基本的文件目录结构：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">├── LICENSE</div><div class="line">├── README.md</div><div class="line">├── css</div><div class="line">│   └── index.css</div><div class="line">├── dist</div><div class="line">│   ├── app.css</div><div class="line">│   ├── app.js</div><div class="line">│   └── index.html</div><div class="line">├── js</div><div class="line">│   └── index.js</div><div class="line">├── package.json</div><div class="line">├── static</div><div class="line">│   ├── analytics.svg</div><div class="line">│   ├── archives.svg</div><div class="line">│   ├── businessman.svg</div><div class="line">│   ├── businessmen.svg</div><div class="line">│   ├── certificate.svg</div><div class="line">│   ├── chat.svg</div><div class="line">│   └── contract.svg</div><div class="line">├── template</div><div class="line">│   └── index.html</div><div class="line">└── webpack.config.js</div></pre></td></tr></table></figure></p>
+<p>webpack.config.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</div><div class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</div><div class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> plugins = [</div><div class="line">  <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</div><div class="line">    <span class="attr">filename</span>: <span class="string">'./index.html'</span>,</div><div class="line">    <span class="attr">template</span>: <span class="string">'./template/index.html'</span></div><div class="line">  &#125;)</div><div class="line">];</div><div class="line"></div><div class="line">plugins.push(</div><div class="line">  <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'[name].css'</span>)</div><div class="line">);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">app</span>: <span class="string">'./js/index.js'</span>,</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">output</span>: &#123;</div><div class="line">    <span class="attr">path</span>: <span class="string">'./dist'</span>,</div><div class="line">    <span class="attr">publicPath</span>: <span class="string">'./'</span>,</div><div class="line">    <span class="comment">// filename: '[name].[chunkhash:6].js'</span></div><div class="line">    filename: <span class="string">'[name].js'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">resolve</span>: &#123;</div><div class="line">    <span class="attr">extensions</span>: [ <span class="string">''</span>, <span class="string">'.js'</span> ]</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">module</span>: &#123;</div><div class="line">    <span class="attr">loaders</span>: [</div><div class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.js$/</span>, <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>, <span class="attr">loader</span>: <span class="string">'babel-loader'</span> &#125;,</div><div class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.css$/</span>, <span class="attr">loader</span>: ExtractTextPlugin.extract(<span class="string">'style'</span>, <span class="string">'css'</span>) &#125;,</div><div class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.svg$/</span>, <span class="attr">loaders</span>: [ <span class="string">'svg-sprite-loader'</span>, <span class="string">'svgo-loader?useConfig=svgoConfig'</span> ] &#125;,</div><div class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.(gif|png|jpg|ttf|woff2|woff|eot)$/</span>, <span class="attr">loader</span>: <span class="string">'url?limit=1000&amp;name=[path][name].[hash:6].[ext]'</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">svgoConfig</span>: &#123;</div><div class="line">    <span class="attr">plugins</span>: [</div><div class="line">      &#123; <span class="attr">removeTitle</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">convertColors</span>: &#123; <span class="attr">shorthex</span>: <span class="literal">true</span> &#125; &#125;,</div><div class="line">      &#123; <span class="attr">convertPathData</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">cleanupAttrs</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeComments</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeDesc</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeUselessDefs</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeEmptyAttrs</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeHiddenElems</span>: <span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">removeEmptyText</span>: <span class="literal">true</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: plugins</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;可以看到，配置文件中使用了 <code>svg-sprite-loader</code> 和 <code>svgo-loader</code> 对 <code>svg</code> 文件进行处理，<code>svg-sprite-loader</code> 的作用就是将多个 <code>svg</code> 文件合并为一个 <code>&lt;svg&gt;</code> 元素。至于 <code>svgo-loader</code>，作用是将 <code>&lt;svg&gt;</code> 中一些无用的信息过滤去除，精简结构，详细配置可以自行查阅对应的文档说明，可以根据实际需求进行过滤。接下来将列出 <code>index.css</code>, <code>index.js</code>, <code>index.html</code> 的内容：</p>
+<p>index.css<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line">  <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.icons</span> <span class="selector-tag">svg</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> indexStyle <span class="keyword">from</span> <span class="string">'../css/index.css'</span>;</div><div class="line"><span class="keyword">import</span> analytics <span class="keyword">from</span> <span class="string">'../static/analytics.svg'</span></div><div class="line"><span class="keyword">import</span> archives <span class="keyword">from</span> <span class="string">'../static/archives.svg'</span></div><div class="line"><span class="keyword">import</span> businessman <span class="keyword">from</span> <span class="string">'../static/businessman.svg'</span></div><div class="line"><span class="keyword">import</span> businessmen <span class="keyword">from</span> <span class="string">'../static/businessmen.svg'</span></div><div class="line"><span class="keyword">import</span> certificate <span class="keyword">from</span> <span class="string">'../static/certificate.svg'</span></div><div class="line"><span class="keyword">import</span> chat <span class="keyword">from</span> <span class="string">'../static/chat.svg'</span></div><div class="line"><span class="keyword">import</span> contract <span class="keyword">from</span> <span class="string">'../static/contract.svg'</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'demo complete'</span>);</div></pre></td></tr></table></figure></p>
+<p>index.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>svg-sprites-demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icons"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#analytics"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#archives"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#businessman"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#businessmen"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#certificate"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#chat"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#contract"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;以上就是主要的一些配置和内容，如果需要完整的项目，可以到我的 <a href="https://github.com/Rlilyyy/svg-sprites-demo" target="_blank" rel="external">github</a> 下 clone 项目到你的本地进行构建。下面是构建后的网页效果和结构：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/%E6%95%88%E6%9E%9C.jpeg" alt="效果"></p>
+<h1 id="优点-amp-缺点"><a href="#优点-amp-缺点" class="headerlink" title="优点 &amp; 缺点"></a>优点 &amp; 缺点</h1><p>优点：</p>
+<ul>
+<li>将多个请求压缩为无请求</li>
+<li>svg 对比 image 其屏幕适应性更好，任何分辨率都能达到高清效果</li>
+<li>svg 体积更小</li>
+<li>每一个 <code>&lt;symbol&gt;</code> 都可以重复利用</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>svg 不利于变动性大的图片，例如需要经常修改颜色</li>
+<li>兼容性对于需要兼容 IE8- 的网站不好，需要对低版本浏览器有替代方案</li>
+</ul>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/defs" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/defs</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/24/svg-sprite-简介/" class="archive-article-date">
+  	<time datetime="2016-10-24T14:14:25.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/SVG/">SVG</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/02/CSS-Level-4-中的新东西/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CSS Selectors Level 4 中的新东西</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

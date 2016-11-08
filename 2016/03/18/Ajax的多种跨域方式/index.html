@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>Ajax的多种跨域方式 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CORS（Cross-Origin Resource Sharing，跨源资源共享）
+CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（eg. Origin: http://www.baidu.com），如果服务器接收到 request 后，需要给 response 加上 Access-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax的多种跨域方式">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/18/Ajax的多种跨域方式/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="CORS（Cross-Origin Resource Sharing，跨源资源共享）
+CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（eg. Origin: http://www.baidu.com），如果服务器接收到 request 后，需要给 response 加上 Access-C">
+<meta property="og:updated_time" content="2016-03-18T07:10:32.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax的多种跨域方式">
+<meta name="twitter:description" content="CORS（Cross-Origin Resource Sharing，跨源资源共享）
+CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（eg. Origin: http://www.baidu.com），如果服务器接收到 request 后，需要给 response 加上 Access-C">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Ajax的多种跨域方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax的多种跨域方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CORS（Cross-Origin-Resource-Sharing，跨源资源共享）"><a href="#CORS（Cross-Origin-Resource-Sharing，跨源资源共享）" class="headerlink" title="CORS（Cross-Origin Resource Sharing，跨源资源共享）"></a>CORS（Cross-Origin Resource Sharing，跨源资源共享）</h2><blockquote>
+<p>CORS 的实现相对简单，当我们使用 XMLHttpRequest 进行跨域时，会给request的地址加入一个 Origin 头部，其中包含请求页面的源信息（<code>eg. Origin: http://www.baidu.com</code>），如果服务器接收到 request 后，需要给 response 加上 Access-Control-Allow-Origin 头部（<code>eg. Access-Control-Allow-Origin: http://www.baidu.com</code>），当然，如果是公共资源，将地址改成<code>*</code>就可以允许所有源地址进行跨域访问。如果服务器没有加入和 Origin 头部地址对应的头部或者 Access-Control-Allow-Origin 允许的跨域地址不相符合（<code>eg. Access-Control-Allow-Origin: http://www.google.com</code>），那么浏览器将会驳回请求，导致跨域失败。</p>
+</blockquote>
+<h3 id="1-XDomainRequest"><a href="#1-XDomainRequest" class="headerlink" title="1.XDomainRequest"></a>1.XDomainRequest</h3><p>XDomainRequest（以下简称XDR）是IE部分实现CORS规范的一个类型，和 XMLHttpRequest（以下简称XHR）不同的是，XDR 有以下不同：</p>
+<ul>
+<li>cookie 不会随请求发送，也不会随响应返回</li>
+<li>只能设置请求头部信息中的 Content-Type 字段</li>
+<li>不能访问响应头部信息</li>
+<li>只支持 GET 和 POST 请求</li>
+<li>浏览器支持：只有IE8+</li>
+</ul>
+<h3 id="2-XMLHttpRequest"><a href="#2-XMLHttpRequest" class="headerlink" title="2.XMLHttpRequest"></a>2.XMLHttpRequest</h3><p>使用 XMLHttpRequest（以下简称XHR）跨域和 XDR 跨域不同之处有以下几点：</p>
+<ul>
+<li>可以访问status</li>
+<li>可以访问statusText</li>
+<li>支持同步请求</li>
+</ul>
+<p>同时，跨域 XHR 也有以下限制（每个浏览器安全策略不同，例如chrome可以对跨域的XHR使用setRequestHeader）：</p>
+<ul>
+<li>不能使用 setRequestHeader() 设置自定义头部</li>
+<li>不能发送和接收cookie（可以通过设置 withCredentials 属性为 true 来允许发送cookie，同时服务器必须设置 Access-Control-Allow-Credentials: true）</li>
+<li>调用 getAllResponseHeaders() 方法总会返回字符串</li>
+</ul>
+<h3 id="3-Preflighted-Requests"><a href="#3-Preflighted-Requests" class="headerlink" title="3.Preflighted Requests"></a>3.Preflighted Requests</h3><p>Preflighted Requests 是一种透明服务器验证机制，使用即可支持开发人员使用自定义头部、GET 或 POST 以外的方法以及不同类型的主体内容。上面提到跨域XHR不能使用 setRequestHeader() 设置自定义头部，如果使用了 setRequestHeader() 设置自定义头部（eg. xhr.setRequestHeader(“halo”, “loha”)），那么在发出正式请求之前，浏览器首先会发出一个 OPTION 方法的请求，其中包括以下头部内容：</p>
+<ul>
+<li>Origin: 参照上面</li>
+<li>Access-Control-Request-Method: 请求自身的方法，例如GET</li>
+<li>Access-Control-Request-Headers: 自定义头部信息，多个头部以逗号分隔，例如halo</li>
+</ul>
+<p>当服务器接收到OPTION方法请求后，返回以下头部信息：</p>
+<ul>
+<li>Access-Control-Allow-Origin: 必须同源</li>
+<li>Access-Control-Allow-Method: 必须包含OPTION请求中的方法</li>
+<li>Access-Control-Allow-Headers: 必须包含 OPTION请求中的Header名</li>
+<li>Access-Control-Max-Age: 设置该 Preflighted 可以缓存的时间</li>
+</ul>
+<p>当OPTION成功请求并收到返回，浏览器将会检查response的头部信息，如果符合条件则正式发起请求，同时缓存此次 Preflighted 请求的结果。反之，如果不符合，那么真正的请求会失败。</p>
+<h3 id="4-JSONP"><a href="#4-JSONP" class="headerlink" title="4.JSONP"></a>4.JSONP</h3><p>JSONP（JSON with padding， 填充式JSON）与 JSON 并无关系，JSONP 的跨域实现主要运用 <code>&lt;script&gt;</code> 不受同域限制的原理，在请求的 URL 后加入一个 callback 参数，该 callback 参数代表服务器需要返回的JS代码的函数名称（<code>eg. &lt;script src=&quot;http://localhost?callback=func&quot;&gt;</code>），“func”这个名称将是服务器返回 JS 代码的函数名称（<code>eg. 以php为例，echo &quot;func(123)&quot;</code>），当 <code>&lt;script&gt;</code> 接收到这段代码的时候，便会运行 func 函数，并把“123”作为数据代进去（前提是你在前面已经写了一个func函数），至此，JSONP 完成。不过 JSONP 有以下缺点：</p>
+<ul>
+<li>安全性无法保证</li>
+<li>只能使用 GET 方法请求</li>
+</ul>
+<h3 id="5-图像ping"><a href="#5-图像ping" class="headerlink" title="5.图像ping"></a>5.图像ping</h3><p>图像ping 利用 <code>&lt;img&gt;</code> 去访问一个 URL，同时对该 <code>&lt;img&gt;</code> 的 <code>onload</code> 和 <code>onerror</code> 事件进行监听，可以得知请求的成功与失败，但无法获取返回数据，多用于跟踪网页点击次数等。图像ping 有以下缺点：</p>
+<ul>
+<li>只能使用 GET 方法请求</li>
+<li>无法获取返回数据</li>
+</ul>
+<h3 id="6-iframe"><a href="#6-iframe" class="headerlink" title="6.iframe"></a>6.iframe</h3><p>想要操作 iframe 的内容，那么 iframe 和主页面必须同域。<br>使用 document.domain 可以修改iframe和主页面的域名为同一个，前提是两个页面处于同一主域名下（eg. p2p.a.com和www.a.com可以设置为a.com），这样就可以操作 iframe 里的 contentDocument 了<br>使用 location.hash（eg. 将a.com变为a.com#abc不会导致页面刷新），不过由于同域原因，要加多一个和主页面同域的页面才能成功修改主页面的 hash，主页面使用定时器检测 hash 变化。可以查看以下网址了解：</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html" target="_blank" rel="external">http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html</a></p>
+</blockquote>
+<p>使用 window.name，同样需要第三个和主页面同域的页面做代理，window.name 可容纳2M的内容。具体方法查看：</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html" target="_blank" rel="external">http://www.cnblogs.com/rainman/archive/2011/02/21/1960044.html</a></p>
+</blockquote>
+<p>使用 postMessage，参考</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/dolphinX/p/3464056.html" target="_blank" rel="external">http://www.cnblogs.com/dolphinX/p/3464056.html</a></p>
+</blockquote>
+<h3 id="7-Web-Sockets"><a href="#7-Web-Sockets" class="headerlink" title="7.Web Sockets"></a>7.Web Sockets</h3><p>以 node.js 为例，基于 socket.io 可以很容易建立 Web Sockets， HTML5 的 Web Sockets 使用的是 <code>ws://</code> 和 <code>wss://</code> 协议，这样可以减少 <code>http://</code> 和 <code>https://</code> 协议字节级的开销，带宽消耗小。具体实现请查阅Google。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/18/Ajax的多种跨域方式/" class="archive-article-date">
+  	<time datetime="2016-03-18T05:19:02.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/03/18/两列布局一列固定宽度一列自适应宽度实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          两列布局一列固定宽度一列自适应宽度实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/18/双飞翼布局和圣杯布局/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">双飞翼布局和圣杯布局</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>SameSite-Cookie——防御 CSRF &amp; XSSI | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SameSite-Cookie——防御 CSRF & XSSI">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/innerLink.png">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/devTools.png">
+<meta property="og:updated_time" content="2016-07-10T15:10:30.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SameSite-Cookie——防御 CSRF & XSSI">
+<meta name="twitter:description" content="SameSite——防御 CSRF &amp;amp; XSSI 新机制
+SameSite-cookies 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 Set-Cookie 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-SameSite-Cookie——防御-CSRF-XSSI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SameSite-Cookie——防御 CSRF &amp; XSSI
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SameSite——防御-CSRF-amp-XSSI-新机制"><a href="#SameSite——防御-CSRF-amp-XSSI-新机制" class="headerlink" title="SameSite——防御 CSRF &amp; XSSI 新机制"></a>SameSite——防御 CSRF &amp; XSSI 新机制</h1><blockquote>
+<p><code>SameSite-cookies</code> 是 Google 开发的用于防御 CSRF 和 XSSI（Cross Site Script Inclusion，跨域脚本包含）的新安全机制，只需在 <code>Set-Cookie</code> 中加入一个新的字段属性，浏览器会根据设置的安全级别进行对应的安全 cookie 发送拦截，而目前在 Chrome-dev（51.0.2704.4）中可用。</p>
+</blockquote>
+<h2 id="XSSI——Cross-Site-Script-Inclusion"><a href="#XSSI——Cross-Site-Script-Inclusion" class="headerlink" title="XSSI——Cross Site Script Inclusion"></a>XSSI——Cross Site Script Inclusion</h2><p><code>XSSI</code> 属于 <code>XSS</code> 攻击的一种攻击方式，一般来说，浏览器允许网页加载其他域的脚本或图片等，假设我们在安全的网站上 a.com 包含一个脚本文件 <code>getData.js</code> 用于读取用户的私人信息，第一次用户需要在 a.com 登录，然后就可以根据验证返回用户私人信息并设置 cookie 以便下次使用，此时我们只做一个恶意网站 c.com，并包含了 <code>getData.js</code> 这个脚本文件，当用户点击 c.com 时，他的信息就泄露了。</p>
+<p>当然，这种方法可以用 <code>token</code> 令牌等来解决，另外一种方法就是 <code>SameSite-Cookies</code>，通过验证是否是从 a.com 访问的 getData.js 的方式来阻止 cookie 的发送。</p>
+<h2 id="SameSite-使用方式"><a href="#SameSite-使用方式" class="headerlink" title="SameSite 使用方式"></a>SameSite 使用方式</h2><p>需要在 <code>Set-Cookie</code> 中加入 <code>SameSite</code> 关键字，例如</p>
+<blockquote>
+<p>Set-Cookie: key=value; HttpOnly; SameSite=Strict</p>
+</blockquote>
+<h2 id="SameSite-的两个属性"><a href="#SameSite-的两个属性" class="headerlink" title="SameSite 的两个属性"></a>SameSite 的两个属性</h2><h3 id="no-restriction"><a href="#no-restriction" class="headerlink" title="no_restriction"></a>no_restriction</h3><p>当没有添加 SameSite 关键字的时候，默认是空的</p>
+<h3 id="Lax"><a href="#Lax" class="headerlink" title="Lax"></a>Lax</h3><ul>
+<li>允许发送安全 HTTP 方法（<code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>TRACE</code>）第三方链接的 cookies</li>
+<li>必须是 TOP-LEVEL 即可引起地址栏变化的跳转方式，例如 <code>&lt;a&gt;</code>, <code>&lt;link rel=&quot;prerender&quot;&gt;</code>, <code>GET 方式的 form 表单</code>，此外，<code>XMLHttpRequest</code>, <code>&lt;img&gt;</code> 等方式进行 GET 方式的访问将不会发送 cookies</li>
+<li>但是禁止发送不安全 HTTP 方法（<code>POST</code>, <code>PUT</code>, <code>DELETE</code>）第三方链接的cookies</li>
+</ul>
+<h3 id="Strict"><a href="#Strict" class="headerlink" title="Strict"></a>Strict</h3><p>禁止发送所有第三方链接的 cookies，默认情况下，如果添加了 SameSite 关键字，但是没有指定 value（Lax or Stict），那么默认为 Strict</p>
+<h2 id="Strict-下的-Request-Cookie-变化"><a href="#Strict-下的-Request-Cookie-变化" class="headerlink" title="Strict 下的 Request Cookie 变化"></a>Strict 下的 Request Cookie 变化</h2><p>当我们通过其他网站来访问一个有 SameSite-Cookies 机制的网站时，例如从 a.com 点击链接进入 b.com，如果 b.com 设置了 <code>Set-Cookie:foo=bar;SameSite=Strict</code>，那么，<code>foo=bar</code> 这一 cookie 是不会随着 request 发送的，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/outerLink.png" alt="outerLink"></p>
+<p>可以看到 <code>foo=bar</code> 并没有发送，假如此时刷新一下页面或者直接从地址栏输入 b.com 的地址，那么 cookie 将会正常发送，不过假设用户点击了外链进入了 b.com，由于 SameSite-Cookies 的保护，他的 cookie 第一次受到了保护，但是假设用户此时手动刷新了一下页面，那么 cookie 将会被发送出去，所以可能需要其他一些验证手段来对 cookie 未随 request 发送的情况来做相对应的处理，不过该种情况仅限于 GET 方法下，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/innerLink.png" alt="innerLink"></p>
+<p>此外，为了更清楚地了解 cookie 中哪些字段是 SameSite 控制并且级别为 Lax 或 Strict 或 none，我们可以在 Chrome DevTools 上清楚地看到，如下图：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/devTools.png" alt="devTools"></p>
+<p><a href="http://www.libinhong.com:5000" target="_blank" rel="external">点击查看 DEMO</a></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/" target="_blank" rel="external">http://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/</a></li>
+<li><a href="https://tools.ietf.org/html/draft-west-first-party-cookies-07" target="_blank" rel="external">https://tools.ietf.org/html/draft-west-first-party-cookies-07</a></li>
+<li><a href="https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/" target="_blank" rel="external">https://chloe.re/2016/04/13/goodbye-csrf-samesite-to-the-rescue/</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" class="archive-article-date">
+  	<time datetime="2016-07-10T15:06:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-10</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/">cookie</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/前端安全/">前端安全</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/02/CSS-Level-4-中的新东西/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          CSS Selectors Level 4 中的新东西
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/17/reflow-和-repaint-简易分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">reflow 和 repaint 简易分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
