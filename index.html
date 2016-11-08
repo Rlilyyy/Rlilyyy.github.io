@@ -434,6 +434,173 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/24/svg-sprite-简介/" itemprop="url">
+                  svg sprite 简介
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-24T22:14:25+08:00" content="2016-10-24">
+              2016-10-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/SVG/" itemprop="url" rel="index">
+                    <span itemprop="name">SVG</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/24/svg-sprite-简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/svg-sprite-简介/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;首页的高速加载和渲染一直是前端开发者们津津乐道的事情，因此各种技术也应运而生。在 HTTP1.1 时代，为了减少请求的发送，加快首页加载，压缩和合并成了必不可少的技术，其中包括了 JavaScript 文件的压缩、混淆和合并，还有 CSS 文件的压缩和合并，最后还有一个是针对小图片的请求优化，也就是 <code>CSS Sprite</code>，也叫 <code>雪碧图</code> 或 <code>CSS 精灵</code>。其大概的思想就是将多个小图片按照一定的尺寸和位置排列好，然后合成一张图片，最后用户访问页面时，只要请求这一张合成图，而开发者利用 <code>background-position</code> 等属性控制显示合成图某个位置的图片，即可达到一张图片多个图标的效果，同时也将请求数量压缩为一个。当然，这次我们要说的并不是这个技术，而是与之运用思想类似的 <code>SVG Sprite</code>。</p>
+<h1 id="SVG-Sprite"><a href="#SVG-Sprite" class="headerlink" title="SVG Sprite"></a>SVG Sprite</h1><p>&emsp;&emsp;<code>SVG Sprite</code> 使用 <code>&lt;symbol&gt;</code> 标签来定义一个图形模板对象，好处在于其可以重复利用，我们可以看一下 <a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol" target="_blank" rel="external">MDN</a> 中对 <code>&lt;symbol&gt;</code> 的定义：</p>
+<blockquote>
+<p>symbol元素用来定义一个图形模板对象，它可以用一个<use></use>元素实例化。symbol元素对图形的作用是在同一文档中多次使用，添加结构和语义。结构丰富的文档可以更生动地呈现出来，类似讲演稿或盲文，从而提升了可访问性。注意，一个symbol元素本身是不呈现的。只有symbol元素的实例（亦即，一个引用了symbol的 <use></use>元素）才能呈现。</p>
+</blockquote>
+<p>&emsp;&emsp;可以看到，<code>&lt;symbol&gt;</code> 定义的图形并不会第一时间显示出来，只有使用了 <code>&lt;use&gt;</code> 标签进行实例化以后才会显现。<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use" target="_blank" rel="external">MDN</a> 中对其做出了如下定义：</p>
+<blockquote>
+<p>use元素在SVG文档内取得目标节点，并在别的地方复制它们。它的效果等同于这些节点被深克隆到一个不可见的DOM中，然后将其粘贴到use元素的位置，很像HTML5中的克隆模板元素。</p>
+</blockquote>
+<p>&emsp;&emsp;而要使用 <code>&lt;use&gt;</code> 来实例化一个 <code>svg图形模板对象</code>，则要使用其中的 <code>xlink:href</code> 属性，在我们处理好的 <code>&lt;symbol&gt;</code> 上都会带有一个 <code>id</code>，如下所示（伪代码）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span> <span class="attr">style</span>=<span class="string">"position:absolute;width:0;height:0;visibility:hidden"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">defs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon1"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon2"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon3"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;根据每一个 <code>&lt;symbol&gt;</code> 的 <code>id</code>，我们可以使用 <code>&lt;use&gt;</code> 根据这些 <code>id</code> 来使用 <code>svg</code>，如下所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icons"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon1"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon2"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon3"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;<code>SVG Sprite</code> 的基本原理就是运用这些元素，相比较 <code>CSS Sprite</code>，<code>SVG Sprite</code> 显得更为友好，不用多余的例如 <code>background-position</code> 属性来控制位置。</p>
+<h1 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h1><p>&emsp;&emsp;运用一个技术的前提都是其兼容性满足项目的最低要求，或者在不兼容的情况下有相对应的替代方案。在饿了么 Web 的兼容性要求为 PC 端 IE9+，安卓移动端 4.4+，IOS7+，具体可以看 ElemeFE 的 <a href="https://github.com/ElemeFE/style-guide/blob/master/compatibility-web.md" target="_blank" rel="external">style-guide</a>。下面是在 <a href="http://caniuse.com/#search=SVG" target="_blank" rel="external">caniuse</a> 上的结果：<br><img src="http://7xoehm.com1.z0.glb.clouddn.com/svg-%E5%85%BC%E5%AE%B9%E6%80%A7.jpeg" alt="SVG-兼容性"></p>
+<p>&emsp;&emsp;可以看到兼容性在 PC 端上是完全没有问题的，而在移动端上也能支持，所以可以安心地用起来了。</p>
+<h1 id="结合-Webpack-使用-SVG-Sprite"><a href="#结合-Webpack-使用-SVG-Sprite" class="headerlink" title="结合 Webpack 使用 SVG Sprite"></a>结合 Webpack 使用 <code>SVG Sprite</code></h1><p>&emsp;&emsp;我们使用 <code>Webpack</code> 来对多个分离的 SVG 文件进行自动化处理为合并好的多个 <code>&lt;symbol&gt;</code>，并插入到 <code>&lt;body&gt;</code> 顶部。首先我们要对 <code>webpack.config.js</code> 进行配置。</p>
+<p>首先看一下基本的文件目录结构：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">├── css</span><br><span class="line">│   └── index.css</span><br><span class="line">├── dist</span><br><span class="line">│   ├── app.css</span><br><span class="line">│   ├── app.js</span><br><span class="line">│   └── index.html</span><br><span class="line">├── js</span><br><span class="line">│   └── index.js</span><br><span class="line">├── package.json</span><br><span class="line">├── static</span><br><span class="line">│   ├── analytics.svg</span><br><span class="line">│   ├── archives.svg</span><br><span class="line">│   ├── businessman.svg</span><br><span class="line">│   ├── businessmen.svg</span><br><span class="line">│   ├── certificate.svg</span><br><span class="line">│   ├── chat.svg</span><br><span class="line">│   └── contract.svg</span><br><span class="line">├── template</span><br><span class="line">│   └── index.html</span><br><span class="line">└── webpack.config.js</span><br></pre></td></tr></table></figure></p>
+<p>webpack.config.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> plugins = [</span><br><span class="line">  <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    filename: <span class="string">'./index.html'</span>,</span><br><span class="line">    template: <span class="string">'./template/index.html'</span></span><br><span class="line">  &#125;)</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">plugins.push(</span><br><span class="line">  <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'[name].css'</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./js/index.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  output: &#123;</span><br><span class="line">    path: <span class="string">'./dist'</span>,</span><br><span class="line">    publicPath: <span class="string">'./'</span>,</span><br><span class="line">    <span class="comment">// filename: '[name].[chunkhash:6].js'</span></span><br><span class="line">    filename: <span class="string">'[name].js'</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [ <span class="string">''</span>, <span class="string">'.js'</span> ]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    loaders: [</span><br><span class="line">      &#123; test: <span class="regexp">/\.js$/</span>, exclude: <span class="regexp">/node_modules/</span>, loader: <span class="string">'babel-loader'</span> &#125;,</span><br><span class="line">      &#123; test: <span class="regexp">/\.css$/</span>, loader: ExtractTextPlugin.extract(<span class="string">'style'</span>, <span class="string">'css'</span>) &#125;,</span><br><span class="line">      &#123; test: <span class="regexp">/\.svg$/</span>, loaders: [ <span class="string">'svg-sprite-loader'</span>, <span class="string">'svgo-loader?useConfig=svgoConfig'</span> ] &#125;,</span><br><span class="line">      &#123; test: <span class="regexp">/\.(gif|png|jpg|ttf|woff2|woff|eot)$/</span>, loader: <span class="string">'url?limit=1000&amp;name=[path][name].[hash:6].[ext]'</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  svgoConfig: &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      &#123; removeTitle: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; convertColors: &#123; shorthex: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">      &#123; convertPathData: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; cleanupAttrs: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeComments: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeDesc: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeUselessDefs: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeEmptyAttrs: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeHiddenElems: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; removeEmptyText: <span class="literal">true</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: plugins</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;可以看到，配置文件中使用了 <code>svg-sprite-loader</code> 和 <code>svgo-loader</code> 对 <code>svg</code> 文件进行处理，<code>svg-sprite-loader</code> 的作用就是将多个 <code>svg</code> 文件合并为一个 <code>&lt;svg&gt;</code> 元素。至于 <code>svgo-loader</code>，作用是将 <code>&lt;svg&gt;</code> 中一些无用的信息过滤去除，精简结构，详细配置可以自行查阅对应的文档说明，可以根据实际需求进行过滤。接下来将列出 <code>index.css</code>, <code>index.js</code>, <code>index.html</code> 的内容：</p>
+<p>index.css<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.icons</span> <span class="selector-tag">svg</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> indexStyle <span class="keyword">from</span> <span class="string">'../css/index.css'</span>;</span><br><span class="line"><span class="keyword">import</span> analytics <span class="keyword">from</span> <span class="string">'../static/analytics.svg'</span></span><br><span class="line"><span class="keyword">import</span> archives <span class="keyword">from</span> <span class="string">'../static/archives.svg'</span></span><br><span class="line"><span class="keyword">import</span> businessman <span class="keyword">from</span> <span class="string">'../static/businessman.svg'</span></span><br><span class="line"><span class="keyword">import</span> businessmen <span class="keyword">from</span> <span class="string">'../static/businessmen.svg'</span></span><br><span class="line"><span class="keyword">import</span> certificate <span class="keyword">from</span> <span class="string">'../static/certificate.svg'</span></span><br><span class="line"><span class="keyword">import</span> chat <span class="keyword">from</span> <span class="string">'../static/chat.svg'</span></span><br><span class="line"><span class="keyword">import</span> contract <span class="keyword">from</span> <span class="string">'../static/contract.svg'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'demo complete'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>index.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>svg-sprites-demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icons"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#analytics"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#archives"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#businessman"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#businessmen"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#certificate"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#chat"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#contract"</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;以上就是主要的一些配置和内容，如果需要完整的项目，可以到我的 <a href="https://github.com/Rlilyyy/svg-sprites-demo" target="_blank" rel="external">github</a> 下 clone 项目到你的本地进行构建。下面是构建后的网页效果和结构：</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/%E6%95%88%E6%9E%9C.jpeg" alt="效果"></p>
+<h1 id="优点-amp-缺点"><a href="#优点-amp-缺点" class="headerlink" title="优点 &amp; 缺点"></a>优点 &amp; 缺点</h1><p>优点：</p>
+<ul>
+<li>将多个请求压缩为无请求</li>
+<li>svg 对比 image 其屏幕适应性更好，任何分辨率都能达到高清效果</li>
+<li>svg 体积更小</li>
+<li>每一个 <code>&lt;symbol&gt;</code> 都可以重复利用</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>svg 不利于变动性大的图片，例如需要经常修改颜色</li>
+<li>兼容性对于需要兼容 IE8- 的网站不好，需要对低版本浏览器有替代方案</li>
+</ul>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/symbol</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/defs" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/defs</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/use</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/02/CSS-Level-4-中的新东西/" itemprop="url">
                   CSS Selectors Level 4 中的新东西
                 </a>
@@ -528,10 +695,10 @@
         
           
             <blockquote>
-<p>以下所有示例在 <code>Safari Technology Preview</code> 饮用最佳，<code>Chrome Canary</code> 有些示例都还没实现，可能是我使用的姿势不对……</p>
+<p>以下所有示例在 <code>Safari Technology Preview</code> 使用最佳，<code>Chrome Canary</code> 有些都还没实现，可能是我使用的姿势不对……</p>
 </blockquote>
 <h1 id="Negation-pseudo-class——-not"><a href="#Negation-pseudo-class——-not" class="headerlink" title="Negation pseudo-class——:not()"></a>Negation pseudo-class——:not()</h1><blockquote>
-<p><code>:not()</code> 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 <code>:not()</code> 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 <code>:not(p)</code> 用来选择不是 <code>&lt;p&gt;&lt;/p&gt;</code> 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 <code>:not(:not(...))</code>。</p>
+<p><code>:not()</code> 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 <code>:not()</code>，不过在 CSS3 中只能使用简单的匹配规则，例如 <code>:not(p)</code> 用来选择不是 <code>&lt;p&gt;&lt;/p&gt;</code> 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 <code>:not(:not(...))</code>。</p>
 </blockquote>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.negation</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[data-red="no"]</span>) &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.negation</span> <span class="selector-class">.default</span> <span class="selector-tag">a</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[rel="green"]</span>, <span class="selector-attr">[rel="default"]</span>) &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"negation"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.baidu.com"</span> <span class="attr">rel</span>=<span class="string">"green"</span>&gt;</span>这里是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.ele.me"</span> <span class="attr">rel</span>=<span class="string">"default"</span>&gt;</span>这里也是绿色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.sina.com"</span> <span class="attr">rel</span>=<span class="string">"blue"</span>&gt;</span>这里是蓝色<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"no"</span>&gt;</span></span><br><span class="line">    这里是黑色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default"</span> <span class="attr">data-red</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line">    这里是红色</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -581,7 +748,7 @@
 <p>想解锁更多姿势就去看 <a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/#the-any-link-pseudo" target="_blank" rel="external">The Hyperlink Pseudo-class 草案</a></p>
 </blockquote>
 <h1 id="The-contextual-reference-element-pseudo-class——-scope"><a href="#The-contextual-reference-element-pseudo-class——-scope" class="headerlink" title="The contextual reference element pseudo-class——:scope"></a>The contextual reference element pseudo-class——:scope</h1><blockquote>
-<p><code>:scope</code> 用于匹配当前作用域下的顶级元素。但是目前已经被移出规范——<a href="https://github.com/whatwg/html/issues/552#issuecomment-249038746" target="_blank" rel="external">issue</a></p>
+<p><code>:scope</code> 用于匹配当前作用域下的顶级元素。但是目前 <code>&lt;style scoped&gt;</code> 已经被移除——<a href="https://github.com/whatwg/html/issues/552" target="_blank" rel="external">issue</a></p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is outside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span><br><span class="line">      <span class="selector-pseudo">:scope</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: red;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="selector-tag">p</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">      &#125;</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This paragraph is inside the scope.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>以上代码，第二个 <code>div</code> 将会有红色背景，并且他的所有 <code>&lt;p&gt;</code> 子元素都将拥有蓝色文字。</p>
@@ -701,7 +868,7 @@
 <p><code>:drop</code> 和 <code>:drop()</code> 匹配可被放置拖动元素的目标元素，两者区别在于 <code>:drop()</code> 可以匹配一些规则，包括 <code>active</code>, <code>valid</code>, <code>invalid</code>。<code>active</code> 会匹配可被放置的目标元素，<code>valid</code> 匹配放置的元素为合法元素的目标元素，<code>invalid</code> 反之。如果 <code>:drop()</code> 括号里没有任何过滤，那么将和 <code>:drop</code> 没有区别。</p>
 <p>想解锁更多姿势就去看 <a href="https://drafts.csswg.org/selectors-4/#selectordef-drop-function" target="_blank" rel="external">The Drag-and-Drop Pseudo-class 草案</a></p>
 </blockquote>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>这篇博客算是一篇科普文，趁着空余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我也十分各位帮我指出错误之处或不足之处！另外，国庆节快乐，祝你们玩得开心，单身狗继续写代码了~</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>其实这就是一篇科普文， 趁着国庆的闲余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我十分的希望各位大牛帮我指出错误之处或不足之处！另外，祝大家国庆快乐。作为一只 single dog 还是写代码为好！</p>
 <p>参考资料：</p>
 <blockquote>
 <p><a href="https://www.w3.org/TR/2013/WD-selectors4-20130502/" target="_blank" rel="external">https://www.w3.org/TR/2013/WD-selectors4-20130502/</a><br><a href="https://drafts.csswg.org/selectors-4/" target="_blank" rel="external">https://drafts.csswg.org/selectors-4/</a><br><a href="http://css4.rocks/selectors-level-4/" target="_blank" rel="external">http://css4.rocks/selectors-level-4/</a><br><a href="http://css4-selectors.com/selectors/" target="_blank" rel="external">http://css4-selectors.com/selectors/</a></p>
@@ -2227,197 +2394,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/18/ES6-学习笔记（三）/" itemprop="url">
-                  ES6 学习笔记（三）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-18T16:21:39+08:00" content="2016-04-18">
-              2016-04-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端/ECMAScript-6/" itemprop="url" rel="index">
-                    <span itemprop="name">ECMAScript 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/18/ES6-学习笔记（三）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/ES6-学习笔记（三）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h1><blockquote>
-<p><code>Symbol</code> 是 JavaScript 的第七种类型（前六种是：Undefined、Null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object））。它用于生成独一无二的变量名，防止相同变量名的相互覆盖，例如在对象中，用字符串声明的属性如果相同，那么会互相覆盖</p>
-</blockquote>
-<p>注意点：</p>
-<ul>
-<li>Symbol 不能与其他值一起计算，例如与字符串连接，但是可以使用 <code>toString()</code> 进行转换</li>
-<li>Symbol 不能使用点运算符作为属性名，只能使用方括号，避免与字符串方式冲突</li>
-<li>Symbol 作为属性名，该属性不会出现在 for…in、for…of 循环中，也不会被 Object.keys()、Object.getOwnPropertyNames() 返回</li>
-<li>Symbol 可以被 Object.getOwnPropertySymbols() 返回</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>(<span class="string">'bar'</span>);</span><br><span class="line"><span class="keyword">var</span> s3 = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">var</span> s4 = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">var</span> s5 = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line">s1 <span class="comment">// Symbol(foo)</span></span><br><span class="line">s2 <span class="comment">// Symbol(bar)</span></span><br><span class="line"></span><br><span class="line">s3 === s4; <span class="comment">// false</span></span><br><span class="line">s1 === s5; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">s1.toString() <span class="comment">// "Symbol(foo)"</span></span><br><span class="line">s2.toString() <span class="comment">// "Symbol(bar)"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mySymbol = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">a.mySymbol = <span class="string">'Hello!'</span>;</span><br><span class="line">a[mySymbol] <span class="comment">// undefined</span></span><br><span class="line">a[<span class="string">'mySymbol'</span>] <span class="comment">// "Hello!"</span></span><br></pre></td></tr></table></figure>
-<h2 id="Symbol-for-amp-Symbol-keyFor"><a href="#Symbol-for-amp-Symbol-keyFor" class="headerlink" title="Symbol.for() &amp; Symbol.keyFor()"></a>Symbol.for() &amp; Symbol.keyFor()</h2><blockquote>
-<p><code>Symbol.for(name)</code> 与 <code>Symbol(name)</code> 不同的地方在于，前者在没有存在 name 注册的 Symbol 变量时，会注册一个新的 Symbol 变量，如果存在，那么就会返回该 name 注册的 Symbol。后者不管 name 有没有注册过，都会产生一个新的 Symbol</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line">s1 === s2 <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Symbol</span>.for(<span class="string">"bar"</span>) === <span class="built_in">Symbol</span>.for(<span class="string">"bar"</span>)</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">"bar"</span>) === <span class="built_in">Symbol</span>(<span class="string">"bar"</span>)</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>Symbol.keyFor(Symbol)</code> 会返回已注册过的 Symbol 的值的 desc</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>.for(<span class="string">"foo"</span>);</span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(s1) <span class="comment">// "foo"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>(<span class="string">"foo"</span>);</span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(s2) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><blockquote>
-<p>Proxy用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程</p>
-</blockquote>
-<h2 id="new-Proxy-target-handler"><a href="#new-Proxy-target-handler" class="headerlink" title="new Proxy(target, handler)"></a>new Proxy(target, handler)</h2><blockquote>
-<p>target 为要通过 handler 进行处理拦截的对象</p>
-</blockquote>
-<h2 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h2><blockquote>
-<p>用于拦截对对象属性访问时的处理</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"张三"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(person, &#123;</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params">target, property</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (property <span class="keyword">in</span> target) &#123;</span><br><span class="line">      <span class="keyword">return</span> target[property];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">ReferenceError</span>(<span class="string">"Property \""</span> + property + <span class="string">"\" does not exist."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">proxy.name <span class="comment">// "张三"</span></span><br><span class="line">proxy.age <span class="comment">// 抛出一个错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对数组负数的索引值进行处理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createArray</span>(<span class="params">...elements</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> handler = &#123;</span><br><span class="line">    get(target, propKey, receiver) &#123;</span><br><span class="line">      <span class="keyword">let</span> index = <span class="built_in">Number</span>(propKey);</span><br><span class="line">      <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        propKey = <span class="built_in">String</span>(target.length + index);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, propKey, receiver);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> target = [];</span><br><span class="line">  target.push(...elements);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = createArray(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>);</span><br><span class="line">arr[<span class="number">-1</span>] <span class="comment">// c</span></span><br></pre></td></tr></table></figure>
-<h2 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h2><blockquote>
-<p>用于拦截设置属性时的操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> validator = &#123;</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'age'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">Number</span>.isInteger(value)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'The age is not an integer'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (value &gt; <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RangeError</span>(<span class="string">'The age seems invalid'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对于age以外的属性，直接保存</span></span><br><span class="line">    obj[prop] = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, validator);</span><br><span class="line"></span><br><span class="line">person.age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">person.age <span class="comment">// 100</span></span><br><span class="line">person.age = <span class="string">'young'</span> <span class="comment">// 报错</span></span><br><span class="line">person.age = <span class="number">300</span> <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
-<h2 id="apply-target-context-args"><a href="#apply-target-context-args" class="headerlink" title="apply(target, context, args)"></a>apply(target, context, args)</h2><blockquote>
-<p>用于拦截函数的调用、call和apply操作。target 为目标函数，context 为函数执行上下文，args 为函数参数</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> target = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'I am the target'</span>; &#125;;</span><br><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  apply: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'I am the proxy'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line">p()</span><br><span class="line"><span class="comment">// "I am the proxy"</span></span><br></pre></td></tr></table></figure>
-<h2 id="has"><a href="#has" class="headerlink" title="has()"></a>has()</h2><blockquote>
-<p>用于处理一些在执行 “xxx in obj” 的拦截，可以对某些属性进行隐藏</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  has (target, key) &#123;</span><br><span class="line">    <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">'_'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key <span class="keyword">in</span> target;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> target = &#123; _prop: <span class="string">'foo'</span>, prop: <span class="string">'foo'</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line"><span class="string">'_prop'</span> <span class="keyword">in</span> proxy <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<h2 id="construct"><a href="#construct" class="headerlink" title="construct()"></a>construct()</h2><blockquote>
-<p>用于拦截 new 操作时的处理</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;, &#123;</span><br><span class="line">  construct: <span class="function"><span class="keyword">function</span>(<span class="params">target, args</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'called: '</span> + args.join(<span class="string">', '</span>));</span><br><span class="line">    <span class="keyword">return</span> &#123; value: args[<span class="number">0</span>] * <span class="number">10</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> p(<span class="number">1</span>).value</span><br><span class="line"><span class="comment">// "called: 1"</span></span><br><span class="line"><span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<h2 id="deleteProperty"><a href="#deleteProperty" class="headerlink" title="deleteProperty()"></a>deleteProperty()</h2><blockquote>
-<p>用于拦截删除对象属性时的操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  deleteProperty (target, key) &#123;</span><br><span class="line">    invariant(key, <span class="string">'delete'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">invariant</span> (<span class="params">key, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">'_'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Invalid attempt to <span class="subst">$&#123;action&#125;</span> private "<span class="subst">$&#123;key&#125;</span>" property`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> target = &#123; _prop: <span class="string">'foo'</span> &#125;</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br><span class="line"><span class="keyword">delete</span> proxy._prop; <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
-<h2 id="defineProperty"><a href="#defineProperty" class="headerlink" title="defineProperty()"></a>defineProperty()</h2><blockquote>
-<p>用于拦截定义对象属性时的操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  defineProperty (target, key, descriptor) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> target = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br><span class="line">proxy.foo = <span class="string">'bar'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate()"></a>enumerate()</h2><blockquote>
-<p>用于拦截 “for xxx in obj” 时的处理操作，跟 has() 不是同种拦截，互不影响</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个例子在 FF 上成功，但是 Chrome 上依旧打印了所有属性</span></span><br><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  enumerate (target) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(target).filter(key =&gt; key[<span class="number">0</span>] !== <span class="string">'_'</span>)[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> target = &#123; prop: <span class="string">'foo'</span>, _bar: <span class="string">'baz'</span>, _prop: <span class="string">'foo'</span> &#125;</span><br><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> proxy) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key);</span><br><span class="line">  <span class="comment">// "prop"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h1><blockquote>
-<p>Reflect 对象提供了若干个能对任意对象进行某种特定的可拦截操作（interceptable operation）的方法，它所提供的静态方法在 Proxy 中都有对应的相同方法，可以这么说，Reflect 保留了原先的默认处理方式，以供 Proxy 在修改默认处理的同时也能应用默认处理后再进行一些其他处理。某些方法也是 Object 上的方法，不过修改相应的返回值，更加完善<br>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect</a></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 老写法</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(target, property, attributes);</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="comment">// failure</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新写法</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Reflect</span>.defineProperty(target, property, attributes)) &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// failure</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 老写法</span></span><br><span class="line"><span class="string">'assign'</span> <span class="keyword">in</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 新写法</span></span><br><span class="line"><span class="comment">// 行为被函数化</span></span><br><span class="line"><span class="built_in">Reflect</span>.has(<span class="built_in">Object</span>, <span class="string">'assign'</span>) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加了自己的行为，同时使用 Reflect 的相应静态方法执行默认行为</span></span><br><span class="line"><span class="keyword">var</span> loggedObj = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, &#123;</span><br><span class="line">  get(target, name) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'get'</span>, target, name);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, name);</span><br><span class="line">  &#125;,</span><br><span class="line">  deleteProperty(target, name) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'delete'</span> + name);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.deleteProperty(target, name);</span><br><span class="line">  &#125;,</span><br><span class="line">  has(target, name) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'has'</span> + name);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.has(target, name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可能有人会对 Reflect 的存在感到疑惑，我个人认为 Reflect 存在的意义大概有两点，一是对 ES5 中 Object 一些方法的返回值进行修改完善，但是为了兼容性，开拓了一个新的对象来存放这些静态方法。二是为了让 Proxy 可以方便地在拦截器中添加处理方法的同时调用默认处理方法，所以 Reflect 中存在的静态方法都跟 Proxy 中的方法一一对应，同时修改了部分 Object 中的方法的返回值，例如 Object 中一些调用失败的方法会抛出错误，而在 Reflect 中修改为返回布尔值，以上是一点点见解，可以参考一下：<a href="https://tc39.github.io/ecma262/#sec-reflect-object" target="_blank" rel="external">https://tc39.github.io/ecma262/#sec-reflect-object</a></p>
-<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2463,7 +2439,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2471,7 +2447,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2480,7 +2456,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
