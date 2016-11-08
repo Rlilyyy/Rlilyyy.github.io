@@ -7,10 +7,10 @@ categories:
     - CSS4
 tags: CSS
 ---
-> 以下所有示例在 `Safari Technology Preview` 食用最佳，`Chrome Canary` 有些示例都还没实现，可能是我使用的姿势不对……
+> 以下所有示例在 `Safari Technology Preview` 使用最佳，`Chrome Canary` 有些都还没实现，可能是我使用的姿势不对……
 
 # Negation pseudo-class——:not()
-> `:not()` 伪类用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 `:not()` 伪类，不过在 CSS3 中只能使用简单的匹配规则，例如 `:not(p)` 用来选择不是 `<p></p>` 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 `:not(:not(...))`。
+> `:not()` 用于将符合规则的元素剔除，将样式规则应用于其他元素上。在 CSS3 中已经有 `:not()`，不过在 CSS3 中只能使用简单的匹配规则，例如 `:not(p)` 用来选择不是 `<p></p>` 的元素。而在 CSS4 中，可以应用更复杂的匹配规则，但是同样地不允许嵌套使用，例如 `:not(:not(...))`。
 
 ```css
 .negation {
@@ -220,7 +220,7 @@ tags: CSS
 
 
 # The contextual reference element pseudo-class——:scope
-> `:scope` 用于匹配当前作用域下的顶级元素。但是目前已经被移出规范——[issue](https://github.com/whatwg/html/issues/552#issuecomment-249038746)
+> `:scope` 用于匹配当前作用域下的顶级元素。但是目前 `<style scoped>` 已经被移除——[issue](https://github.com/whatwg/html/issues/552)
 
 ```html
 <div class="scope">
@@ -561,7 +561,7 @@ section:has(:not(h1, h2, h3, h4, h5, h6))
 > 想解锁更多姿势就去看 [The Drag-and-Drop Pseudo-class 草案](https://drafts.csswg.org/selectors-4/#selectordef-drop-function)
 
 # 最后
-这篇博客算是一篇科普文，趁着空余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我也十分各位帮我指出错误之处或不足之处！另外，国庆节快乐，祝你们玩得开心，单身狗继续写代码了~
+其实这就是一篇科普文， 趁着国庆的闲余时间将 CSS Selectors Level 4 的一些新的特性总结了一下，可能有所错漏或理解错误，我十分的希望各位大牛帮我指出错误之处或不足之处！另外，祝大家国庆快乐。作为一只 single dog 还是写代码为好！
 
 参考资料：
 > https://www.w3.org/TR/2013/WD-selectors4-20130502/
