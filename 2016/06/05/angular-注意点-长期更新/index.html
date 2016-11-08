@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>angular 注意点（长期更新） | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这篇 blog 主要存放我在学习和使用 angular 踩到的坑和需要注意的点
+
+ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
+
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular 注意点（长期更新）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/06/05/angular-注意点-长期更新/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="这篇 blog 主要存放我在学习和使用 angular 踩到的坑和需要注意的点
+
+ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
+
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng">
+<meta property="og:updated_time" content="2016-06-13T03:04:36.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular 注意点（长期更新）">
+<meta name="twitter:description" content="这篇 blog 主要存放我在学习和使用 angular 踩到的坑和需要注意的点
+
+ng-repeat
+ng-repeat 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一
+
+123&amp;lt;div ng-app=&quot;app&quot; ng-controller=&quot;control&quot;&amp;gt;    &amp;lt;h3 ng-repeat=&quot;content in repeatContent&quot;&amp;gt;ng">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-angular-注意点-长期更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular 注意点（长期更新）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇 blog 主要存放我在学习和使用 angular 踩到的坑和需要注意的点</p>
+</blockquote>
+<h1 id="ng-repeat"><a href="#ng-repeat" class="headerlink" title="ng-repeat"></a>ng-repeat</h1><blockquote>
+<p><code>ng-repeat</code> 用于标识某个 elem 需要重复输出，同时重复输出的内容需为唯一</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"app"</span> <span class="attr">ng-controller</span>=<span class="string">"control"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h3</span> <span class="attr">ng-repeat</span>=<span class="string">"content in repeatContent"</span>&gt;</span>ng-repeat: &#123;&#123; content &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</div><div class="line">app.controller(<span class="string">"control"</span>, ($scope) =&gt; &#123;</div><div class="line">    <span class="comment">// 输出李滨泓</span></div><div class="line">    $scope.repeatContent = [<span class="string">"李"</span>, <span class="string">"滨"</span>, <span class="string">"泓"</span>];</div><div class="line">    <span class="comment">// 下面存在两个“泓”，会报错</span></div><div class="line">    <span class="comment">// $scope.repeatContent = ["李", "滨", "泓", "泓"];</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h1 id="provider-service-factory-之间的关系"><a href="#provider-service-factory-之间的关系" class="headerlink" title="provider, service, factory 之间的关系"></a>provider, service, factory 之间的关系</h1><h2 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h2><blockquote>
+<p><code>factory</code> 很像 <code>service</code>，不同之处在于，service 在 Angular 中是一个单例对象，即当需要使用 service 时，使用 new 关键字来创建一个（也仅此一个）service。而 factory 则是一个普通的函数，当需要用时，他也仅仅是一个普通函数的调用方式，它可以返回各种形式的数据，例如通过返回一个功能函数的集合对象来将供与使用。</p>
+</blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</div><div class="line"></div><div class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></div><div class="line">app.factory(<span class="string">"Today"</span>, () =&gt; &#123;</div><div class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">year</span>: date.getFullYear(),</div><div class="line">        <span class="attr">month</span>: date.getMonth() + <span class="number">1</span>,</div><div class="line">        <span class="attr">day</span>: date.getDate()</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(Today.year);</div><div class="line">    <span class="built_in">console</span>.log(Today.month);</div><div class="line">    <span class="built_in">console</span>.log(Today.day);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><blockquote>
+<p><code>service</code> 在使用时是一个单例对象，同时也是一个 constructor，它的特点让它可以不返回任何东西，因为它使用 new 关键字新建，同时它可以用在 controller 之间的通讯与数据交互，因为 controller 在无用时其作用域链会被销毁（例如使用路由跳转到另一个页面，同时使用了另一个 controller）</p>
+</blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</div><div class="line"></div><div class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></div><div class="line"><span class="comment">// 注意这里不可以使用 arrow function</span></div><div class="line"><span class="comment">// arrow function 不能作为 constructor</span></div><div class="line">app.service(<span class="string">"Today"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    <span class="keyword">this</span>.year = date.getFullYear();</div><div class="line">    <span class="keyword">this</span>.month = date.getMonth() + <span class="number">1</span>;</div><div class="line">    <span class="keyword">this</span>.day = date.getDate();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(Today.year);</div><div class="line">    <span class="built_in">console</span>.log(Today.month);</div><div class="line">    <span class="built_in">console</span>.log(Today.day);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><blockquote>
+<p><code>provider</code> 是 <code>service</code> 的底层创建方式，可以理解 provider 是一个可配置版的 service，我们可以在正式注入 provider 前对 provider 进行一些参数的配置。</p>
+</blockquote>
+<p>定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> app = angular.module(<span class="string">"app"</span>, []);</div><div class="line"></div><div class="line"><span class="comment">// 这里可以注入 $http 等 Provider</span></div><div class="line"><span class="comment">// 注意这里不可以使用 arrow function</span></div><div class="line"><span class="comment">// arrow function 不能作为 constructor</span></div><div class="line">app.provider(<span class="string">"Today"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    <span class="keyword">let</span> self = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.setDate = <span class="function">(<span class="params">year, month, day</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.date = <span class="keyword">new</span> <span class="built_in">Date</span>(year, month - <span class="number">1</span>, day);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.$get = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">year</span>: <span class="keyword">this</span>.date.getFullYear(),</div><div class="line">            <span class="attr">month</span>: <span class="keyword">this</span>.date.getMonth() + <span class="number">1</span>,</div><div class="line">            <span class="attr">day</span>: <span class="keyword">this</span>.date.getDate()</div><div class="line">        &#125;;</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用注入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里重新配置了今天的日期是 2015年2月15日</span></div><div class="line"><span class="comment">// 注意这里注入的是 TodayProvider，使用驼峰命名来注入正确的需要配置的 provider</span></div><div class="line">app.config(<span class="function">(<span class="params">TodayProvider</span>) =&gt;</span> &#123;</div><div class="line">    TodayProvider.setDate(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">15</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.controller(<span class="string">"control"</span>, (Today) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(Today.year);</div><div class="line">    <span class="built_in">console</span>.log(Today.month);</div><div class="line">    <span class="built_in">console</span>.log(Today.day);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="handlebars-与-angular-符号解析冲突"><a href="#handlebars-与-angular-符号解析冲突" class="headerlink" title="handlebars 与 angular 符号解析冲突"></a>handlebars 与 angular 符号解析冲突</h1><p>场景：</p>
+<blockquote>
+<p>当我使用 node.js 作为服务端，而其中使用了 handlebars 作为模板引擎，当 node.js 对某 URL 进行相应并 render，由于其模板使用 <code>{ {} }</code> 作为变量解析符号。同样地，angular 也使用 <code>{ {} }</code> 作为变量解析符号，所以当 node.js 进行 render 页面后，如果 <code>{ {} }</code> 内的变量不存在，则该个区域会被清空，而我的原意是这个作为 angular 的解析所用，而不是 handlebars 使用，同时我也想继续使用 handlebars，那么此时就需要将 angular 默认的 <code>{ {} }</code> 解析符号重新定义。即使用依赖注入 <code>$interpolateProvider</code> 进行定义，如下示例：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.config(<span class="function"><span class="params">$interpolateProvider</span> =&gt;</span> &#123;</div><div class="line">    $interpolateProvider.startSymbol(<span class="string">'&#123;[&#123;'</span>);</div><div class="line">    $interpolateProvider.endSymbol(<span class="string">'&#125;]&#125;'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="ng-annotate-loader"><a href="#ng-annotate-loader" class="headerlink" title="ng-annotate-loader"></a>ng-annotate-loader</h1><blockquote>
+<p><code>ng-annotate-loader</code> 应用于 webpack + angular 的开发场景，是用于解决 angular 在进行 JS 压缩后导致依赖注入失效并出现错误的解决方法</p>
+</blockquote>
+<p>安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install ng-annotate-loader --save-dev</div></pre></td></tr></table></figure></p>
+<p>配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line">&#123;</div><div class="line">    <span class="attr">test</span>: <span class="regexp">/\.js?$/</span>,</div><div class="line">    <span class="attr">exclude</span>: <span class="regexp">/(node_modules|bower_components)/</span>,</div><div class="line">    <span class="attr">loader</span>: <span class="string">'ng-annotate!babel?presets=es2015'</span></div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<h1 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h1><blockquote>
+<p>当我们使用非 Angular 自带的事件时，$scope 里的数据改变并不会引起 <code>$digest</code> 的 <code>dirty-checking</code> 循环，这将导致当 <code>model</code> 改变时，<code>view</code> 不会同步更新，这时我们需要自己主动触发更新</p>
+</blockquote>
+<p>HTML<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; foo &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"addBtn"</span>&gt;</span>go<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">"control"</span>, ($scope) =&gt; &#123;</div><div class="line">    $scope.foo = <span class="number">0</span>;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"addBtn"</span>).addEventListener(<span class="string">"click"</span>, () =&gt; &#123;</div><div class="line">        $scope.foo++;</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>很明显，示例的意图是当点击 button 时，<code>foo</code> 自增长并更新 View，但是实际上，$scope.foo 是改变了，但是 View 并不会刷新，这是因为 foo 并没有一个 $watch 检测变化后 $apply，最终引起 $digest，所以我们需要自己触发 $apply 或者创建一个 $watch 来触发或检测数据变化</p>
+<p>JavaScript（使用 $apply）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">"control"</span>, ($scope) =&gt; &#123;</div><div class="line">    $scope.foo = <span class="number">0</span>;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"addBtn"</span>).addEventListener(<span class="string">"click"</span>, () =&gt; &#123;</div><div class="line">        </div><div class="line">        $scope.$apply(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $scope.foo++;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>JavaScript（使用 $watch &amp; $digest）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">app.controller(<span class="string">"control"</span>, ($scope) =&gt; &#123;</div><div class="line">    $scope.foo = <span class="number">0</span>;</div><div class="line">    $scope.flag = <span class="number">0</span>;</div><div class="line"></div><div class="line">    $scope.$watch(<span class="string">"flag"</span>, (newValue, oldValue) =&gt; &#123;</div><div class="line"></div><div class="line">        <span class="comment">// 当 $digest 循环检测 flag 时，如果新旧值不一致将调用该函数</span></div><div class="line">        $scope.foo = $scope.flag;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"addBtn"</span>).addEventListener(<span class="string">"click"</span>, () =&gt; &#123;</div><div class="line">       </div><div class="line">        $scope.flag++;</div><div class="line">        <span class="comment">// 主动触发 $digest 循环</span></div><div class="line">        $scope.$digest();</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="watch-watchExpression-listener-objectEquality"><a href="#watch-watchExpression-listener-objectEquality" class="headerlink" title="$watch(watchExpression, listener, [objectEquality])"></a>$watch(watchExpression, listener, [objectEquality])</h2><blockquote>
+<p>注册一个 <code>listener</code> 回调函数，在每次 <code>watchExpression</code> 的值发生改变时调用</p>
+</blockquote>
+<ul>
+<li><code>watchExpression</code> 在每次 <code>$digest</code> 执行时被调用，并返回要被检测的值（当多次输入同样的值时，<code>watchExpression</code> 不应该改变其自身的值，否则可能会引起多次的 $digest 循环，<code>watchExpression</code> 应该幂等）</li>
+<li><code>listener</code> 将在当前 <code>watchExpression</code> 返回值和上次的 <code>watchExpression</code> 返回值不一致时被调用（使用 <code>!==</code> 来严格地判断不一致性，而不是使用 <code>==</code> 来判断，不过 <code>objectEquality == true</code> 除外）</li>
+<li><code>objectEquality</code> 为 <code>boolean</code> 值，当为 <code>true</code> 时，将使用 <code>angular.equals</code> 来判断一致性，并使用 <code>angular.copy</code> 来保存此次的 Object 拷贝副本供给下一次的比较，这意味着复杂的对象检测将会有性能和内存上的问题</li>
+</ul>
+<h2 id="apply-exp"><a href="#apply-exp" class="headerlink" title="$apply([exp])"></a>$apply([exp])</h2><blockquote>
+<p><code>$apply</code> 是 <code>$scope</code> 的一个函数，用于触发 <code>$digest</code> 循环</p>
+</blockquote>
+<p>$apply 伪代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">$apply</span>(<span class="params">expr</span>) </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> $<span class="built_in">eval</span>(expr);</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">        $exceptionHandler(e);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        $root.$digest();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>使用 <code>$eval(expr)</code> 执行 <code>expr</code> 表达式</li>
+<li>如果在执行过程中跑出 exception，那么执行 $exceptionHandler(e)</li>
+<li>最后无论结果，都会执行一次 <code>$digest</code> 循环</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/05/angular-注意点-长期更新/" class="archive-article-date">
+  	<time datetime="2016-06-05T09:30:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-05</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/Angular/">Angular</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/06/17/reflow-和-repaint-简易分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          reflow 和 repaint 简易分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/04/Webpack-Babel-使用-ES6-新特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">webpack + Babel 使用 ES6 新特性</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

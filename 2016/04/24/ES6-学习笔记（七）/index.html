@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>ES6 学习笔记（七） | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Generator
+Generator 函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同
+
+声明12345678910111213// 这里的 * 只要在 function 和函数名之间使用就可以function* iterator() &amp;#123;    yield &quot;x&quot;;    yield &quot;y&quot;;    return &quot;z&quot;;&amp;#125;let iter = iterat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 学习笔记（七）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/04/24/ES6-学习笔记（七）/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="Generator
+Generator 函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同
+
+声明12345678910111213// 这里的 * 只要在 function 和函数名之间使用就可以function* iterator() &amp;#123;    yield &quot;x&quot;;    yield &quot;y&quot;;    return &quot;z&quot;;&amp;#125;let iter = iterat">
+<meta property="og:updated_time" content="2016-04-25T07:05:51.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 学习笔记（七）">
+<meta name="twitter:description" content="Generator
+Generator 函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同
+
+声明12345678910111213// 这里的 * 只要在 function 和函数名之间使用就可以function* iterator() &amp;#123;    yield &quot;x&quot;;    yield &quot;y&quot;;    return &quot;z&quot;;&amp;#125;let iter = iterat">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ES6-学习笔记（七）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 学习笔记（七）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><blockquote>
+<p><code>Generator</code> 函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同</p>
+</blockquote>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里的 * 只要在 function 和函数名之间使用就可以</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">iterator</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="string">"x"</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="string">"y"</span>;</div><div class="line">    <span class="keyword">return</span> <span class="string">"z"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> iter = iterator();</div><div class="line"></div><div class="line">iter.next(); <span class="comment">// &#123;value: "x", done: false&#125;</span></div><div class="line">iter.next(); <span class="comment">// &#123;value: "y", done: false&#125;</span></div><div class="line">iter.next(); <span class="comment">// &#123;value: "z", done: true&#125;</span></div><div class="line">iter.next(); <span class="comment">// &#123;value: undefined, done: true&#125;</span></div></pre></td></tr></table></figure>
+<p>调用 Generator 函数并不会如同普通函数一样返回函数的返回值，而是返回一个迭代器对象。<code>yield</code> 用于惰性执行 Generator 函数，当调用迭代器对象的 <code>next()</code> 时，就会执行函数内的代码知道遇到一个 <code>yield</code> 声明，并且其后面的值作为 <code>value</code> 的值返回，如果程序执行完毕，那么 <code>done</code> 是 <code>true</code>，反之是 <code>false</code></p>
+<h2 id="next"><a href="#next" class="headerlink" title="next()"></a>next()</h2><p><code>next()</code> 是 Generator 函数的步骤执行的调用者，同时可以利用它来为函数内部注入值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">2</span> * (<span class="keyword">yield</span> (x + <span class="number">1</span>));</div><div class="line">  <span class="keyword">var</span> z = <span class="keyword">yield</span> (y / <span class="number">3</span>);</div><div class="line">  <span class="keyword">return</span> (x + y + z);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = foo(<span class="number">5</span>);</div><div class="line">a.next() <span class="comment">// Object&#123;value:6, done:false&#125;</span></div><div class="line">a.next() <span class="comment">// Object&#123;value:NaN, done:false&#125;</span></div><div class="line">a.next() <span class="comment">// Object&#123;value:NaN, done:true&#125;</span></div><div class="line"></div><div class="line"><span class="comment">// 一开始 x 为 5，所以 yield 惰性求值返回为 6</span></div><div class="line"><span class="keyword">var</span> b = foo(<span class="number">5</span>);</div><div class="line">b.next() <span class="comment">// &#123; value:6, done:false &#125;</span></div><div class="line"><span class="comment">// 这里相当于声明上一个 yield 的返回值是 12，所以 y 等于 2*12</span></div><div class="line">b.next(<span class="number">12</span>) <span class="comment">// &#123; value:8, done:false &#125;</span></div><div class="line"><span class="comment">// 这里相当于声明上一个 yield 的返回值是 13，所以 z 等于 13</span></div><div class="line">b.next(<span class="number">13</span>) <span class="comment">// &#123; value:42, done:true &#125;</span></div></pre></td></tr></table></figure>
+<h2 id="使用-for…of"><a href="#使用-for…of" class="headerlink" title="使用 for…of"></a>使用 for…of</h2><p>由于 Generator 函数调用返回一个迭代器对象 ，那么他就可以被所有支持迭代器遍历的特性使用，例如 for…of</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">4</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">5</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">6</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> foo()) &#123;</div><div class="line">  <span class="built_in">console</span>.log(v);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 1 2 3 4 5</span></div><div class="line"><span class="comment">// 由于当迭代器返回的 done 是 true 就停止遍历，所以 6 并不会被输出</span></div></pre></td></tr></table></figure>
+<p>除了 for…of，<code>...</code>  运算符和 <code>Array.from()</code> 同样支持 Generator</p>
+<h2 id="Generator-prototype-throw"><a href="#Generator-prototype-throw" class="headerlink" title="Generator.prototype.throw()"></a>Generator.prototype.throw()</h2><blockquote>
+<p>Generator函数返回的遍历器对象，都有一个throw方法，可以在函数体外抛出错误，然后在Generator函数体内捕获</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'内部捕获'</span>, e);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> i = g();</div><div class="line">i.next();</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  <span class="comment">// 内部捕获后不再捕获此后的错误</span></div><div class="line">  i.throw(<span class="string">'a'</span>);</div><div class="line">  <span class="comment">// 内部不捕获，传递到外部</span></div><div class="line">  i.throw(<span class="string">'b'</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'外部捕获'</span>, e);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 内部捕获 a</span></div><div class="line"><span class="comment">// 外部捕获 b</span></div></pre></td></tr></table></figure>
+<h2 id="Generator-prototype-return"><a href="#Generator-prototype-return" class="headerlink" title="Generator.prototype.return()"></a>Generator.prototype.return()</h2><blockquote>
+<p>Generator函数返回的遍历器对象，还有一个return方法，可以返回给定的值，并且终结遍历Generator函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = gen();</div><div class="line"></div><div class="line">g.next()        <span class="comment">// &#123; value: 1, done: false &#125;</span></div><div class="line">g.return(<span class="string">'foo'</span>) <span class="comment">// &#123; value: "foo", done: true &#125;</span></div><div class="line">g.next()        <span class="comment">// &#123; value: undefined, done: true &#125;</span></div></pre></td></tr></table></figure>
+<h2 id="yield"><a href="#yield" class="headerlink" title="yield*"></a>yield*</h2><p><code>yield*</code> 用于在 Generator 函数内调用另一个 Generator 函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'x'</span>;</div><div class="line">  <span class="keyword">yield</span>* foo();</div><div class="line">  <span class="keyword">yield</span> <span class="string">'y'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 等同于</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'x'</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'a'</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'b'</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'y'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 等同于</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'x'</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> foo()) &#123;</div><div class="line">    <span class="keyword">yield</span> v;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'y'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> bar())&#123;</div><div class="line">  <span class="built_in">console</span>.log(v);</div><div class="line">&#125;</div><div class="line"><span class="comment">// "x"</span></div><div class="line"><span class="comment">// "a"</span></div><div class="line"><span class="comment">// "b"</span></div><div class="line"><span class="comment">// "y"</span></div><div class="line"></div><div class="line"><span class="comment">// 另外一个例子</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">inner</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'hello!'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">outer1</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'open'</span>;</div><div class="line">  <span class="keyword">yield</span> inner();</div><div class="line">  <span class="keyword">yield</span> <span class="string">'close'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> gen = outer1()</div><div class="line">gen.next().value <span class="comment">// "open"</span></div><div class="line">gen.next().value <span class="comment">// 返回一个遍历器对象</span></div><div class="line">gen.next().value <span class="comment">// "close"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">outer2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">'open'</span></div><div class="line">  <span class="keyword">yield</span>* inner()</div><div class="line">  <span class="keyword">yield</span> <span class="string">'close'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> gen = outer2()</div><div class="line">gen.next().value <span class="comment">// "open"</span></div><div class="line">gen.next().value <span class="comment">// "hello!"</span></div><div class="line">gen.next().value <span class="comment">// "close"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Generator 函数的丰富超乎想象，这里写的笔记只是其冰山一角的特性，更多还是需要阅读相关书籍和资料<br>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/24/ES6-学习笔记（七）/" class="archive-article-date">
+  	<time datetime="2016-04-24T07:19:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/ECMAScript-6/">ECMAScript 6</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/05/04/Webpack-Babel-使用-ES6-新特性/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          webpack + Babel 使用 ES6 新特性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/23/ES6-学习笔记（六）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 学习笔记（六）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

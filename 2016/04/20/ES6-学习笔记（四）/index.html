@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>ES6 学习笔记（四） | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="二进制数组
+二进制数组不是数组，只是类数组，二进制数组用于直接操作内存
+
+ArrayBuffer(long)
+ArrayBuffer 用于创建一段连续的内存地址，long 表示内存的长度（字节），但是不可以直接读写，只能通过 视图 读写，例如 TypeArray，ArrayBuffer 每个内存地址默认值都为 0。不同 TypeArray 操作同一组内存会互相影响
+
+123456789101112">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 学习笔记（四）">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/04/20/ES6-学习笔记（四）/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="二进制数组
+二进制数组不是数组，只是类数组，二进制数组用于直接操作内存
+
+ArrayBuffer(long)
+ArrayBuffer 用于创建一段连续的内存地址，long 表示内存的长度（字节），但是不可以直接读写，只能通过 视图 读写，例如 TypeArray，ArrayBuffer 每个内存地址默认值都为 0。不同 TypeArray 操作同一组内存会互相影响
+
+123456789101112">
+<meta property="og:updated_time" content="2016-04-20T07:09:11.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 学习笔记（四）">
+<meta name="twitter:description" content="二进制数组
+二进制数组不是数组，只是类数组，二进制数组用于直接操作内存
+
+ArrayBuffer(long)
+ArrayBuffer 用于创建一段连续的内存地址，long 表示内存的长度（字节），但是不可以直接读写，只能通过 视图 读写，例如 TypeArray，ArrayBuffer 每个内存地址默认值都为 0。不同 TypeArray 操作同一组内存会互相影响
+
+123456789101112">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ES6-学习笔记（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6 学习笔记（四）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="二进制数组"><a href="#二进制数组" class="headerlink" title="二进制数组"></a>二进制数组</h1><blockquote>
+<p>二进制数组不是数组，只是类数组，二进制数组用于直接操作内存</p>
+</blockquote>
+<h2 id="ArrayBuffer-long"><a href="#ArrayBuffer-long" class="headerlink" title="ArrayBuffer(long)"></a>ArrayBuffer(long)</h2><blockquote>
+<p><code>ArrayBuffer</code> 用于创建一段连续的内存地址，<code>long</code> 表示内存的长度（字节），但是不可以直接读写，只能通过 <code>视图</code> 读写，例如 <code>TypeArray</code>，<code>ArrayBuffer</code> 每个内存地址默认值都为 0。不同 <code>TypeArray</code> 操作同一组内存会互相影响</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">32</span>);</div><div class="line"><span class="keyword">var</span> dataView = <span class="keyword">new</span> <span class="built_in">DataView</span>(buf);</div><div class="line">dataView.getUint8(<span class="number">0</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line"><span class="comment">// 操作同一组内存</span></div><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">12</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> x1 = <span class="keyword">new</span> <span class="built_in">Int32Array</span>(buffer);</div><div class="line">x1[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> x2 = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buffer);</div><div class="line">x2[<span class="number">0</span>]  = <span class="number">2</span>;</div><div class="line"></div><div class="line">x1[<span class="number">0</span>] <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-byteLength"><a href="#Array-prototype-byteLength" class="headerlink" title="Array.prototype.byteLength"></a>Array.prototype.byteLength</h3><blockquote>
+<p>获取分配的内存字节长度</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">32</span>);</div><div class="line">buffer.byteLength</div><div class="line"><span class="comment">// 32</span></div><div class="line"></div><div class="line"><span class="keyword">if</span>(buffer.byteLength) &#123;</div><div class="line">    <span class="comment">// success</span></div><div class="line">&#125;<span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// error</span></div><div class="line">    <span class="comment">// 分配的内存空间太大，可能存在没有那么大的内存空间而失败的情况</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Array-prototype-slice-start-end"><a href="#Array-prototype-slice-start-end" class="headerlink" title="Array.prototype.slice(start, end)"></a>Array.prototype.slice(start, end)</h3><blockquote>
+<p>生成一段新的内存，拷贝 start 到 end-1 位置的内容到新的内存</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">8</span>);</div><div class="line"><span class="keyword">var</span> newBuffer = buffer.slice(<span class="number">0</span>, <span class="number">3</span>);</div></pre></td></tr></table></figure>
+<h3 id="ArrayBuffer-isView-buffer"><a href="#ArrayBuffer-isView-buffer" class="headerlink" title="ArrayBuffer.isView(buffer)"></a>ArrayBuffer.isView(buffer)</h3><blockquote>
+<p>判断 buffer 是否是视图的实例化对象，该方法为 ArrayBuffer 的静态方法，直接调用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">8</span>);</div><div class="line"><span class="built_in">ArrayBuffer</span>.isView(buffer) <span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> <span class="built_in">Int32Array</span>(buffer);</div><div class="line"><span class="built_in">ArrayBuffer</span>.isView(v) <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h1 id="TypeArray"><a href="#TypeArray" class="headerlink" title="TypeArray"></a>TypeArray</h1><blockquote>
+<p><code>TypeArray</code> 不是一个构造函数，而是一组构造函数，它包含 9 个不同的视图构造函数，都是类数组，都能用下标访问，都有 length 属性</p>
+</blockquote>
+<ul>
+<li>Int8Array：8位有符号整数，长度1个字节。</li>
+<li>Uint8Array：8位无符号整数，长度1个字节。</li>
+<li>Uint8ClampedArray：8位无符号整数，长度1个字节，溢出处理不同。</li>
+<li>Int16Array：16位有符号整数，长度2个字节。</li>
+<li>Uint16Array：16位无符号整数，长度2个字节。</li>
+<li>Int32Array：32位有符号整数，长度4个字节。</li>
+<li>Uint32Array：32位无符号整数，长度4个字节。</li>
+<li>Float32Array：32位浮点数，长度4个字节。</li>
+<li>Float64Array：64位浮点数，长度8个字节。</li>
+</ul>
+<h2 id="TypedArray-buffer-byteOffset-length"><a href="#TypedArray-buffer-byteOffset-length" class="headerlink" title="TypedArray(buffer [, byteOffset [, length]])"></a>TypedArray(buffer [, byteOffset [, length]])</h2><blockquote>
+<p>TypeArray 的构造函数可以传入三个参数</p>
+</blockquote>
+<ul>
+<li>第一个参数，ArrayBuffer 的实例对象，必选</li>
+<li>第二个参数，从 ArrayBuffer 的第 byteOffset 个字节开始读取，默认从 0 开始，注意，如果是 16 位的视图，需要是 2 的倍数，如果是 32 位 的视图，需要是 4 的倍数，以此类推，因为例如是 32 位的视图，那么该视图中 4 个字节为一个下标，为了完整读取内存，必须是每一个下标字节大小的整数倍，可选</li>
+<li>第三个参数，读取 ArrayBuffer 的 length 个字节，默认读取到末尾，可选</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建一个8字节的ArrayBuffer</span></div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">8</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建一个指向b的Int32视图，开始于字节0，直到缓冲区的末尾</span></div><div class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> <span class="built_in">Int32Array</span>(b);</div><div class="line"></div><div class="line"><span class="comment">// 创建一个指向b的Uint8视图，开始于字节2，直到缓冲区的末尾</span></div><div class="line"><span class="keyword">var</span> v2 = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(b, <span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建一个指向b的Int16视图，开始于字节2，长度为2</span></div><div class="line"><span class="keyword">var</span> v3 = <span class="keyword">new</span> <span class="built_in">Int16Array</span>(b, <span class="number">2</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
+<h2 id="TypeArray-length"><a href="#TypeArray-length" class="headerlink" title="TypeArray(length)"></a>TypeArray(length)</h2><blockquote>
+<p>TypeArray 的构造函数还能直接通过分配内存创建视图</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f64a = <span class="keyword">new</span> <span class="built_in">Float64Array</span>(<span class="number">8</span>);</div><div class="line">f64a[<span class="number">0</span>] = <span class="number">10</span>;</div><div class="line">f64a[<span class="number">1</span>] = <span class="number">20</span>;</div><div class="line">f64a[<span class="number">2</span>] = f64a[<span class="number">0</span>] + f64a[<span class="number">1</span>];</div></pre></td></tr></table></figure>
+<h2 id="TypeArray-typedArray"><a href="#TypeArray-typedArray" class="headerlink" title="TypeArray(typedArray)"></a>TypeArray(typedArray)</h2><blockquote>
+<p>TypeArray 的构造函数能接受另外一个 TypeArray 的实例作为构造参数，新的实例是开辟了新的内存地址同时复制了相同的值，不会互相影响</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> <span class="built_in">Int8Array</span>([<span class="number">1</span>, <span class="number">1</span>]);</div><div class="line"><span class="keyword">var</span> y = <span class="keyword">new</span> <span class="built_in">Int8Array</span>(x);</div><div class="line">x[<span class="number">0</span>] <span class="comment">// 1</span></div><div class="line">y[<span class="number">0</span>] <span class="comment">// 1</span></div><div class="line"></div><div class="line">x[<span class="number">0</span>] = <span class="number">2</span>;</div><div class="line">y[<span class="number">0</span>] <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<h2 id="TypedArray-arrayLikeObject"><a href="#TypedArray-arrayLikeObject" class="headerlink" title="TypedArray(arrayLikeObject)"></a>TypedArray(arrayLikeObject)</h2><blockquote>
+<p>TypeArray 的构造函数能接受一个类数组的参数，会开辟一段新的内存实例化视图</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> <span class="built_in">Int8Array</span>([<span class="number">1</span>, <span class="number">1</span>]);</div><div class="line"><span class="keyword">var</span> y = <span class="keyword">new</span> <span class="built_in">Int8Array</span>(x.buffer);</div><div class="line">x[<span class="number">0</span>] <span class="comment">// 1</span></div><div class="line">y[<span class="number">0</span>] <span class="comment">// 1</span></div><div class="line"></div><div class="line">x[<span class="number">0</span>] = <span class="number">2</span>;</div><div class="line">y[<span class="number">0</span>] <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<h2 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h2><blockquote>
+<p>普通数组的方法对 TypeArray 也完全适用</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 缺少 contact 方法</span></div><div class="line">TypedArray.prototype.copyWithin(target, start[, end = <span class="keyword">this</span>.length])</div><div class="line">TypedArray.prototype.entries()</div><div class="line">TypedArray.prototype.every(callbackfn, thisArg?)</div><div class="line">TypedArray.prototype.fill(value, start=<span class="number">0</span>, end=<span class="keyword">this</span>.length)</div><div class="line">TypedArray.prototype.filter(callbackfn, thisArg?)</div><div class="line">TypedArray.prototype.find(predicate, thisArg?)</div><div class="line">TypedArray.prototype.findIndex(predicate, thisArg?)</div><div class="line">TypedArray.prototype.forEach(callbackfn, thisArg?)</div><div class="line">TypedArray.prototype.indexOf(searchElement, fromIndex=<span class="number">0</span>)</div><div class="line">TypedArray.prototype.join(separator)</div><div class="line">TypedArray.prototype.keys()</div><div class="line">TypedArray.prototype.lastIndexOf(searchElement, fromIndex?)</div><div class="line">TypedArray.prototype.map(callbackfn, thisArg?)</div><div class="line">TypedArray.prototype.reduce(callbackfn, initialValue?)</div><div class="line">TypedArray.prototype.reduceRight(callbackfn, initialValue?)</div><div class="line">TypedArray.prototype.reverse()</div><div class="line">TypedArray.prototype.slice(start=<span class="number">0</span>, end=<span class="keyword">this</span>.length)</div><div class="line">TypedArray.prototype.some(callbackfn, thisArg?)</div><div class="line">TypedArray.prototype.sort(comparefn)</div><div class="line">TypedArray.prototype.toLocaleString(reserved1?, reserved2?)</div><div class="line">TypedArray.prototype.toString()</div><div class="line">TypedArray.prototype.values()</div></pre></td></tr></table></figure>
+<h2 id="小端字节序"><a href="#小端字节序" class="headerlink" title="小端字节序"></a>小端字节序</h2><blockquote>
+<p>如果使用一个 32 位的视图读取并修改一段内存后，再使用一个 16 位的视图读取该段内存缓冲时，其长度应该是 32 位视图的两倍，这时候 16 位视图中的数据存放就会出现一个现象，跟字节排放的规则相关，看示例</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">16</span>);</div><div class="line"><span class="keyword">var</span> int32View = <span class="keyword">new</span> <span class="built_in">Int32Array</span>(buffer);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; int32View.length; i++) &#123;</div><div class="line">  int32View[i] = i * <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(int32View); <span class="comment">// [0, 2, 4, 6]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> int16View = <span class="keyword">new</span> <span class="built_in">Int16Array</span>(buffer);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(int16View); <span class="comment">// [0, 0, 2, 0, 4, 0, 6, 0]</span></div></pre></td></tr></table></figure>
+<p>由于 32 位视图是 4 个字节存放一个数据，16 位视图是 2 个字节存放一个数据，那么 16 位视图明显要使用 2 个数据位来存放一个 32 位视图的数据，而之所以 16 位视图都是两个数据位的第一个数据位显示为正确数据，第二个显示为 0，这就涉及现代计算机都采用了小端字节序的规则在内存中存放数据的原因，而 TypeArray 也是采用该种策略。小端字节序简略地说就是从后往前一个字节一个字节地存放数据到内存的每个地址中，更详细的解释可以参考：<a href="http://blog.csdn.net/ce123/article/details/6971544" target="_blank" rel="external">http://blog.csdn.net/ce123/article/details/6971544</a> 小端字节序也导致了 TypeArray 无法正确读取大端字节序的内容</p>
+<h2 id="TypeArray-prototype-BYTES-PER-ELEMENT"><a href="#TypeArray-prototype-BYTES-PER-ELEMENT" class="headerlink" title="TypeArray.prototype.BYTES_PER_ELEMENT"></a>TypeArray.prototype.BYTES_PER_ELEMENT</h2><blockquote>
+<p>用于输出每一个 TypeArray 类型视图的每一位所占的字节数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Int8Array</span>.BYTES_PER_ELEMENT <span class="comment">// 1</span></div><div class="line"><span class="built_in">Uint8Array</span>.BYTES_PER_ELEMENT <span class="comment">// 1</span></div><div class="line"><span class="built_in">Int16Array</span>.BYTES_PER_ELEMENT <span class="comment">// 2</span></div><div class="line"><span class="built_in">Uint16Array</span>.BYTES_PER_ELEMENT <span class="comment">// 2</span></div><div class="line"><span class="built_in">Int32Array</span>.BYTES_PER_ELEMENT <span class="comment">// 4</span></div><div class="line"><span class="built_in">Uint32Array</span>.BYTES_PER_ELEMENT <span class="comment">// 4</span></div><div class="line"><span class="built_in">Float32Array</span>.BYTES_PER_ELEMENT <span class="comment">// 4</span></div><div class="line"><span class="built_in">Float64Array</span>.BYTES_PER_ELEMENT <span class="comment">// 8</span></div></pre></td></tr></table></figure>
+<h2 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h2><blockquote>
+<p>TypeArray 对于溢出的处理就是直接抛弃溢出的位</p>
+</blockquote>
+<ul>
+<li>正向溢出（overflow）：当输入值大于当前数据类型的最大值，结果等于当前数据类型的最小值加上余值，再减去1</li>
+<li>负向溢出（underflow）：当输入值小于当前数据类型的最小值，结果等于当前数据类型的最大值减去余值，再加上1</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> int8 = <span class="keyword">new</span> <span class="built_in">Int8Array</span>(<span class="number">1</span>);</div><div class="line"></div><div class="line">int8[<span class="number">0</span>] = <span class="number">128</span>;</div><div class="line">int8[<span class="number">0</span>] <span class="comment">// -128</span></div><div class="line"></div><div class="line">int8[<span class="number">0</span>] = <span class="number">-129</span>;</div><div class="line">int8[<span class="number">0</span>] <span class="comment">// 127</span></div></pre></td></tr></table></figure>
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><ul>
+<li>TypedArray.prototype.buffer，返回视图整段内存引用</li>
+<li>TypedArray.prototype.byteLength，返回视图的内存字节长度</li>
+<li>TypedArray.prototype.byteOffset，返回视图从内存第几个字节开始引用</li>
+<li>TypedArray.prototype.length，返回视图的成员长度，与其每个成员占用字节数相关</li>
+<li>TypedArray.prototype.set(typeArray[, startIndex])，将一段内存完全复制到另一端内存中</li>
+<li>TypedArray.prototype.subarray(startIndex, endIndex)，从一个视图上截取一部分创建为一个新的视图</li>
+<li>TypedArray.prototype.slice(index)，从一个视图上截取一段创建一个新的视图，index 可以为负数，表示倒数</li>
+<li>TypedArray.of()，将参数创建为一个新的视图</li>
+<li>TypedArray.from(arrayLike[, callback])，将 arrayLike 转化为一个相应的可遍历的视图类型，callback 的功能类似于数组的 map 功能</li>
+</ul>
+<h1 id="DataView"><a href="#DataView" class="headerlink" title="DataView"></a>DataView</h1><blockquote>
+<p>DataView 可以自行设置大端字节序或者小端字节序，同时有 8 个获取数据的方法和 8 个设置数据的方法</p>
+</blockquote>
+<ul>
+<li>getInt8：读取1个字节，返回一个8位整数。</li>
+<li>getUint8：读取1个字节，返回一个无符号的8位整数。</li>
+<li>getInt16：读取2个字节，返回一个16位整数。</li>
+<li>getUint16：读取2个字节，返回一个无符号的16位整数。</li>
+<li>getInt32：读取4个字节，返回一个32位整数。</li>
+<li>getUint32：读取4个字节，返回一个无符号的32位整数。</li>
+<li>getFloat32：读取4个字节，返回一个32位浮点数。</li>
+<li>getFloat64：读取8个字节，返回一个64位浮点数。</li>
+</ul>
+<p>这 8 个方法都传入一个正整数表示从第几个字节开始读取，第二个参数为一个布尔值，true 代表使用小端字节序，false 代表使用大端字节序，默认为大端字节序</p>
+<ul>
+<li>setInt8：写入1个字节的8位整数。</li>
+<li>setUint8：写入1个字节的8位无符号整数。</li>
+<li>setInt16：写入2个字节的16位整数。</li>
+<li>setUint16：写入2个字节的16位无符号整数。</li>
+<li>setInt32：写入4个字节的32位整数。</li>
+<li>setUint32：写入4个字节的32位无符号整数。</li>
+<li>setFloat32：写入4个字节的32位浮点数。</li>
+<li>setFloat64：写入8个字节的64位浮点数。</li>
+</ul>
+<p>这 8 个方法都可以传入三个参数，第一个表示从第几个字节写入数据，第二个表示写入数据的内容，第三个指定大小端字节序</p>
+<h1 id="其他一些新特性"><a href="#其他一些新特性" class="headerlink" title="其他一些新特性"></a>其他一些新特性</h1><h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><blockquote>
+<p>AJAX 可以设置 <code>responseType</code> 为 <code>arraybuffer</code> 明确指定响应数据位二进制数据，如果不明确，可以设置为 <code>blod</code></p>
+</blockquote>
+<h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><blockquote>
+<p>Canvas 使用 <code>Uint8ClampedArray</code> 读取二进制像素数据，该 TypeArray 可以自动过滤高位溢出，取值范围始终为 0-255</p>
+</blockquote>
+<h2 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h2><blockquote>
+<p>WebSocket 可以发送二进制数据</p>
+</blockquote>
+<h2 id="Fetch-API"><a href="#Fetch-API" class="headerlink" title="Fetch API"></a>Fetch API</h2><blockquote>
+<p>Fetch API取回的数据，就是 <code>ArrayBuffer</code> 对象</p>
+</blockquote>
+<h2 id="File-API"><a href="#File-API" class="headerlink" title="File API"></a>File API</h2><blockquote>
+<p>File API 可以将文件数据作为二进制的 <code>ArrayBuffer</code> 类型读取处理</p>
+<p>以上实例代码大部分来自阮一峰老师的 《ECMAScript 6 入门》 一书<br>书籍在线阅读地址: <a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="external">http://es6.ruanyifeng.com/#README</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/20/ES6-学习笔记（四）/" class="archive-article-date">
+  	<time datetime="2016-04-20T01:26:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-20</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/ECMAScript-6/">ECMAScript 6</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/21/ES6-学习笔记（五）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ES6 学习笔记（五）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/18/ES6-学习笔记（三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 学习笔记（三）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

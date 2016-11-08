@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>双飞翼布局和圣杯布局 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="双飞翼布局源自淘宝UED，圣杯布局来自2006年 Matthew Levine 的一篇文章，目的都是为了实现三列布局（中间列自适应宽度，两边分别固定宽度），并且中间列优先加载。两种布局的原理可以应用到两列布局中。
+开始之前说一个翻译问题，圣杯布局作者提到发明圣杯布局前的其中一个需求：allow any column to be the tallest这里应该翻译为：允许任意列高度是最高的，而不是“">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双飞翼布局和圣杯布局">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/03/18/双飞翼布局和圣杯布局/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="双飞翼布局源自淘宝UED，圣杯布局来自2006年 Matthew Levine 的一篇文章，目的都是为了实现三列布局（中间列自适应宽度，两边分别固定宽度），并且中间列优先加载。两种布局的原理可以应用到两列布局中。
+开始之前说一个翻译问题，圣杯布局作者提到发明圣杯布局前的其中一个需求：allow any column to be the tallest这里应该翻译为：允许任意列高度是最高的，而不是“">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/githubclipboard.png">
+<meta property="og:updated_time" content="2016-03-18T07:44:05.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="双飞翼布局和圣杯布局">
+<meta name="twitter:description" content="双飞翼布局源自淘宝UED，圣杯布局来自2006年 Matthew Levine 的一篇文章，目的都是为了实现三列布局（中间列自适应宽度，两边分别固定宽度），并且中间列优先加载。两种布局的原理可以应用到两列布局中。
+开始之前说一个翻译问题，圣杯布局作者提到发明圣杯布局前的其中一个需求：allow any column to be the tallest这里应该翻译为：允许任意列高度是最高的，而不是“">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/githubclipboard.png">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-双飞翼布局和圣杯布局" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      双飞翼布局和圣杯布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>双飞翼布局源自淘宝UED，圣杯布局来自2006年 Matthew Levine 的一篇文章，目的都是为了实现三列布局（中间列自适应宽度，两边分别固定宽度），并且中间列优先加载。两种布局的原理可以应用到两列布局中。</p>
+<p>开始之前说一个翻译问题，圣杯布局作者提到发明圣杯布局前的其中一个需求：<code>allow any column to be the tallest</code><br>这里应该翻译为：允许任意列高度是最高的，而不是“允许任意列（在 HTML 中位置）在最高”。</p>
+<h3 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h3><ul>
+<li>都让三列布局左浮动</li>
+<li>实现三列布局</li>
+<li>中间列优先加载</li>
+<li>左右两列顺序不影响布局</li>
+</ul>
+<h3 id="异同点："><a href="#异同点：" class="headerlink" title="异同点："></a>异同点：</h3><ul>
+<li>圣杯布局利用布局父元素 container 左右 padding 出边距给予左右两列的空间放置，左右两列则通过 position 和margin 负边距插入到自身的位置。</li>
+<li>双飞翼布局直接在 container 加入一个 div 包裹住中间列，同时该 div 浮动，而被包裹住的中间列则 margin 左右为左右两列布局留出空白，这样做省了多个 CSS 属性（position，左右两列的 margin 负边距，container 的 padding 属性，左右两列的 left 或 right 属性），但是双飞翼则多了一个 div 标签。</li>
+<li>圣杯布局在 IE 6/7 下需要加入 hack 解决一个布局问题，双飞翼布局则不用。</li>
+</ul>
+<p>在我看来我更喜欢双飞翼布局，用一个 div 标签换来减少多个属性和一个 hack 属性（在 IE 6/7 下圣杯布局需要加入 hack，但是如果 container 触发了 BFC 则该 hack 不用加入，例如 container 使用了 clearfix 或 overflow: hidden）。圣杯布局下需要加入的 hack 是左边的列的 left 属性必须是右边列的宽度的值，在正常浏览器布局下 left 属性的值则是自身的宽度的负值，这里提一个现象，在实现圣杯布局的时候我使用了 clearfix 闭合浮动而不是圣杯布局来源文章中的使用 footer 来清除浮动，导致在 IE 6/7 下会出现的异常布局消失了，我估计是触发了 BFC 的原因（我把 clearfix 去掉后使用了 overflow: hidden 出现同样的效果）。</p>
+<h2 id="1-双飞翼布局"><a href="#1-双飞翼布局" class="headerlink" title="1.双飞翼布局"></a>1.双飞翼布局</h2><p>演示地址：<a href="http://www.libinhong.com/demo/Flying" target="_blank" rel="external">http://www.libinhong.com/demo/Flying</a></p>
+<h3 id="CSS："><a href="#CSS：" class="headerlink" title="CSS："></a>CSS：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">body &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    text-align: center;</div><div class="line">    font-family: Microsoft YaHei;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.fl &#123;</div><div class="line">    float: left;</div><div class="line">    height: 300px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container-center &#123;</div><div class="line">    width: 100%;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container-center .center &#123;</div><div class="line">    margin: 0 200px;</div><div class="line">    height: 100%;</div><div class="line">    background-color: rgb(143, 221, 172);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container .left &#123;</div><div class="line">    width: 200px;</div><div class="line">    margin-left: -100%;</div><div class="line">    background: rgb(205, 228, 128);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container .right &#123;</div><div class="line">    width: 200px;</div><div class="line">    margin-left: -200px;</div><div class="line">    background-color: rgb(94, 152, 185);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix:before, .clearfix:after &#123;</div><div class="line">    content: "";</div><div class="line">    display: table;</div><div class="line">&#125;</div><div class="line">.clearfix:after &#123;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">    *zoom: 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HTML："><a href="#HTML：" class="headerlink" title="HTML："></a>HTML：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container clearfix"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container-center fl"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span>中间自适应<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left fl"</span>&gt;</span>左边固定200px<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right fl"</span>&gt;</span>右边固定200px<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-圣杯布局"><a href="#2-圣杯布局" class="headerlink" title="2.圣杯布局"></a>2.圣杯布局</h2><p>演示地址：<a href="http://www.libinhong.com/demo/HolyGrails" target="_blank" rel="external">http://www.libinhong.com/demo/HolyGrails</a></p>
+<h3 id="CSS：-1"><a href="#CSS：-1" class="headerlink" title="CSS："></a>CSS：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">body &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    text-align: center;</div><div class="line">    font-family: Microsoft YaHei;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.fl &#123;</div><div class="line">    float: left;</div><div class="line">    height: 300px;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container &#123;</div><div class="line">    padding: 0 200px 0 150px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container .center &#123;</div><div class="line">    width: 100%;</div><div class="line">    background-color: rgb(166, 212, 121);</div><div class="line">&#125;</div><div class="line">.container .left &#123;</div><div class="line">    width: 150px;</div><div class="line">    margin-left: -100%;</div><div class="line">    left: -150px;</div><div class="line">    /**left: 200px;*/  /** for IE6/7*/*/</div><div class="line">    background-color: rgb(136, 204, 194);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.container .right &#123;</div><div class="line">    width: 200px;</div><div class="line">    margin-right: -200px;</div><div class="line">    background-color: rgb(228, 215, 92);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix:before, .clearfix:after &#123;</div><div class="line">    content: "";</div><div class="line">    display: table;</div><div class="line">&#125;</div><div class="line">.clearfix:after &#123;</div><div class="line">    clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">    *zoom: 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HTML：-1"><a href="#HTML：-1" class="headerlink" title="HTML："></a>HTML：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container clearfix"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center fl"</span>&gt;</span>中间自适应<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left fl"</span>&gt;</span>左边固定150px<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right fl"</span>&gt;</span>右边固定200px<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="演示效果："><a href="#演示效果：" class="headerlink" title="演示效果："></a>演示效果：</h2><p><img src="http://7xoehm.com1.z0.glb.clouddn.com/githubclipboard.png" alt="演示效果"></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/18/双飞翼布局和圣杯布局/" class="archive-article-date">
+  	<time datetime="2016-03-17T17:32:16.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/03/18/Ajax的多种跨域方式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ajax的多种跨域方式
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

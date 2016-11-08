@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>webpack + Babel 使用 ES6 新特性 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="webpack 是一个模块加载器兼打包工具，Babel 是一款转码编译器，可以很方便地将 ES6、ES7 等当前浏览器不兼容的 JavaScript 新特性转码为 ES5 等当前浏览器普遍兼容的代码。将两者结合起来可以很方便地在项目中一边使用 ES6 编写代码，一边自动生成 ES5 代码
+
+webpack &amp;amp; Babel安装 webpack1npm install webpack -g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack + Babel 使用 ES6 新特性">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/05/04/Webpack-Babel-使用-ES6-新特性/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="webpack 是一个模块加载器兼打包工具，Babel 是一款转码编译器，可以很方便地将 ES6、ES7 等当前浏览器不兼容的 JavaScript 新特性转码为 ES5 等当前浏览器普遍兼容的代码。将两者结合起来可以很方便地在项目中一边使用 ES6 编写代码，一边自动生成 ES5 代码
+
+webpack &amp;amp; Babel安装 webpack1npm install webpack -g">
+<meta property="og:updated_time" content="2016-05-06T09:03:41.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack + Babel 使用 ES6 新特性">
+<meta name="twitter:description" content="webpack 是一个模块加载器兼打包工具，Babel 是一款转码编译器，可以很方便地将 ES6、ES7 等当前浏览器不兼容的 JavaScript 新特性转码为 ES5 等当前浏览器普遍兼容的代码。将两者结合起来可以很方便地在项目中一边使用 ES6 编写代码，一边自动生成 ES5 代码
+
+webpack &amp;amp; Babel安装 webpack1npm install webpack -g">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Webpack-Babel-使用-ES6-新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack + Babel 使用 ES6 新特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>webpack 是一个模块加载器兼打包工具，Babel 是一款转码编译器，可以很方便地将 ES6、ES7 等当前浏览器不兼容的 JavaScript 新特性转码为 ES5 等当前浏览器普遍兼容的代码。将两者结合起来可以很方便地在项目中一边使用 ES6 编写代码，一边自动生成 ES5 代码</p>
+</blockquote>
+<h1 id="webpack-amp-Babel"><a href="#webpack-amp-Babel" class="headerlink" title="webpack &amp; Babel"></a>webpack &amp; Babel</h1><h2 id="安装-webpack"><a href="#安装-webpack" class="headerlink" title="安装 webpack"></a>安装 webpack</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack -g</div></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">npm install webpack --save-dev</div></pre></td></tr></table></figure></p>
+<h2 id="安装-Babel-相关组件"><a href="#安装-Babel-相关组件" class="headerlink" title="安装 Babel 相关组件"></a>安装 Babel 相关组件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装加载器 babel-loader 和 Babel 的 API 代码 babel-core</span></div><div class="line">npm install --save-dev babel-loader babel-core</div><div class="line"><span class="comment"># 安装 ES2015（ES6）的代码，用于转码</span></div><div class="line">npm install babel-preset-es2015 --save-dev</div><div class="line"><span class="comment"># 用于转换一些 ES6 的新 API，如 Generator，Promise 等</span></div><div class="line">npm install --save babel-polyfill</div></pre></td></tr></table></figure>
+<p>你可以在以下页面查看 JavaScript 的所需的转换代码模块进行按需安装<br><a href="http://babeljs.io/docs/plugins/preset-es2015/" target="_blank" rel="external">http://babeljs.io/docs/plugins/preset-es2015/</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>类似于 Grunt 和 Gulp，webpack 也有其特定地配置文件 <code>webpack.config.js</code></p>
+</blockquote>
+<p>如下配置使用babel：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">entry</span>: [</div><div class="line">        <span class="string">"babel-polyfill"</span>,</div><div class="line">        <span class="string">"./index.js"</span></div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="attr">output</span>: &#123;</div><div class="line">        <span class="attr">path</span>: __dirname + <span class="string">'/output/'</span>,</div><div class="line">        <span class="attr">publicPath</span>: <span class="string">"/output/"</span>,</div><div class="line">        <span class="attr">filename</span>: <span class="string">'index.js'</span></div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">module</span>: &#123;</div><div class="line">        <span class="attr">loaders</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">test</span>: <span class="regexp">/\.jsx?$/</span>,</div><div class="line">                <span class="attr">exclude</span>: <span class="regexp">/(node_modules|bower_components)/</span>,</div><div class="line">                <span class="attr">loader</span>: <span class="string">'babel-loader'</span>, <span class="comment">// 'babel-loader' is also a legal name to reference</span></div><div class="line">                query: &#123;</div><div class="line">                    <span class="attr">presets</span>: [<span class="string">'es2015'</span>]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>entry——用于设置 webpack 执行打包文件的入口，是一个数组</li>
+<li>output——用于指定生成文件的路径以及文件名等<ul>
+<li>path——指定生成文件路径</li>
+<li>publicPath——指定域名公共路径</li>
+<li>filename——指定生成文件的名称</li>
+</ul>
+</li>
+<li>module——主要用于配置 <code>loaders</code><ul>
+<li>loaders——用于配置对应后缀的文件使用何种加载器进行处理<ul>
+<li>test——使用正则表达式来指定某种特定的文件类型</li>
+<li>exclude——排除某个文件夹下的文件进行处理</li>
+<li>loader——指定相应的加载器，多个加载器使用 <code>!</code> 进行连接，每个 loader 都可以省略其后缀，如 <code>babel-loader</code> 可以写成 <code>babel</code></li>
+<li>query——指定加载器的配置信息，也可以使用 <code>?</code> 直接连接在 <code>loader</code> 后面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上只是涉及到我目前用到的一些配置信息的说明，更多的配置信息可以查阅官方文档，地址如下：<br><a href="https://webpack.github.io/docs/configuration.html" target="_blank" rel="external">https://webpack.github.io/docs/configuration.html</a></p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>在有 <code>webpack.config.js</code> 文件的目录下使用一下命令行：</p>
+<ul>
+<li><code>webpack</code>——直接启动 webpack，默认配置文件为 <code>webpack.config.js</code></li>
+<li><code>webpack -w</code>——监测启动 webpack，实时打包更新文件</li>
+<li><code>webpack -p</code>——对打包后的文件进行压缩</li>
+</ul>
+<p>更多的命令可以查看官方文档下的说明，地址如下：<br><a href="http://webpack.github.io/docs/cli.html" target="_blank" rel="external">http://webpack.github.io/docs/cli.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/05/04/Webpack-Babel-使用-ES6-新特性/" class="archive-article-date">
+  	<time datetime="2016-05-04T14:49:46.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/ECMAScript-6/">ECMAScript 6</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/06/05/angular-注意点-长期更新/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          angular 注意点（长期更新）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/24/ES6-学习笔记（七）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6 学习笔记（七）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

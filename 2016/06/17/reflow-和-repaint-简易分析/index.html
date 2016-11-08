@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://rlilyyy.github.io">
+  <title>reflow 和 repaint 简易分析 | 滨滨和泓泓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浏览器渲染当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 repaint 和 reflow 的操作？首先我们要先知道用于该操作的 渲染树 的由来。
+DOM Tree 的生成
+浏览器首先会解析 HTML 代码，生成一颗 DOM Tree，DOM（文档对象模型）
+
+简单地说，DOM Tree 的生成一般经历了四个阶段
+
+转换——浏览器将从供应方（例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reflow 和 repaint 简易分析">
+<meta property="og:url" content="http://rlilyyy.github.io/2016/06/17/reflow-和-repaint-简易分析/index.html">
+<meta property="og:site_name" content="滨滨和泓泓">
+<meta property="og:description" content="浏览器渲染当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 repaint 和 reflow 的操作？首先我们要先知道用于该操作的 渲染树 的由来。
+DOM Tree 的生成
+浏览器首先会解析 HTML 代码，生成一颗 DOM Tree，DOM（文档对象模型）
+
+简单地说，DOM Tree 的生成一般经历了四个阶段
+
+转换——浏览器将从供应方（例">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/1448333443367.jpg">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/cssom-tree.png">
+<meta property="og:image" content="http://7xoehm.com1.z0.glb.clouddn.com/render-tree-construction.png">
+<meta property="og:updated_time" content="2016-06-17T18:18:46.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="reflow 和 repaint 简易分析">
+<meta name="twitter:description" content="浏览器渲染当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 repaint 和 reflow 的操作？首先我们要先知道用于该操作的 渲染树 的由来。
+DOM Tree 的生成
+浏览器首先会解析 HTML 代码，生成一颗 DOM Tree，DOM（文档对象模型）
+
+简单地说，DOM Tree 的生成一般经历了四个阶段
+
+转换——浏览器将从供应方（例">
+<meta name="twitter:image" content="http://7xoehm.com1.z0.glb.clouddn.com/1448333443367.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="滨滨和泓泓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Rlilyyy</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+	        
+				<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+		        
+					<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Rlilyyy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://tva3.sinaimg.cn/crop.0.0.720.720.180/7049ef44jw8ewq4mjthssj20k00k0jt6.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Rlilyyy</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="http://www.libinhong.com:5000/#/">福利</a></li>
+		        
+					<li><a href="http://www.libinhong.com:90/">听听音乐</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Rlilyyy" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1883893572?is_all=1" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/532273622@qq.com" title="mail">mail</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/binbinhehonhon" title="twitter">twitter</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-reflow-和-repaint-简易分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      reflow 和 repaint 简易分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xoehm.com1.z0.glb.clouddn.com/1448333443367.jpg" alt="福利"></p>
+<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1><p>当我们打开一个网页的时候，浏览器是如何将 HTML 代码转换为用户可见的视图的？浏览器又在何时进行 <code>repaint</code> 和 <code>reflow</code> 的操作？首先我们要先知道用于该操作的 <code>渲染树</code> 的由来。</p>
+<h2 id="DOM-Tree-的生成"><a href="#DOM-Tree-的生成" class="headerlink" title="DOM Tree 的生成"></a>DOM Tree 的生成</h2><blockquote>
+<p>浏览器首先会解析 HTML 代码，生成一颗 <code>DOM Tree</code>，DOM（文档对象模型）</p>
+</blockquote>
+<p>简单地说，<code>DOM Tree</code> 的生成一般经历了四个阶段</p>
+<ul>
+<li>转换——浏览器将从供应方（例如本地磁盘或服务器）获取到的 HTML 字节，根据 HTML 的文件编码格式转换为字符</li>
+<li>符号化——浏览对转换好的字符串进行解析，将 <code>&lt;&gt;</code> 识别为对应的符号</li>
+<li>词法分析——将符号化的字符串转换为 <code>对象</code>，一般来说是节点（Node）</li>
+<li>DOM 构建——对象生成完毕后，将根据对象之间的关系（父子、兄弟）生成 <code>DOM Tree</code>，在 <code>DOM Tree</code> 中可以确认 Node 节点间的关系</li>
+</ul>
+<h2 id="CSSOM-的生成"><a href="#CSSOM-的生成" class="headerlink" title="CSSOM 的生成"></a>CSSOM 的生成</h2><blockquote>
+<p>在生成 <code>DOM Tree</code> 以后，将会生成 <code>CSSOM</code>（CSS 对象模型）的树形结构</p>
+</blockquote>
+<p>与构建 <code>DOM</code> 的过程类似是，<code>CSSOM</code> 的构建过程也是读取 CSS 字节，进行转换解析，并生成对应的 <code>CSSOM Tree</code>，不同的是，<code>CSSOM</code> 为 CSS 样式服务，而 <code>DOM</code> 为节点服务</p>
+<h3 id="CSSOM-能干什么？"><a href="#CSSOM-能干什么？" class="headerlink" title="CSSOM 能干什么？"></a>CSSOM 能干什么？</h3><p>CSSOM 通过复杂而具体的规则计算 CSS 样式，并将其映射到对应的需要样式的节点上，其遵循 <code>向下层叠</code> 的计算规则，例如下图</p>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/cssom-tree.png" alt="向下层叠"></p>
+<p>可以看到，body 处使用了 <code>font-size: 16px</code>，根据 <code>向下层叠</code> 的规则，body 的子节点如果没有其自己的 <code>font-size</code> 规则，那么 body 的 <code>font-size</code> 规则将会层叠给该节点</p>
+<h3 id="CSSOM-注意点"><a href="#CSSOM-注意点" class="headerlink" title="CSSOM 注意点"></a>CSSOM 注意点</h3><ul>
+<li><code>CSSOM</code> 的构建会阻塞页面的渲染——假设页面的呈现没有等待 <code>CSSOM</code> 的构建和计算，那么用户看到的将会是一堆没有样式的页面，等到 <code>CSSOM</code> 构建以后，页面又突然间变成有样式的页面，所以等待 <code>CSSOM</code> 的构建完成再进行渲染并呈现页面是必须的，不过如果 <code>CSSOM</code> 的构建的效率很低，那么将会出现常见的 <code>白屏</code> 现象。</li>
+<li>只要重新加载页面，那么 <code>CSSOM</code> 也会重新构建——不管 CSS 样式文件是否被浏览器进行了缓存，<code>CSSOM</code> 是永远不会被缓存的，它会伴随页面的每一次重新加载而加载。</li>
+<li>JS 的运行所阻塞会被 <code>CSSOM</code> 的构建阻塞——在构建 <code>DOM</code> 时，遇见 <code>&lt;script&gt;</code> 标签时，浏览器会发出 HTTP 请求资源，并将控制权移交给 JavaScript 引擎，等待 JS 执行完毕归还控制权继续 <code>DOM</code> 的构建，然而，如果此时 <code>CSSOM</code> 未下载并构建完成，JS 的执行时机将被延迟</li>
+</ul>
+<h2 id="Render-Tree——渲染树"><a href="#Render-Tree——渲染树" class="headerlink" title="Render Tree——渲染树"></a>Render Tree——渲染树</h2><blockquote>
+<p><code>渲染树</code> 由 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 融合构成，渲染树与 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 不同，渲染树只包含需要渲染的节点信息，例如 <code>display: none</code> 的节点是不存在于 <code>渲染树</code> 内的</p>
+</blockquote>
+<p><img src="http://7xoehm.com1.z0.glb.clouddn.com/render-tree-construction.png" alt="合成渲染树"></p>
+<p>可以发现，<code>span</code> 由于拥有 <code>display: none</code> 并未包含在 <code>渲染树</code> 里。</p>
+<h2 id="渲染树构建和渲染步骤"><a href="#渲染树构建和渲染步骤" class="headerlink" title="渲染树构建和渲染步骤"></a>渲染树构建和渲染步骤</h2><p>在这里我们简单说一下 <code>渲染树</code> 的构建和渲染步骤：</p>
+<ul>
+<li>从 <code>DOM Tree</code> 根节点开始遍历所有可见节点<ul>
+<li>不可见节点（如 <code>&lt;script&gt;</code> 和 <code>&lt;meta&gt;</code> 等）将不会包含在内，会被忽略</li>
+<li>通过 CSS 样式设置不可见的节点也不被包括，例如 <code>display: none</code>，不包括 <code>visibility: hidden</code> 等</li>
+</ul>
+</li>
+<li>从 <code>CSSOM Tree</code> 找到对应节点的规则，进行匹配</li>
+<li>发射可见节点，连带其内容及计算的样式</li>
+<li>根据生成的渲染树计算每个节点在屏幕中的绝对像素位置</li>
+<li>根据计算结果开始渲染，这一步通常称为 <code>绘制</code> 或者 <code>栅格化</code></li>
+</ul>
+<h1 id="重绘（repaint）和重排（reflow）"><a href="#重绘（repaint）和重排（reflow）" class="headerlink" title="重绘（repaint）和重排（reflow）"></a>重绘（repaint）和重排（reflow）</h1><p>上面我们知道了 <code>渲染树</code> 由 <code>DOM Tree</code> 和 <code>CSSOM Tree</code> 融合构建而成，但是页面并不是进行一次渲染就可以适应各种节点的几何属性改变等变化的，页面会在某些时机进行 <code>重绘（repaint）</code> 和 <code>重排（reflow）</code>。</p>
+<p>我们首先要知道其二者的区别：</p>
+<ul>
+<li>重绘（repaint）——页面部分样式属性改变了（背景颜色，字体颜色等），但是几何属性没有改变，页面需要重绘该部分的内容，这就叫 <code>重绘（repaint）</code></li>
+<li>重排（reflow）——页面节点的几何属性改变，这时候需要重新计算元素的几何属性，重新构建 <code>渲染树</code>，这就叫 <code>重排（reflow）</code></li>
+</ul>
+<p>同时，我们要记得一下这句话：</p>
+<blockquote>
+<p>重绘不一定导致重排，但是重排一定会导致重绘</p>
+</blockquote>
+<h2 id="repaint-和-reflow-所带来的性能问题"><a href="#repaint-和-reflow-所带来的性能问题" class="headerlink" title="repaint 和 reflow 所带来的性能问题"></a>repaint 和 reflow 所带来的性能问题</h2><p>通过前面的分析，可以预见的是，<code>repaint</code> 和 <code>reflow</code> 所需的性能消耗代价必然巨大，下面通过一个例子来说明：</p>
+<p>HTML:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-a"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-b"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-c"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"elem-d"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>JavaScript:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// example 1</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-a render time"</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>).innerHTML += idx;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-a render time"</span>);</div><div class="line">&#125;)();</div><div class="line"></div><div class="line"><span class="comment">// example 2</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-b render time"</span>);</div><div class="line">    <span class="keyword">let</span> elemB = <span class="built_in">document</span>.getElementById(<span class="string">"elem-b"</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</div><div class="line">        elemB.innerHTML += idx;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-b render time"</span>);</div><div class="line">&#125;)();</div><div class="line"></div><div class="line"><span class="comment">// example 3</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-c render time"</span>);</div><div class="line">    <span class="keyword">let</span> str = <span class="string">""</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</div><div class="line">        <span class="keyword">let</span> elemC = <span class="built_in">document</span>.getElementById(<span class="string">"elem-c"</span>);</div><div class="line">        str += idx;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"elem-c"</span>).innerHTML = str;</div><div class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-c render time"</span>);</div><div class="line">&#125;)();</div><div class="line"></div><div class="line"><span class="comment">// example 4</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.time(<span class="string">"elem-d render time"</span>);</div><div class="line">    <span class="keyword">let</span> elemD = <span class="built_in">document</span>.getElementById(<span class="string">"elem-d"</span>);</div><div class="line">    <span class="keyword">let</span> str = <span class="string">""</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> idx=<span class="number">0</span>;idx&lt;<span class="number">10000</span>;idx++) &#123;</div><div class="line">        str += idx;</div><div class="line">    &#125;</div><div class="line">    elemD.innerHTML += str;</div><div class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">"elem-d render time"</span>);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>上面进行了 4 次试验，每次试验的内容不一样，下面进行分析：</p>
+<ul>
+<li>example 1——进行 10000 次的 “DOM 索引 + 重绘 + 重排”</li>
+<li>example 2——进行 10000 次的 “重绘 + 重排”，进行 1 次的 “DOM 索引”</li>
+<li>example 3——进行 10000 次的 “DOM 索引”，进行 1 次的 “重绘 + 重排”</li>
+<li>example 4——进行 10000 次的 “字符串拼接”，进行一次的 “DOM 索引 + 重绘 + 重排”</li>
+</ul>
+<p>控制台打印结果如下：</p>
+<ul>
+<li>elem-a render time: 6020.826ms</li>
+<li>elem-b render time: 5797.140ms</li>
+<li>elem-c render time: 14.061ms</li>
+<li>elem-d render time: 3.905ms</li>
+</ul>
+<p>由结果分析可知：</p>
+<ul>
+<li><code>repaint</code> 和 <code>reflow</code> 消耗的性能是无比巨大的</li>
+<li>DOM 索引也消耗一定的性能，但是比起 <code>repaint</code> 和 <code>reflow</code> 简直是小巫见大巫</li>
+<li>优化的重点在于减少 DOM 重复索引和循环引起的 <code>repaint</code> 和 <code>reflow</code>，尽量压缩为一次</li>
+</ul>
+<h2 id="如何减少-repaint-和-reflow-的发生？"><a href="#如何减少-repaint-和-reflow-的发生？" class="headerlink" title="如何减少 repaint 和 reflow 的发生？"></a>如何减少 <code>repaint</code> 和 <code>reflow</code> 的发生？</h2><p>要知道如何减少 <code>repaint</code> 和 <code>reflow</code> 的发生，我们就得先知道引起它们的原因， <code>repaint</code> 无疑就是改变 DOM 的背景颜色等导致，重点在于 <code>reflow</code> 的原因：</p>
+<ul>
+<li>页面初始化必须进行一次的 <code>reflow</code></li>
+<li>缩放窗口</li>
+<li>改变字体</li>
+<li>添加或删除样式</li>
+<li>添加或删除元素</li>
+<li>内容改变，例如用户在输入框中输入文本</li>
+<li>激活了伪类样式，例如：hover</li>
+<li>脚本操作 DOM 并改变了其样式</li>
+<li>计算 offsetWidth 和 offsetHeight</li>
+<li>设置样式属性（width，height等）</li>
+</ul>
+<p>以上种种都有可能引起页面的 <code>reflow</code>，而且不止这些，但是我们无法完全避免 <code>reflow</code>，所以我们必须想方设法去减少 <code>reflow</code>，例如：</p>
+<ul>
+<li>减少单一操作样式属性，使用 class 一次性替换</li>
+<li>对有动画的元素，使其 <code>position</code> 为 <code>fixed</code> 或 <code>absolute</code>，这样会减少元素间的影响</li>
+<li>使用平滑的过渡动画，例如尽量少用 1 个像素的移动动画，可以改为 3 个像素，<a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/#smooth" target="_blank" rel="external">具体原因</a></li>
+<li>避免使用 table 布局，<a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/#tables" target="_blank" rel="external">具体原因</a></li>
+<li>减少在 CSS 样式中使用 JS 表达式</li>
+<li>将元素 <code>display: none</code> 后再修改样式</li>
+<li>创建一个新的节点元素，进行样式操作后替代原先的元素，不过可能会出现页面闪烁</li>
+<li>创建 DocumentFragment 来进行更新</li>
+</ul>
+<p>这里提一下浏览器自身对减少 <code>reflow</code> 的优化，下面例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> elemA = <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>);</div><div class="line"></div><div class="line">elemA.style.width = <span class="string">"100px"</span>;</div><div class="line">elemA.style.height = <span class="string">"100px"</span>;</div><div class="line">elemA.style.backgroundColor = <span class="string">"yellow"</span>;</div></pre></td></tr></table></figure></p>
+<p>以上例子浏览器只会一次性进行 <code>reflow</code> 而非 3 次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> elemA = <span class="built_in">document</span>.getElementById(<span class="string">"elem-a"</span>);</div><div class="line"></div><div class="line">elemA.style.width = <span class="string">"100px"</span>;</div><div class="line">elemA.style.height = <span class="string">"100px"</span>;</div><div class="line">elemA.getComputedStyle();</div><div class="line">elemA.style.backgroundColor = <span class="string">"yellow"</span>;</div></pre></td></tr></table></figure>
+<p>以上例子浏览器会进行 2 次 <code>reflow</code>，因为中间需要获取当前的样式信息，浏览器必须先进行 <code>渲染树</code> 的重新计算，只要是获取以下样式信息的，都会引起浏览器立即重新渲染（如果必须则会 <code>reflow</code>）：</p>
+<ul>
+<li>offsetTop</li>
+<li>offsetLeft</li>
+<li>offsetWidth</li>
+<li>offsetHeight</li>
+<li>scrollTop</li>
+<li>scrollLeft</li>
+<li>scrollWidth</li>
+<li>scrollHeight</li>
+<li>clientTop</li>
+<li>clientLeft</li>
+<li>clientWidth</li>
+<li>clientHeight</li>
+<li>getComputedStyle()</li>
+<li>currentStyle（just for IE）</li>
+</ul>
+<blockquote>
+<p>参考</p>
+</blockquote>
+<ul>
+<li><a href="https://varvy.com/performance/cssom.html" target="_blank" rel="external">https://varvy.com/performance/cssom.html</a></li>
+<li><a href="http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/" target="_blank" rel="external">http://www.stubbornella.org/content/2009/03/27/reflows-repaints-css-performance-making-your-javascript-slow/</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=zh-cn" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=zh-cn</a></li>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">http://taligarsiel.com/Projects/howbrowserswork1.htm</a></li>
+<li><a href="http://www.cnblogs.com/zichi/p/4720000.html" target="_blank" rel="external">http://www.cnblogs.com/zichi/p/4720000.html</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/17/reflow-和-repaint-简易分析/" class="archive-article-date">
+  	<time datetime="2016-06-17T02:16:50.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-17</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/前端/">前端</a><a class="article-category-link" href="/categories/前端/CSS/">CSS</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/07/10/SameSite-Cookie——防御-CSRF-XSSI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SameSite-Cookie——防御 CSRF &amp; XSSI
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/05/angular-注意点-长期更新/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">angular 注意点（长期更新）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Rlilyyy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Oxygen/" style="font-size: 17.5px;">Oxygen</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/布局/" style="font-size: 15px;">布局</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Stay folish&lt;br&gt;&lt;br&gt;Stay hungry</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
